@@ -10,9 +10,6 @@ set ignorecase
 set smartcase
 set cursorline
 
-" set leader key
-let mapleader=","
-
 " indent
 filetype plugin indent on
 " set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
@@ -29,23 +26,6 @@ set clipboard=unnamedplus
 
 " keep windows from resizing
 set noea
-
-" window management
-map <C-J> <C-W>j
-map <C-K> <C-W>k
-map <C-H> <C-W>h
-map <C-L> <C-W>l
-if has('nvim')
-    " fix <c-h> in neovim
-    nmap <BS> <C-W>h
-endif
-
-" terminal management
-tnoremap <Esc> <C-\><C-n>
-" tnoremap <A-h> <C-\><C-n><C-w>h
-" tnoremap <A-j> <C-\><C-n><C-w>j
-" tnoremap <A-k> <C-\><C-n><C-w>k
-" tnoremap <A-l> <C-\><C-n><C-w>l
 
 " Plugin Management ==================================================
 call plug#begin('~/.config/nvim/plugged')
@@ -247,8 +227,8 @@ let g:NERDTreeMapPreview="<F4>"
 let NERDTreeMinimalUI=1
 
 " ultisnips
-" let g:UltiSnipsExpandTrigger="<c-space>"
-let g:UltiSnipsExpandTrigger="<c-@>"
+let g:UltiSnipsExpandTrigger="<c-space>"
+" let g:UltiSnipsExpandTrigger="<c-@>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
@@ -320,10 +300,30 @@ endif
 " set colorscheme
 colorscheme gruvbox
 set background=dark
-let g:gruvbox_contrast_dark = 'hard'
+" let g:gruvbox_contrast_dark = 'hard'
 
-" Misq Functions  ==================================================
-" icrementally increase a numbeer inside ctrl v boxes
+" Misq Functions and keybindings  ==================================================
+" set leader key
+let mapleader=","
+
+" window management
+map <C-J> <C-W>j
+map <C-K> <C-W>k
+map <C-H> <C-W>h
+map <C-L> <C-W>l
+if has('nvim')
+    " fix <c-h> in neovim
+    nmap <BS> <C-W>h
+endif
+
+" terminal management
+tnoremap <Esc> <C-\><C-n>
+" tnoremap <A-h> <C-\><C-n><C-w>h
+" tnoremap <A-j> <C-\><C-n><C-w>j
+" tnoremap <A-k> <C-\><C-n><C-w>k
+" tnoremap <A-l> <C-\><C-n><C-w>l
+
+" icrementally increase a number inside ctrl v boxes
 function! Incr()
   let a = line('.') - line("'<")
   let c = virtcol("'<")
@@ -342,11 +342,43 @@ imap <C-F> <ESC>A;<CR>
 nmap <C-G> A,<ESC><CR>
 imap <C-G> <ESC>A,<CR>
 
+" insert symbols instead of numbers
+function! NumberReplace()
+  if g:NumberReplace_toggle == 0
+    imap 1 !
+    imap 2 "
+    imap 3 £
+    imap 4 $
+    imap 5 %
+    imap 6 ^
+    imap 7 &
+    imap 8 *
+    imap 9 (
+    imap 0 )
+    let g:NumberReplace_toggle = 1
+  else
+    imap 1 1
+    imap 2 2
+    imap 3 3
+    imap 4 4
+    imap 5 5
+    imap 6 6
+    imap 7 7
+    imap 8 8
+    imap 9 9
+    imap 0 0
+    let g:NumberReplace_toggle = 0
+  endif
+endfunction
+let g:NumberReplace_toggle = 0
+:call NumberReplace()
+nnoremap <space>n :call NumberReplace()<CR>: echo g:NumberReplace_toggle<CR>
+
 " map :wa to keybinding
 nmap <c-b> :wa<CR>
 imap <c-b> <ESC>:wa<CR>
 
-"reload vimrc
+" reload vimrc
 nnoremap <F5> :so $MYVIMRC<CR>
 
 " Jump to next non-whitespace char in the same column
