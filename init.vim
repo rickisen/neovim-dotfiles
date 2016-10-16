@@ -49,7 +49,7 @@ Plug 'carlitux/deoplete-ternjs'
 Plug 'sheerun/vim-polyglot'
 
 " css3 syntax
-Plug 'hail2u/vim-css3-syntax'
+" Plug 'hail2u/vim-css3-syntax' " should be in polygot
 
 " asynchronous execution library for Vim, others depends on this
 Plug 'Shougo/vimproc'
@@ -121,7 +121,7 @@ Plug 'ntpeters/vim-better-whitespace'
 " Plug 'captbaritone/better-indent-support-for-php-with-html'
 
 " php.vim on drugs
-Plug 'StanAngeloff/php.vim'
+" Plug 'StanAngeloff/php.vim' " should be in polyglot
 
 " better php omnicomplete
 " Plug 'shawncplus/phpcomplete.vim'
