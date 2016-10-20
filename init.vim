@@ -154,8 +154,15 @@ let g:tern#arguments = ["--persistent"]
 
 " deoplete -------------------------
 " Python setup for mac osx
-" let g:python_host_prog = '/usr/bin/python'
-" let g:python3_host_prog = '/usr/local/bin/python3'
+if system('uname -s') == "Darwin\n"
+  "OSX
+  " set clipboard=unnamed
+  let g:python_host_prog = '/usr/bin/python'
+  let g:python3_host_prog = '/usr/local/bin/python3'
+else
+  "Linux
+  " set clipboard=unnamedplus
+endif
 
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_complete_start_length = 1
@@ -227,10 +234,14 @@ let g:NERDTreeMapPreview="<F4>"
 let NERDTreeMinimalUI=1
 
 " ultisnips
-let g:UltiSnipsExpandTrigger="<c-space>"
-" let g:UltiSnipsExpandTrigger="<c-@>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" Aperently keyboards differ on my laptop and desktop
+if system('hostname') == "rickisens-MacBook.local\n"
+  let g:UltiSnipsExpandTrigger="<c-@>"
+else
+  let g:UltiSnipsExpandTrigger="<c-space>"
+endif
 
 " airline -------------------------------
 :set laststatus=2 "allways show airline
