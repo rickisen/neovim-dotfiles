@@ -239,6 +239,8 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " Aperently keyboards differ on my laptop and desktop
 if system('hostname') == "rickisens-MacBook.local\n"
   let g:UltiSnipsExpandTrigger="<c-@>"
+elseif system('hostname') == "LaptopLinux\n"
+  let g:UltiSnipsExpandTrigger="<c-@>"
 else
   let g:UltiSnipsExpandTrigger="<c-space>"
 endif
