@@ -348,11 +348,11 @@ endfunction
 vnoremap <C-a> :call Incr()<CR>
 
 " insert ; at end of line
-nmap <C-F> A;<ESC><CR>
+nmap <C-F> A;<ESC>j
 imap <C-F> <ESC>A;<CR>
 
 " insert , at end of line
-nmap <C-G> A,<ESC><CR>
+nmap <C-G> A,<ESC>j
 imap <C-G> <ESC>A,<CR>
 
 " insert symbols instead of numbers
