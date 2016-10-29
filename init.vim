@@ -132,7 +132,9 @@ Plug 'ntpeters/vim-better-whitespace'
 
 " react / jsx
 " Plug 'pangloss/vim-javascript'
-Plug 'othree/yajs'
+Plug 'jelera/vim-javascript-syntax'
+Plug 'othree/javascript-libraries-syntax.vim'
+" Plug 'othree/yajs'
 " Plug 'mxw/vim-jsx' "included in polyglot
 
 " vim-react-snippets
@@ -143,6 +145,9 @@ Plug 'can3p/incbool.vim'
 
 " smart indetation when pasting code
 Plug 'sickill/vim-pasta'
+
+" split and join various objects on multiple lines
+Plug 'AndrewRadev/splitjoin.vim'
 
 call plug#end()
 
@@ -180,8 +185,8 @@ inoremap <expr><S-Tab>  pumvisible() ? "\<C-p>" : "\<C-h>"
 
 " needed so tab works both for inserting tabs and scroll deoplete
 function! s:is_whitespace()
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~? '\s'
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~? '\s'
 endfunction
 
 " omnifuncs
@@ -298,8 +303,21 @@ let g:neomake_json_enabled_makers = ['jsonlint']
 
 let g:neomake_logfile='/tmp/error.log'
 
-" jsx react
+" jsx react -------------------------
 let g:jsx_ext_required = 0
+
+" let g:javascript_opfirst = '^\s*\%(\%(\%(\/\*.\{-}\)\=\*\+\/\s*\)\=\)\@>\%([<>,:?^%|*&]\|\([-/.+]\)\1\@!\|=>\@!\|in\%(sta nceof\)\=\>\)'
+let g:javascript_opfirst = '^\s*\%(\%(\%(\/\*.\{-}\)\=\*\+\/\s*\)\=\)\@>\%([<>,?^%|*&]\|\([-/.+]\)\1\@!\|=>\@!\|in\%(sta nceof\)\=\>\)'
+" let g:javascript_continuation = '\%([<=,.?/*:^%|&]\|+\@<!+\|-\@<!-\|=\@<!>\|\<in\%(stanceof\)\=\)\s*\%(\%(\/\%(\%(\*.\{-}\*\/\)\|\%(\*\+\)\)\)\s*\)\=$'
+let g:javascript_continuation = '\%([<=,.?/*:^%|&]\|+\@<!+\|-\@<!-\|\<in\%(stanceof\)\=\)\s*\%(\%(\/\%(\%(\*.\{-}\*\/\)\|\%(\*\+\)\)\)\s*\)\=$'
+
+" javascript-libraries-syntax -------------------------
+
+" let g:used_javascript_libs = ' jquery, underscore, underscore, 
+" backbone, prelude, angularjs, angularui, angularuirouter, react, 
+" flux, requirejs, sugar, jasmine, chai, handlebars, ramda, vue'
+" let g:used_javascript_libs = 'jquery, backbone, underscore'
+let g:used_javascript_libs = 'react'
 
 " Color Configuration ==================================================
 " enable nvim truecolor
