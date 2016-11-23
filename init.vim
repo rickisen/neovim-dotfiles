@@ -27,6 +27,12 @@ set clipboard=unnamedplus
 " keep windows from resizing
 set noea
 
+" spellchecking
+" set spell spellang=sv
+
+" automatic linebreaks
+" set tw=79
+
 " Plugin Management ==================================================
 call plug#begin('~/.config/nvim/plugged')
 
