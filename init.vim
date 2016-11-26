@@ -45,6 +45,9 @@ Plug 'ternjs/tern_for_vim'
 " deoplete tern source
 Plug 'carlitux/deoplete-ternjs'
 
+" neco-look, use look for english word suggestions in deoplete
+Plug 'ujihisa/neco-look'
+
 " syntax package
 Plug 'sheerun/vim-polyglot'
 
