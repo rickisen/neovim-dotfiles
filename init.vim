@@ -281,8 +281,8 @@ nnoremap <space>go  :Git checkout<Space>
 " nnoremap <space>gpl :Dispatch! git pull<CR>
 
 " Neomake  -------------------------
-" allways run on write
-autocmd! BufWritePost * Neomake
+" allways run on read and write
+autocmd! BufWritePost,BufEnter * Neomake
 " Check javascript
 let g:neomake_javascript_jshint_maker = {
     \ 'args': ['--verbose'],
@@ -302,8 +302,8 @@ function! neomake#makers#ft#scss#scsslint()
     \ }
 endfunction
 
-let g:neomake_jsx_enabled_makers = ['jscs']
-let g:neomake_javascript_enabled_makers = ['jscs']
+let g:neomake_jsx_enabled_makers = ['eslint']
+let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_php_enabled_makers = ['php']
 let g:neomake_html_enabled_makers = ['tidy']
 let g:neomake_scss_enabled_makers = ['scsslint']
