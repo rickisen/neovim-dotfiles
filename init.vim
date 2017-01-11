@@ -20,6 +20,8 @@ set shiftwidth=2
 " On pressing tab, insert y spaces
 set expandtab
 
+au FileType stylus setl sw=4 ts=4
+
 " clipboard linux fix
 set clipboard=unnamed
 set clipboard=unnamedplus
@@ -180,8 +182,9 @@ endif
 
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_complete_start_length = 1
-let g:tern_request_timeout = 1
 
+" tern completeion deoplete-ternjs
+let g:tern_request_timeout = 1
 " This do disable full signature type on autocomplete
 let g:tern_show_signature_in_pum = 0
 
@@ -411,7 +414,7 @@ function! NumberReplace()
     let g:NumberReplace_toggle = 0
   endif
 endfunction
-let g:NumberReplace_toggle = 0
+let g:NumberReplace_toggle = 1
 :call NumberReplace()
 nnoremap <space>n :call NumberReplace()<CR>: echo g:NumberReplace_toggle<CR>
 
