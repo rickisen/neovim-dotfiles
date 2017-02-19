@@ -14,7 +14,7 @@ set cursorline
 filetype plugin indent on
 " set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
 " show existing tab with x spaces width
-set tabstop=4
+set tabstop=2
 " when indenting with '>', use y spaces width
 set shiftwidth=2
 " On pressing tab, insert y spaces
@@ -159,6 +159,13 @@ Plug 'sickill/vim-pasta'
 
 " split and join various objects on multiple lines
 Plug 'AndrewRadev/splitjoin.vim'
+
+" enhanced golang support
+Plug 'fatih/vim-go'
+" :GoInstallBinaries
+
+" deoplete go source
+Plug 'zchee/deoplete-go', { 'do': 'make'}
 
 call plug#end()
 
