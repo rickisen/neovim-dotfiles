@@ -42,10 +42,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'tpope/vim-sensible'
 
 " deoplete
-function! DoRemote(arg)
-  UpdateRemotePlugins
-endfunction
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " tern-tags for vim (not completeion engine)
 Plug 'ternjs/tern_for_vim'
@@ -63,10 +60,10 @@ Plug 'sheerun/vim-polyglot'
 " Plug 'hail2u/vim-css3-syntax' " should be in polygot
 
 " asynchronous execution library for Vim, others depends on this
-Plug 'Shougo/vimproc'
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 
 " search for files, maybe dep of nerdtree
-Plug 'Shougo/unite.vim'
+Plug 'shougo/unite.vim'
 
 " vim-easy-align
 Plug 'junegunn/vim-easy-align'
@@ -264,7 +261,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 if system('hostname') == "rickisens-MacBook.local\n"
   let g:UltiSnipsExpandTrigger="<c-@>"
 elseif system('hostname') == "LaptopLinux\n"
-  let g:UltiSnipsExpandTrigger="<c-@>"
+  let g:UltiSnipsExpandTrigger="<c-space>"
 else
   let g:UltiSnipsExpandTrigger="<c-space>"
 endif
@@ -338,6 +335,43 @@ let g:javascript_continuation = '\%([<=,.?/*:^%|&]\|+\@<!+\|-\@<!-\|\<in\%(stanc
 " flux, requirejs, sugar, jasmine, chai, handlebars, ramda, vue'
 " let g:used_javascript_libs = 'jquery, backbone, underscore'
 let g:used_javascript_libs = 'react'
+
+" unite -------------------------
+call unite#custom#source('file_rec, file_rec/async, file_rec/git', 'matchers', ['converter_relative_word', 'matcher_fuzzy'])
+call unite#custom#source('file_rec/async', 'ignore_pattern', 'node_modules/')
+call unite#filters#sorter_default#use(['sorter_rank'])
+call unite#custom#profile('default', 'context.smartcase', 1)
+call unite#custom#profile('default', 'context.ignorecase', 1)
+
+let g:unite_prompt = '» '
+let g:unite_source_history_yank_enable = 1
+
+if executable('ag')
+    let g:unite_source_rec_async_command = 'ag --nocolor --nogroup --hidden -g ""'
+    let g:unite_source_grep_command = 'ag'
+    let g:unite_source_grep_default_opts = '--nocolor --nogroup --hidden'
+    let g:unite_source_grep_recursive_opt=''
+endif
+
+let g:unite_source_mark_marks =
+            \   "abcdefghijklmnopqrstuvwxyz"
+            \ . "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+nnoremap <Space>p :Unite -start-insert -no-split -no-resize file_rec/async<cr>
+nnoremap <Space>f :Unite -start-insert -no-split -no-resize file file/new directory/new<cr>
+nnoremap <Space>b :Unite -start-insert -no-split -no-resize buffer<cr>
+nnoremap <Space>y :Unite -start-insert -no-split -no-resize history/yank<cr>
+nnoremap <Space>o :Unite -start-insert -no-split -no-resize outline<cr>
+nnoremap <Space>/ :Unite -start-insert -no-split -no-resize grep:.<cr>
+
+" vim-go -------------------------
+" fix for loading gb projects imports
+let $GOPATH = getcwd() . ":" . getcwd() . "/vendor"
+
+" disables auto formating on save
+let g:go_fmt_autosave = 0
+
+" ------------------------------------
 
 " Color Configuration ==================================================
 " enable nvim truecolor
