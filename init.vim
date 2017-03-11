@@ -215,6 +215,14 @@ augroup omnifuncs
   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 augroup end
 
+" priority of sources
+call deoplete#custom#set('ultisnips', 'rank', 999)
+call deoplete#custom#set('buffer', 'rank', 998)
+call deoplete#custom#set('fs', 'rank', 997)
+call deoplete#custom#set('go', 'rank', 996)
+call deoplete#custom#set('tern', 'rank', 995)
+call deoplete#custom#set('look', 'rank', 1)
+
 " easy align -------------------------
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
@@ -330,8 +338,8 @@ let g:javascript_continuation = '\%([<=,.?/*:^%|&]\|+\@<!+\|-\@<!-\|\<in\%(stanc
 
 " javascript-libraries-syntax -------------------------
 
-" let g:used_javascript_libs = ' jquery, underscore, underscore, 
-" backbone, prelude, angularjs, angularui, angularuirouter, react, 
+" let g:used_javascript_libs = ' jquery, underscore, underscore,
+" backbone, prelude, angularjs, angularui, angularuirouter, react,
 " flux, requirejs, sugar, jasmine, chai, handlebars, ramda, vue'
 " let g:used_javascript_libs = 'jquery, backbone, underscore'
 let g:used_javascript_libs = 'react'
