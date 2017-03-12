@@ -164,11 +164,29 @@ Plug 'fatih/vim-go'
 " deoplete go source
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 
+"c# completions
+Plug 'OmniSharp/omnisharp-vim', { 'do': 'cd server && xbuild' }
+" Plug 'OmniSharp/omnisharp-vim', { 'do': 'cd omnisharp-roslyn && xbuild' }
+" Installs whitout server. install and run roslyn sepperatly
+" Plug 'OmniSharp/omnisharp-vim'
+
+"c# completions deoplete source
+Plug 'Robzz/deoplete-omnisharp'
+
+" Installs vim-dispatch (required to launch OmniSharp server) Will this crash with neomake?
+Plug 'tpope/vim-dispatch'
+
 call plug#end()
 
 " Plugin Configuration ==================================================
 
-" tern_for_vim
+"OmniSharp ------------------------
+let g:OmniSharp_selector_ui = 'unite'
+let g:Omnisharp_start_server = 1
+let g:Omnisharp_stop_server = 1
+" let g:OmniSharp_server_type = 'roslyn'
+
+" tern_for_vim --------------------
 let g:tern#command = ["tern"]
 let g:tern#arguments = ["--persistent"]
 
