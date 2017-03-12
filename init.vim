@@ -346,7 +346,18 @@ let g:used_javascript_libs = 'react'
 
 " unite -------------------------
 call unite#custom#source('file_rec, file_rec/async, file_rec/git', 'matchers', ['converter_relative_word', 'matcher_fuzzy'])
-call unite#custom#source('file_rec/async', 'ignore_pattern', 'node_modules/')
+" call unite#custom#source('file_rec/async', 'ignore_pattern', 'vendor/')
+" call unite#custom#source('file_rec,file_rec/async', 'ignore_pattern', '\(\node_modules$\|\vendor\/$\)')
+call unite#custom_source('file,file_rec,file_rec/async,grep',
+\ 'ignore_pattern', join([
+\ '\.git/',
+\ '\.bundle/',
+\ '\.rubygems/',
+\ 'node_modules/',
+\ 'pkg/',
+\ 'dist/',
+\ 'vendor/',
+\ ], '\|'))
 call unite#filters#sorter_default#use(['sorter_rank'])
 call unite#custom#profile('default', 'context.smartcase', 1)
 call unite#custom#profile('default', 'context.ignorecase', 1)
