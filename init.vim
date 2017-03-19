@@ -9,6 +9,7 @@ set nowrap
 set ignorecase
 set smartcase
 set cursorline
+set mouse=a
 
 " indent
 filetype plugin indent on
@@ -166,7 +167,7 @@ Plug 'zchee/deoplete-go', { 'do': 'make'}
 
 "c# completions
 Plug 'OmniSharp/omnisharp-vim', { 'do': 'cd server && xbuild' }
-" Plug 'OmniSharp/omnisharp-vim', { 'do': 'cd omnisharp-roslyn && xbuild' }
+" Plug 'OmniSharp/omnisharp-vim', { 'do': 'cd omnisharp-roslyn && ./build.sh' }
 " Installs whitout server. install and run roslyn sepperatly
 " Plug 'OmniSharp/omnisharp-vim'
 
@@ -182,9 +183,11 @@ call plug#end()
 
 "OmniSharp ------------------------
 let g:OmniSharp_selector_ui = 'unite'
-let g:Omnisharp_start_server = 1
-let g:Omnisharp_stop_server = 1
+" let g:Omnisharp_start_server = 1
+" let g:Omnisharp_stop_server = 1
 " let g:OmniSharp_server_type = 'roslyn'
+" let g:omnicomplete_fetch_documentation=1
+" set completeopt=longest,menuone,preview
 
 " tern_for_vim --------------------
 let g:tern#command = ["tern"]
@@ -203,7 +206,8 @@ else
 endif
 
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#auto_complete_start_length = 1
+let g:deoplete#auto_complete_start_length = 2
+let g:deoplete#auto_complete_delay = 150
 
 " tern completeion deoplete-ternjs
 let g:tern_request_timeout = 1
@@ -211,7 +215,9 @@ let g:tern_request_timeout = 1
 let g:tern_show_signature_in_pum = 0
 
 " close the preview window when leaving insert mode
-autocmd InsertLeave * pclose!
+" autocmd InsertLeave * pclose!
+" autocmd InsertLeave * if pumvisible() == 0 | pclose | endif
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " complete with tab
 inoremap <silent><expr><Tab> pumvisible() ? "\<C-n>"  : (<SID>is_whitespace() ? "\<Tab>" : deoplete#mappings#manual_complete())
@@ -344,6 +350,10 @@ let g:neomake_scss_enabled_makers = ['scsslint']
 let g:neomake_markdown_enabled_makers = ['mdl']
 let g:neomake_json_enabled_makers = ['jsonlint']
 
+" work around a bug when editing files webpack watches.
+" But tares on a ssd drive
+autocmd FileType javascript.jsx :set backupcopy=yes
+
 let g:neomake_logfile='/tmp/error.log'
 
 " jsx react -------------------------
@@ -376,7 +386,7 @@ call unite#custom_source('file,file_rec,file_rec/async,grep',
 \ 'dist/',
 \ 'vendor/',
 \ ], '\|'))
-call unite#filters#sorter_default#use(['sorter_rank'])
+" call unite#filters#sorter_default#use(['sorter_rank'])
 call unite#custom#profile('default', 'context.smartcase', 1)
 call unite#custom#profile('default', 'context.ignorecase', 1)
 
@@ -403,7 +413,8 @@ nnoremap <Space>/ :Unite -start-insert -no-split -no-resize grep:.<cr>
 
 " vim-go -------------------------
 " fix for loading gb projects imports
-let $GOPATH = getcwd() . ":" . getcwd() . "/vendor"
+" let $GOPATH = getcwd() . ":" . getcwd() . "/vendor"
+let $GOPATH = '~/.go'
 
 " disables auto formating on save
 let g:go_fmt_autosave = 0

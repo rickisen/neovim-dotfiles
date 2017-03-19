@@ -9,4 +9,6 @@ look
 words
 python
 pip
-
+mono
+dotnet-cli
+libuv
