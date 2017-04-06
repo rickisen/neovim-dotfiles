@@ -11,6 +11,9 @@ set smartcase
 set cursorline
 set mouse=a
 
+" allways diff vertically
+set diffopt+=vertical
+
 " indent
 filetype plugin indent on
 " set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
@@ -22,6 +25,7 @@ set shiftwidth=2
 set expandtab
 
 au FileType stylus setl sw=4 ts=4
+au FileType cs setl sw=4 ts=4
 
 " clipboard linux fix
 set clipboard=unnamed
@@ -176,6 +180,9 @@ Plug 'Robzz/deoplete-omnisharp'
 
 " Installs vim-dispatch (required to launch OmniSharp server) Will this crash with neomake?
 Plug 'tpope/vim-dispatch'
+
+" support for .editorconfig files
+Plug 'editorconfig/editorconfig-vim'
 
 call plug#end()
 
@@ -418,6 +425,9 @@ let $GOPATH = '~/.go'
 
 " disables auto formating on save
 let g:go_fmt_autosave = 0
+
+" editorconfig --------------------
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 " ------------------------------------
 
