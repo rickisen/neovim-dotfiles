@@ -184,6 +184,9 @@ Plug 'tpope/vim-dispatch'
 " support for .editorconfig files
 Plug 'editorconfig/editorconfig-vim'
 
+" conky config
+Plug 'smancill/conky-syntax.vim'
+
 call plug#end()
 
 " Plugin Configuration ==================================================
@@ -380,7 +383,11 @@ let g:javascript_continuation = '\%([<=,.?/*:^%|&]\|+\@<!+\|-\@<!-\|\<in\%(stanc
 let g:used_javascript_libs = 'react'
 
 " unite -------------------------
-call unite#custom#source('file_rec, file_rec/async, file_rec/git', 'matchers', ['converter_relative_word', 'matcher_fuzzy'])
+" call unite#custom#source('file_rec/neovim,buffer', 'sorters', 'sorter_selecta')
+" call unite#custom#source('file_rec, file_rec/async, file_rec/git', 'matchers', ['converter_relative_word', 'matcher_fuzzy'])
+" call unite#custom#source('file_rec, file_rec/async, file_rec/git', 'matchers', ['converter_relative_word', 'matcher_default'])
+" call unite#custom#source('file_rec, file_rec/async, file_rec/git', 'matchers', ['converter_relative_word', 'matcher_glob'])
+call unite#custom#source('file_rec, file_rec/async, file_rec/git', 'matchers', ['converter_relative_word', 'matcher_regexp'])
 " call unite#custom#source('file_rec/async', 'ignore_pattern', 'vendor/')
 " call unite#custom#source('file_rec,file_rec/async', 'ignore_pattern', '\(\node_modules$\|\vendor\/$\)')
 call unite#custom_source('file,file_rec,file_rec/async,grep',
