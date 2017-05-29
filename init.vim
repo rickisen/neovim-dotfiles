@@ -13,6 +13,7 @@ set mouse=a
 
 " allways diff vertically
 set diffopt+=vertical
+nnoremap du  :diffupdate<CR>
 
 " indent
 filetype plugin indent on
@@ -186,6 +187,9 @@ Plug 'editorconfig/editorconfig-vim'
 
 " conky config
 Plug 'smancill/conky-syntax.vim'
+
+" calc stuff
+Plug 'arecarn/vim-crunch'
 
 call plug#end()
 
