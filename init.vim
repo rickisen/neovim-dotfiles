@@ -188,8 +188,11 @@ Plug 'editorconfig/editorconfig-vim'
 " conky config
 Plug 'smancill/conky-syntax.vim'
 
-" calc stuff
+" calculate stuff
 Plug 'arecarn/vim-crunch'
+
+" nice icons for nerdtree and other plugins
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
