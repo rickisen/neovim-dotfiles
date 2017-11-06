@@ -10,6 +10,8 @@ set ignorecase
 set smartcase
 set cursorline
 set mouse=a
+set foldmethod=indent
+set nofoldenable
 
 " allways diff vertically
 set diffopt+=vertical
@@ -47,14 +49,26 @@ call plug#begin('~/.config/nvim/plugged')
 " sensible vim
 Plug 'tpope/vim-sensible'
 
+" LSP client, Language server protocol
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+
+" (LSP) Multi-entry selection UI.
+Plug 'junegunn/fzf'
+
+" (LSP) Showing function signature and inline doc.
+Plug 'Shougo/echodoc.vim'
+
+" (LSP) Multi-entry selection UI.
+Plug 'Shougo/denite.nvim'
+
 " deoplete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " tern-tags for vim (not completeion engine)
-Plug 'ternjs/tern_for_vim'
+" Plug 'ternjs/tern_for_vim'
 
 " deoplete tern source
-Plug 'carlitux/deoplete-ternjs'
+" Plug 'carlitux/deoplete-ternjs'
 
 " neco-look, use look for english word suggestions in deoplete
 Plug 'ujihisa/neco-look'
@@ -120,7 +134,9 @@ Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-surround'
 
 " vim-tags
-Plug 'szw/vim-tags'
+" Plug 'szw/vim-tags'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-easytags'
 
 " tcomments
 Plug 'tomtom/tcomment_vim'
@@ -167,17 +183,20 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'fatih/vim-go'
 " :GoInstallBinaries
 
+Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
+
 " deoplete go source
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 
 "c# completions
-Plug 'OmniSharp/omnisharp-vim', { 'do': 'cd server && xbuild' }
+" Plug 'OmniSharp/omnisharp-vim', { 'do': 'cd server && xbuild' }
 " Plug 'OmniSharp/omnisharp-vim', { 'do': 'cd omnisharp-roslyn && ./build.sh' }
 " Installs whitout server. install and run roslyn sepperatly
 " Plug 'OmniSharp/omnisharp-vim'
 
 "c# completions deoplete source
-Plug 'Robzz/deoplete-omnisharp'
+" Plug 'Robzz/deoplete-omnisharp'
+Plug 'pkosel/deoplete-omnisharp'
 
 " Installs vim-dispatch (required to launch OmniSharp server) Will this crash with neomake?
 Plug 'tpope/vim-dispatch'
@@ -191,26 +210,67 @@ Plug 'smancill/conky-syntax.vim'
 " calculate stuff
 Plug 'arecarn/vim-crunch'
 
+" python completions
+Plug 'zchee/deoplete-jedi'
+
 " nice icons for nerdtree and other plugins
-Plug 'ryanoasis/vim-devicons'
+" Plug 'ryanoasis/vim-devicons'
+
+" vim godot-gameengine
+Plug 'quabug/vim-gdscript'
+
+" for moving around inside indent level
+Plug 'michaeljsmith/vim-indent-object'
 
 call plug#end()
 
+" tagbar
+" Plug 'majutsushi/tagbar'
+
 " Plugin Configuration ==================================================
 
+" easytags
+let g:easytags_async = 1
+
+" Tagbar ------------------------
+nmap <F8> :TagbarToggle<CR>
+let g:airline#extensions#tagbar#enabled = 1
+
+" godot-gameengine ------------------------
+let g:tagbar_type_gdscript = { 'ctagstype' :'gdscript', 'kinds':[ 'c:constants', 'e:exports', 'o:onready', 'p:preloads', 's:signals', 'f:functions', ] }
+
 "OmniSharp ------------------------
-let g:OmniSharp_selector_ui = 'unite'
-" let g:Omnisharp_start_server = 1
+" let g:OmniSharp_selector_ui = 'unite'
+" let g:Omnisharp_start_server = 0
 " let g:Omnisharp_stop_server = 1
-" let g:OmniSharp_server_type = 'roslyn'
-" let g:omnicomplete_fetch_documentation=1
+let g:OmniSharp_server_type = 'roslyn'
+let g:omnicomplete_fetch_documentation=0
 " set completeopt=longest,menuone,preview
 
 " tern_for_vim --------------------
 let g:tern#command = ["tern"]
 let g:tern#arguments = ["--persistent"]
 
-" deoplete -------------------------
+" LSP --------------------
+"
+" Required for operations modifying multiple buffers like rename.
+set hidden
+
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+    \ 'javascript': ['~/.node_modules/lib/node_modules/javascript-typescript-langserver/lib/language-server-stdio.js'],
+    \ 'javascript.jsx': ['~/.node_modules/lib/node_modules/javascript-typescript-langserver/lib/language-server-stdio.js'],
+    \ }
+
+" Automatically start language servers.
+let g:LanguageClient_autoStart = 1
+
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+
+" path to python  --------------------
+"
 " Python setup for mac osx
 if system('uname -s') == "Darwin\n"
   "OSX
@@ -222,14 +282,29 @@ else
   " set clipboard=unnamedplus
 endif
 
+
+" deoplete -------------------------
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_complete_start_length = 2
 let g:deoplete#auto_complete_delay = 150
+let deoplete#tag#cache_limit_size = 5000000 
+" let g:deoplete#sources = {}
+" let g:deoplete#sources._ = ['buffer', 'tag']
+
+" priority of sources
+call deoplete#custom#set('ultisnips', 'rank', 999)
+call deoplete#custom#set('buffer', 'rank', 998)
+call deoplete#custom#set('fs', 'rank', 997)
+call deoplete#custom#set('go', 'rank', 996)
+call deoplete#custom#set('tern', 'rank', 995)
+call deoplete#custom#set('look', 'rank', 1)
 
 " tern completeion deoplete-ternjs
 let g:tern_request_timeout = 1
 " This do disable full signature type on autocomplete
-let g:tern_show_signature_in_pum = 0
+let g:tern_show_signature_in_pum = 1
+" jedi for python
+let g:deoplete#sources#jedi#show_docstring = 1
 
 " close the preview window when leaving insert mode
 " autocmd InsertLeave * pclose!
@@ -255,14 +330,6 @@ augroup omnifuncs
   autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 augroup end
-
-" priority of sources
-call deoplete#custom#set('ultisnips', 'rank', 999)
-call deoplete#custom#set('buffer', 'rank', 998)
-call deoplete#custom#set('fs', 'rank', 997)
-call deoplete#custom#set('go', 'rank', 996)
-call deoplete#custom#set('tern', 'rank', 995)
-call deoplete#custom#set('look', 'rank', 1)
 
 " easy align -------------------------
 xmap ga <Plug>(EasyAlign)
@@ -435,7 +502,13 @@ nnoremap <Space>/ :Unite -start-insert -no-split -no-resize grep:.<cr>
 " vim-go -------------------------
 " fix for loading gb projects imports
 " let $GOPATH = getcwd() . ":" . getcwd() . "/vendor"
-let $GOPATH = '~/.go'
+if system('hostname') == "rickisens-MacBook.local\n"
+  let $GOPATH = '/home/rickisen/.go'
+elseif system('hostname') == "acer\n"
+  let $GOPATH = '/home/rickisen/.go'
+else
+  let $GOPATH = '/home/rickard/.go'
+endif
 
 " disables auto formating on save
 let g:go_fmt_autosave = 0
