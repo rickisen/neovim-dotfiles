@@ -196,7 +196,8 @@ Plug 'zchee/deoplete-go', { 'do': 'make'}
 
 "c# completions deoplete source
 " Plug 'Robzz/deoplete-omnisharp'
-Plug 'pkosel/deoplete-omnisharp'
+" Plug 'pkosel/deoplete-omnisharp'
+Plug 'cyansprite/deoplete-omnisharp' , {'do': './install.sh'}
 
 " Installs vim-dispatch (required to launch OmniSharp server) Will this crash with neomake?
 Plug 'tpope/vim-dispatch'
@@ -243,9 +244,11 @@ let g:tagbar_type_gdscript = { 'ctagstype' :'gdscript', 'kinds':[ 'c:constants',
 " let g:OmniSharp_selector_ui = 'unite'
 " let g:Omnisharp_start_server = 0
 " let g:Omnisharp_stop_server = 1
-let g:OmniSharp_server_type = 'roslyn'
+" let g:OmniSharp_server_type = 'roslyn'
 let g:omnicomplete_fetch_documentation=0
 " set completeopt=longest,menuone,preview
+" let g:deoplete_omnisharp_exe_path   = get(g:, "deoplete_omnisharp_exe_path", '~/.local/share/nvim/plugged/deoplete-omnisharp/omnisharp-server/OmniSharp/bin/Debug/OmniSharp.exe')
+let g:deoplete_omnisharp_port   = get(g:, "deoplete_omnisharp_port", 9999)
 
 " tern_for_vim --------------------
 let g:tern#command = ["tern"]
@@ -292,11 +295,11 @@ let deoplete#tag#cache_limit_size = 5000000
 " let g:deoplete#sources._ = ['buffer', 'tag']
 
 " priority of sources
-call deoplete#custom#set('ultisnips', 'rank', 999)
-call deoplete#custom#set('buffer', 'rank', 998)
-call deoplete#custom#set('fs', 'rank', 997)
-call deoplete#custom#set('go', 'rank', 996)
-call deoplete#custom#set('tern', 'rank', 995)
+call deoplete#custom#set('ultisnips', 'rank', 599)
+call deoplete#custom#set('fs', 'rank', 597)
+call deoplete#custom#set('go', 'rank', 596)
+call deoplete#custom#set('tern', 'rank', 595)
+call deoplete#custom#set('buffer', 'rank', 2)
 call deoplete#custom#set('look', 'rank', 1)
 
 " tern completeion deoplete-ternjs
@@ -480,6 +483,12 @@ call unite#custom#profile('default', 'context.ignorecase', 1)
 
 let g:unite_prompt = '» '
 let g:unite_source_history_yank_enable = 1
+" let g:unite_source_rec_unit = 3000
+" let g:unite_source_rec_async_unit = 3000
+
+" let g:unite_source_file_rec_max_cache_files = 0
+" call unite#custom#source('file_mru,file_rec,file_rec/async,grepocate',
+"             \ 'max_candidates', 0)
 
 if executable('ag')
     let g:unite_source_rec_async_command = 'ag --nocolor --nogroup --hidden -g ""'
@@ -488,11 +497,19 @@ if executable('ag')
     let g:unite_source_grep_recursive_opt=''
 endif
 
+autocmd FileType unite call s:unite_settings()
+
+function! s:unite_settings()
+  imap <buffer> <Tab> <Plug>(unite_select_next_line)
+  imap <buffer> <S-Tab> <Plug>(unite_select_previous_line)
+endfunction
+
 let g:unite_source_mark_marks =
             \   "abcdefghijklmnopqrstuvwxyz"
             \ . "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-
-nnoremap <Space>p :Unite -start-insert -no-split -no-resize file_rec/async<cr>
+" nnoremap <Tab>		|i_<Plug>(unite_select_next_line)|<cr>
+nnoremap <Space>s :Unite -start-insert -no-split -no-resize file_rec/async<cr>
+nnoremap <Space>p :Unite -start-insert -no-split -no-resize file_rec<cr>
 nnoremap <Space>f :Unite -start-insert -no-split -no-resize file file/new directory/new<cr>
 nnoremap <Space>b :Unite -start-insert -no-split -no-resize buffer<cr>
 nnoremap <Space>y :Unite -start-insert -no-split -no-resize history/yank<cr>
@@ -505,10 +522,13 @@ nnoremap <Space>/ :Unite -start-insert -no-split -no-resize grep:.<cr>
 if system('hostname') == "rickisens-MacBook.local\n"
   let $GOPATH = '/home/rickisen/.go'
 elseif system('hostname') == "acer\n"
-  let $GOPATH = '/home/rickisen/.go'
+  let g:deoplete_omnisharp_exe_path   = get(g:, "deoplete_omnisharp_exe_path", '/home/rickisen/Programming/mine/neovim-dotfiles/plugged/deoplete-omnisharp/omnisharp-server/OmniSharp/bin/Debug/OmniSharp.exe')
+  let $GOPATH = '/home/rickisen/.go:/home/rickisen/Programming/mine/BBH/maitress/maitres-backend:/home/rickisen/Programming/mine/BBH/maitress/maitres-backend/vendor'
 else
-  let $GOPATH = '/home/rickard/.go'
+  let g:deoplete_omnisharp_exe_path   = get(g:, "deoplete_omnisharp_exe_path", '/home/rickard/programming/mine/neovim-dotfiles/plugged/deoplete-omnisharp/omnisharp-server/OmniSharp/bin/Debug/OmniSharp.exe')
+  let $GOPATH = '/home/rickard/.go:/home/rickard/programming/mine/BBH/maitress/maitres-backend:/home/rickard/programming/mine/BBH/maitress/maitres-backend/vendor'
 endif
+
 
 " disables auto formating on save
 let g:go_fmt_autosave = 0
