@@ -557,14 +557,19 @@ set background=dark
 let mapleader=","
 
 " window management
-map <C-J> <C-W>j
-map <C-K> <C-W>k
-map <C-H> <C-W>h
-map <C-L> <C-W>l
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+map <C-UP> :res -5 <CR>
+map <C-DOWN> :res +5 <CR>
+map <C-LEFT> :vertical resize -5 <CR>
+map <C-RIGHT> :vertical resize +5 <CR>
 if has('nvim')
     " fix <c-h> in neovim
     nmap <BS> <C-W>h
-endif
+    " nmap <S-BS> :vertical resize +5 <CR>
+  endif
 
 " terminal management
 tnoremap <Esc> <C-\><C-n>
