@@ -223,6 +223,10 @@ Plug 'quabug/vim-gdscript'
 " for moving around inside indent level
 Plug 'michaeljsmith/vim-indent-object'
 
+" for jsx/tsx highlighting
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+
 call plug#end()
 
 " tagbar
@@ -263,6 +267,9 @@ let g:LanguageClient_serverCommands = {
     \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
     \ 'javascript': ['~/.node_modules/lib/node_modules/javascript-typescript-langserver/lib/language-server-stdio.js'],
     \ 'javascript.jsx': ['~/.node_modules/lib/node_modules/javascript-typescript-langserver/lib/language-server-stdio.js'],
+    \ 'typescript': ['~/.node_modules/lib/node_modules/javascript-typescript-langserver/lib/language-server-stdio.js'],
+    \ 'typescript.tsx': ['~/.node_modules/lib/node_modules/javascript-typescript-langserver/lib/language-server-stdio.js'],
+    \ 'typescript.jsx': ['~/.node_modules/lib/node_modules/javascript-typescript-langserver/lib/language-server-stdio.js'],
     \ }
 
 " Automatically start language servers.
@@ -285,6 +292,9 @@ else
   " set clipboard=unnamedplus
 endif
 
+" typescript -------------------------
+" set filetypes as typescript.jsx
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.jsx
 
 " deoplete -------------------------
 let g:deoplete#enable_at_startup = 1
