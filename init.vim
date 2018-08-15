@@ -50,7 +50,10 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'tpope/vim-sensible'
 
 " LSP client, Language server protocol
-Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+Plug 'autozimu/LanguageClient-neovim', {
+\ 'branch': 'next',
+\ 'do': 'bash install.sh',
+\ }
 
 " (LSP) Multi-entry selection UI.
 Plug 'junegunn/fzf'
@@ -197,7 +200,8 @@ Plug 'zchee/deoplete-go', { 'do': 'make'}
 "c# completions deoplete source
 " Plug 'Robzz/deoplete-omnisharp'
 " Plug 'pkosel/deoplete-omnisharp'
-Plug 'cyansprite/deoplete-omnisharp' , {'do': './install.sh'}
+" Plug 'cyansprite/deoplete-omnisharp' , {'do': './install.sh'}
+Plug 'OmniSharp/omnisharp-vim'
 
 " Installs vim-dispatch (required to launch OmniSharp server) Will this crash with neomake?
 Plug 'tpope/vim-dispatch'
@@ -218,7 +222,8 @@ Plug 'zchee/deoplete-jedi'
 " Plug 'ryanoasis/vim-devicons'
 
 " vim godot-gameengine
-Plug 'quabug/vim-gdscript'
+" Plug 'quabug/vim-gdscript'
+Plug 'calviken/vim-gdscript3'
 
 " for moving around inside indent level
 Plug 'michaeljsmith/vim-indent-object'
@@ -226,6 +231,9 @@ Plug 'michaeljsmith/vim-indent-object'
 " for jsx/tsx highlighting
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
+
+" for converting betwee cases (such as snake_case camelCase etc)
+Plug 'tpope/vim-abolish'
 
 call plug#end()
 
@@ -394,6 +402,7 @@ elseif system('hostname') == "LaptopLinux\n"
 else
   let g:UltiSnipsExpandTrigger="<c-space>"
 endif
+let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/UltiSnips', 'UltiSnips']
 
 " airline -------------------------------
 :set laststatus=2 "allways show airline
@@ -668,3 +677,6 @@ function! JumpInFile(back, forw)
 endfunction
 nnoremap <silent> <c-m> :call JumpInFile("\<c-i>", "\<c-o>")<cr>
 nnoremap <silent> <c-n> :call JumpInFile("\<c-o>", "\<c-i>")<cr>
+
+" visually select last insert
+nmap <Leader><Leader> v`[<CR>
