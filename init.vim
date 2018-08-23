@@ -197,7 +197,7 @@ Plug 'zchee/deoplete-go', { 'do': 'make'}
 "c# completions deoplete source
 " Plug 'Robzz/deoplete-omnisharp'
 " Plug 'pkosel/deoplete-omnisharp'
-Plug 'cyansprite/deoplete-omnisharp' , {'do': './install.sh'}
+" Plug 'cyansprite/deoplete-omnisharp' , {'do': './install.sh'}
 
 " Installs vim-dispatch (required to launch OmniSharp server) Will this crash with neomake?
 Plug 'tpope/vim-dispatch'
@@ -249,10 +249,10 @@ let g:tagbar_type_gdscript = { 'ctagstype' :'gdscript', 'kinds':[ 'c:constants',
 " let g:Omnisharp_start_server = 0
 " let g:Omnisharp_stop_server = 1
 " let g:OmniSharp_server_type = 'roslyn'
-let g:omnicomplete_fetch_documentation=0
+" let g:omnicomplete_fetch_documentation=0
 " set completeopt=longest,menuone,preview
 " let g:deoplete_omnisharp_exe_path   = get(g:, "deoplete_omnisharp_exe_path", '~/.local/share/nvim/plugged/deoplete-omnisharp/omnisharp-server/OmniSharp/bin/Debug/OmniSharp.exe')
-let g:deoplete_omnisharp_port   = get(g:, "deoplete_omnisharp_port", 9999)
+" let g:deoplete_omnisharp_port   = get(g:, "deoplete_omnisharp_port", 9999)
 
 " tern_for_vim --------------------
 let g:tern#command = ["tern"]
@@ -305,12 +305,12 @@ let deoplete#tag#cache_limit_size = 5000000
 " let g:deoplete#sources._ = ['buffer', 'tag']
 
 " priority of sources
-call deoplete#custom#set('ultisnips', 'rank', 599)
-call deoplete#custom#set('fs', 'rank', 597)
-call deoplete#custom#set('go', 'rank', 596)
-call deoplete#custom#set('tern', 'rank', 595)
-call deoplete#custom#set('buffer', 'rank', 2)
-call deoplete#custom#set('look', 'rank', 1)
+" call deoplete#custom#set('ultisnips', 'rank', 599)
+" call deoplete#custom#set('fs', 'rank', 597)
+" call deoplete#custom#set('go', 'rank', 596)
+" call deoplete#custom#set('tern', 'rank', 595)
+" call deoplete#custom#set('buffer', 'rank', 2)
+" call deoplete#custom#set('look', 'rank', 1)
 
 " tern completeion deoplete-ternjs
 let g:tern_request_timeout = 1
@@ -536,7 +536,7 @@ nnoremap <Space>/ :Unite -start-insert -no-split -no-resize grep:.<cr>
 if system('hostname') == "rickisens-MacBook.local\n"
   let $GOPATH = '/home/rickisen/.go'
 elseif system('hostname') == "acer\n"
-  let g:deoplete_omnisharp_exe_path   = get(g:, "deoplete_omnisharp_exe_path", '/home/rickisen/Programming/mine/neovim-dotfiles/plugged/deoplete-omnisharp/omnisharp-server/OmniSharp/bin/Debug/OmniSharp.exe')
+  " let g:deoplete_omnisharp_exe_path   = get(g:, "deoplete_omnisharp_exe_path", '/home/rickisen/Programming/mine/neovim-dotfiles/plugged/deoplete-omnisharp/omnisharp-server/OmniSharp/bin/Debug/OmniSharp.exe')
   let $GOPATH = '/home/rickisen/.go:/home/rickisen/Programming/mine/BBH/maitress/maitres-backend:/home/rickisen/Programming/mine/BBH/maitress/maitres-backend/vendor'
 else
   let g:deoplete_omnisharp_exe_path   = get(g:, "deoplete_omnisharp_exe_path", '/home/rickard/programming/mine/neovim-dotfiles/plugged/deoplete-omnisharp/omnisharp-server/OmniSharp/bin/Debug/OmniSharp.exe')
