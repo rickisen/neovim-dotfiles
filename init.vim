@@ -500,6 +500,10 @@ let g:unite_source_history_yank_enable = 1
 " call unite#custom#source('file_mru,file_rec,file_rec/async,grepocate',
 "             \ 'max_candidates', 0)
 
+let g:unite_source_file_rec_max_cache_files = 0
+call unite#custom#source('file_mru,file_rec,file_rec/async,grepocate',
+            \ 'max_candidates', 0)
+
 if executable('ag')
     let g:unite_source_rec_async_command = 'ag --nocolor --nogroup --hidden -g ""'
     let g:unite_source_grep_command = 'ag'
