@@ -650,7 +650,7 @@ nnoremap <space>n :call NumberReplace()<CR>: echo g:NumberReplace_toggle<CR>
 
 " map :wa to keybinding
 nmap <c-b> :wa<CR>
-imap <c-b> <ESC>:wa<CR>
+imap <c-b> <CR><ESC>:wa<CR>
 
 " reload vimrc
 nnoremap <F5> :so $MYVIMRC<CR>
