@@ -201,7 +201,6 @@ Plug 'zchee/deoplete-go', { 'do': 'make'}
 " Plug 'Robzz/deoplete-omnisharp'
 " Plug 'pkosel/deoplete-omnisharp'
 " Plug 'cyansprite/deoplete-omnisharp' , {'do': './install.sh'}
-Plug 'OmniSharp/omnisharp-vim'
 
 " Installs vim-dispatch (required to launch OmniSharp server) Will this crash with neomake?
 Plug 'tpope/vim-dispatch'
@@ -235,10 +234,8 @@ Plug 'peitalin/vim-jsx-typescript'
 " for converting betwee cases (such as snake_case camelCase etc)
 Plug 'tpope/vim-abolish'
 
-call plug#end()
 
-" tagbar
-" Plug 'majutsushi/tagbar'
+call plug#end()
 
 " Plugin Configuration ==================================================
 
@@ -250,17 +247,17 @@ nmap <F8> :TagbarToggle<CR>
 let g:airline#extensions#tagbar#enabled = 1
 
 " godot-gameengine ------------------------
-let g:tagbar_type_gdscript = { 'ctagstype' :'gdscript', 'kinds':[ 'c:constants', 'e:exports', 'o:onready', 'p:preloads', 's:signals', 'f:functions', ] }
+" let g:tagbar_type_gdscript = { 'ctagstype' :'gdscript', 'kinds':[ 'c:constants', 'e:exports', 'o:onready', 'p:preloads', 's:signals', 'f:functions', ] }
 
 "OmniSharp ------------------------
 " let g:OmniSharp_selector_ui = 'unite'
 " let g:Omnisharp_start_server = 0
 " let g:Omnisharp_stop_server = 1
 " let g:OmniSharp_server_type = 'roslyn'
-let g:omnicomplete_fetch_documentation=0
+" let g:omnicomplete_fetch_documentation=0
 " set completeopt=longest,menuone,preview
 " let g:deoplete_omnisharp_exe_path   = get(g:, "deoplete_omnisharp_exe_path", '~/.local/share/nvim/plugged/deoplete-omnisharp/omnisharp-server/OmniSharp/bin/Debug/OmniSharp.exe')
-let g:deoplete_omnisharp_port   = get(g:, "deoplete_omnisharp_port", 9999)
+" let g:deoplete_omnisharp_port   = get(g:, "deoplete_omnisharp_port", 9999)
 
 " tern_for_vim --------------------
 let g:tern#command = ["tern"]
@@ -313,12 +310,12 @@ let deoplete#tag#cache_limit_size = 5000000
 " let g:deoplete#sources._ = ['buffer', 'tag']
 
 " priority of sources
-call deoplete#custom#set('ultisnips', 'rank', 599)
-call deoplete#custom#set('fs', 'rank', 597)
-call deoplete#custom#set('go', 'rank', 596)
-call deoplete#custom#set('tern', 'rank', 595)
-call deoplete#custom#set('buffer', 'rank', 2)
-call deoplete#custom#set('look', 'rank', 1)
+" call deoplete#custom#set('ultisnips', 'rank', 599)
+" call deoplete#custom#set('fs', 'rank', 597)
+" call deoplete#custom#set('go', 'rank', 596)
+" call deoplete#custom#set('tern', 'rank', 595)
+" call deoplete#custom#set('buffer', 'rank', 2)
+" call deoplete#custom#set('look', 'rank', 1)
 
 " tern completeion deoplete-ternjs
 let g:tern_request_timeout = 1
@@ -508,6 +505,10 @@ let g:unite_source_history_yank_enable = 1
 " let g:unite_source_file_rec_max_cache_files = 0
 " call unite#custom#source('file_mru,file_rec,file_rec/async,grepocate',
 "             \ 'max_candidates', 0)
+
+let g:unite_source_file_rec_max_cache_files = 0
+call unite#custom#source('file_mru,file_rec,file_rec/async,grepocate',
+            \ 'max_candidates', 0)
 
 if executable('ag')
     let g:unite_source_rec_async_command = 'ag --nocolor --nogroup --hidden -g ""'

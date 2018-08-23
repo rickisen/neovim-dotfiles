@@ -1,9 +1,13 @@
-snippet co
-console.log('$1', $1);
+snippet imp
+import $3{ $1 }$4 from "$2";
 endsnippet
 
 snippet cons
-console.log('$1');
+console.log('$1', $2);
+endsnippet
+
+snippet co
+console.log('$1', $1);
 endsnippet
 
 snippet <
@@ -21,3 +25,19 @@ endsnippet
 snippet /
 <$1/>
 endsnippet
+
+snippet clar
+export default class $1 extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {$3};
+	}
+
+	render() {
+		return(
+			$2
+		);
+	}
+}
+endsnippet
+
