@@ -218,7 +218,8 @@ Plug 'zchee/deoplete-jedi'
 " Plug 'ryanoasis/vim-devicons'
 
 " vim godot-gameengine
-Plug 'quabug/vim-gdscript'
+" Plug 'quabug/vim-gdscript'
+Plug 'calviken/vim-gdscript3'
 
 " for moving around inside indent level
 Plug 'michaeljsmith/vim-indent-object'
@@ -227,10 +228,13 @@ Plug 'michaeljsmith/vim-indent-object'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 
-call plug#end()
+" mainly for converting to-from different cases, like snake_case to camelCase
+Plug 'tpope/vim-abolish'
 
 " tagbar
 " Plug 'majutsushi/tagbar'
+
+call plug#end()
 
 " Plugin Configuration ==================================================
 
@@ -242,7 +246,7 @@ nmap <F8> :TagbarToggle<CR>
 let g:airline#extensions#tagbar#enabled = 1
 
 " godot-gameengine ------------------------
-let g:tagbar_type_gdscript = { 'ctagstype' :'gdscript', 'kinds':[ 'c:constants', 'e:exports', 'o:onready', 'p:preloads', 's:signals', 'f:functions', ] }
+" let g:tagbar_type_gdscript = { 'ctagstype' :'gdscript', 'kinds':[ 'c:constants', 'e:exports', 'o:onready', 'p:preloads', 's:signals', 'f:functions', ] }
 
 "OmniSharp ------------------------
 " let g:OmniSharp_selector_ui = 'unite'
