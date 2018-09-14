@@ -98,7 +98,8 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'lilydjwg/colorizer'
 
 " gruvbox colorscheme
-Plug 'morhetz/gruvbox'
+" Plug 'morhetz/gruvbox'
+Plug 'arcticicestudio/nord-vim'
 
 " Gundo
 Plug 'sjl/gundo.vim'
@@ -568,8 +569,14 @@ if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gno
 endif
 
 " set colorscheme
-colorscheme gruvbox
+" colorscheme gruvbox
 set background=dark
+colorscheme nord
+let g:nord_italic = 1
+let g:nord_underline = 1
+let g:nord_uniform_status_lines = 1
+let g:nord_italic_comments = 1
+let g:nord_comment_brightness = 19
 " let g:gruvbox_contrast_dark = 'hard'
 
 " Misq Functions and keybindings  ==================================================
