@@ -98,7 +98,9 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'lilydjwg/colorizer'
 
 " gruvbox colorscheme
-" Plug 'morhetz/gruvbox'
+Plug 'kamwitsta/nordisk'
+Plug 'whatyouhide/vim-gotham'
+Plug 'morhetz/gruvbox'
 Plug 'arcticicestudio/nord-vim'
 
 " Gundo
@@ -230,7 +232,8 @@ Plug 'michaeljsmith/vim-indent-object'
 
 " for jsx/tsx highlighting
 Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
+" Plug 'peitalin/vim-jsx-typescript'
+Plug 'ianks/vim-tsx'
 
 " for converting betwee cases (such as snake_case camelCase etc)
 Plug 'tpope/vim-abolish'
@@ -270,12 +273,13 @@ let g:tern#arguments = ["--persistent"]
 set hidden
 
 let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-    \ 'javascript': ['~/.node_modules/lib/node_modules/javascript-typescript-langserver/lib/language-server-stdio.js'],
-    \ 'javascript.jsx': ['~/.node_modules/lib/node_modules/javascript-typescript-langserver/lib/language-server-stdio.js'],
-    \ 'typescript': ['~/.node_modules/lib/node_modules/javascript-typescript-langserver/lib/language-server-stdio.js'],
-    \ 'typescript.tsx': ['~/.node_modules/lib/node_modules/javascript-typescript-langserver/lib/language-server-stdio.js'],
-    \ 'typescript.jsx': ['~/.node_modules/lib/node_modules/javascript-typescript-langserver/lib/language-server-stdio.js'],
+    \ 'rust':           ['rustup', 'run', 'nightly', 'rls'],
+    \ 'javascript':     ['/usr/bin/javascript-typescript-stdio'],
+    \ 'javascript.jsx': ['/usr/bin/javascript-typescript-stdio'],
+    \ 'typescript':     ['/usr/bin/javascript-typescript-stdio'],
+    \ 'typescript.tsx': ['/usr/bin/javascript-typescript-stdio'],
+    \ 'typescript.jsx': ['/usr/bin/javascript-typescript-stdio'],
+    \ 'python':         ['/usr/local/bin/pyls'],
     \ }
 
 " Automatically start language servers.
@@ -569,14 +573,14 @@ if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gno
 endif
 
 " set colorscheme
-" colorscheme gruvbox
 set background=dark
-colorscheme nord
-let g:nord_italic = 1
-let g:nord_underline = 1
-let g:nord_uniform_status_lines = 1
-let g:nord_italic_comments = 1
-let g:nord_comment_brightness = 19
+set termguicolors
+colorscheme gotham
+" let g:nord_italic = 1
+" let g:nord_underline = 1
+" let g:nord_uniform_status_lines = 1
+" let g:nord_italic_comments = 1
+" let g:nord_comment_brightness = 19
 " let g:gruvbox_contrast_dark = 'hard'
 
 " Misq Functions and keybindings  ==================================================
