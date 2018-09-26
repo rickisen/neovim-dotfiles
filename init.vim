@@ -238,12 +238,27 @@ Plug 'ianks/vim-tsx'
 " for converting betwee cases (such as snake_case camelCase etc)
 Plug 'tpope/vim-abolish'
 
+" to apply prettier on typescript
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
 
 call plug#end()
-
 " Plugin Configuration ==================================================
 
-" easytags
+"vim-prettier ------------------------
+let g:prettier#autoformat = 0
+let g:prettier#exec_cmd_async = 1
+
+" run on file write on everyfile (even without @format)
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
+
+" " run on every change
+" let g:prettier#quickfix_enabled = 0
+" let g:prettier#autoformat = 0
+" autocmd BufWritePre,TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
+
+" easytags ------------------------
 let g:easytags_async = 1
 
 " Tagbar ------------------------
