@@ -141,8 +141,8 @@ Plug 'tpope/vim-surround'
 
 " vim-tags
 " Plug 'szw/vim-tags'
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-easytags'
+" Plug 'xolox/vim-misc'
+" Plug 'xolox/vim-easytags'
 
 " tcomments
 Plug 'tomtom/tcomment_vim'
@@ -221,7 +221,7 @@ Plug 'arecarn/vim-crunch'
 Plug 'zchee/deoplete-jedi'
 
 " nice icons for nerdtree and other plugins
-" Plug 'ryanoasis/vim-devicons'
+Plug 'ryanoasis/vim-devicons'
 
 " vim godot-gameengine
 " Plug 'quabug/vim-gdscript'
@@ -458,12 +458,12 @@ let g:neomake_javascript_jscs_maker = {
     \ 'errorformat': '%f: line %l\, col %c\, %m',
     \ }
 
-function! neomake#makers#ft#scss#scsslint()
-    return {
-        \ 'exe': 'node-scss-lint',
-        \ 'errorformat': '%f:%l [%t] %m'
-    \ }
-endfunction
+" function! neomake#makers#ft#scss#scsslint()
+"     return {
+"         \ 'exe': 'node-scss-lint',
+"         \ 'errorformat': '%f:%l [%t] %m'
+"     \ }
+" endfunction
 
 let g:neomake_jsx_enabled_makers = ['eslint']
 let g:neomake_javascript_enabled_makers = ['eslint']
