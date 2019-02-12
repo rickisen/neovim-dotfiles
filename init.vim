@@ -220,9 +220,6 @@ Plug 'arecarn/vim-crunch'
 " python completions
 Plug 'zchee/deoplete-jedi'
 
-" nice icons for nerdtree and other plugins
-Plug 'ryanoasis/vim-devicons'
-
 " vim godot-gameengine
 " Plug 'quabug/vim-gdscript'
 Plug 'calviken/vim-gdscript3'
@@ -238,6 +235,9 @@ Plug 'ianks/vim-tsx'
 " for converting betwee cases (such as snake_case camelCase etc)
 Plug 'tpope/vim-abolish'
 
+" nice icons for nerdtree and other plugins
+" Plug 'ryanoasis/vim-devicons'
+
 " to apply prettier on typescript
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
@@ -245,6 +245,12 @@ Plug 'prettier/vim-prettier', {
 
 call plug#end()
 " Plugin Configuration ==================================================
+
+" vim-devicons
+" let g:WebDevIconsUnicodeGlyphDoubleWidth = 0
+" let g:webdevicons_conceal_nerdtree_brackets = 0
+" let g:WebDevIconsNerdTreeAfterGlyphPadding = ''
+" let g:WebDevIconsNerdTreeGitPluginForceVAlign = 0
 
 "vim-prettier ------------------------
 let g:prettier#autoformat = 0
