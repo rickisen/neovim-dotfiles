@@ -257,7 +257,7 @@ let g:prettier#autoformat = 0
 let g:prettier#exec_cmd_async = 1
 
 " run on file write on everyfile (even without @format)
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
+" autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
 
 " " run on every change
 " let g:prettier#quickfix_enabled = 0
@@ -265,7 +265,7 @@ autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.gra
 " autocmd BufWritePre,TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
 
 " easytags ------------------------
-let g:easytags_async = 1
+" let g:easytags_async = 1
 
 " Tagbar ------------------------
 nmap <F8> :TagbarToggle<CR>
@@ -478,6 +478,10 @@ let g:neomake_html_enabled_makers = ['tidy']
 let g:neomake_scss_enabled_makers = ['scsslint']
 let g:neomake_markdown_enabled_makers = ['mdl']
 let g:neomake_json_enabled_makers = ['jsonlint']
+"
+" Use the fix option of eslint
+let g:neomake_javascript_eslint_args = ['-f', 'compact', '--fix']
+au User NeomakeFinished checktime
 
 " work around a bug when editing files webpack watches.
 " But tares on a ssd drive
