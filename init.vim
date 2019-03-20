@@ -486,6 +486,8 @@ au User NeomakeFinished checktime
 " work around a bug when editing files webpack watches.
 " But tares on a ssd drive
 autocmd FileType javascript.jsx :set backupcopy=yes
+autocmd FileType javascript.jsx :set signcolumn=yes
+autocmd FileType javascript :set signcolumn=yes
 
 let g:neomake_logfile='/tmp/error.log'
 
