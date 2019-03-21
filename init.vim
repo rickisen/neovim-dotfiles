@@ -97,11 +97,12 @@ Plug 'jiangmiao/auto-pairs'
 " colorizer
 Plug 'lilydjwg/colorizer'
 
-" gruvbox colorscheme
-Plug 'kamwitsta/nordisk'
-Plug 'whatyouhide/vim-gotham'
-Plug 'morhetz/gruvbox'
-Plug 'arcticicestudio/nord-vim'
+" colorschemes
+" Plug 'kamwitsta/nordisk'
+" Plug 'whatyouhide/vim-gotham'
+" Plug 'morhetz/gruvbox'
+" Plug 'arcticicestudio/nord-vim'
+Plug 'rickisen/vim-gotham'
 
 " Gundo
 Plug 'sjl/gundo.vim'
@@ -486,6 +487,8 @@ au User NeomakeFinished checktime
 " work around a bug when editing files webpack watches.
 " But tares on a ssd drive
 autocmd FileType javascript.jsx :set backupcopy=yes
+autocmd FileType javascript.jsx :set signcolumn=yes
+autocmd FileType javascript :set signcolumn=yes
 
 let g:neomake_logfile='/tmp/error.log'
 

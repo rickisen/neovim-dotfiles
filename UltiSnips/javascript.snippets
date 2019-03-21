@@ -26,6 +26,14 @@ snippet /
 <$1/>
 endsnippet
 
+
+snippet prop
+static propTypes = {
+	dispatch: PropTypes.func.isRequired,
+	$1:$2
+}
+endsnippet
+
 snippet clar
 export default class $1 extends React.Component {
 	constructor(props) {
