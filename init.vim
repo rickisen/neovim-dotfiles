@@ -480,7 +480,7 @@ let g:neomake_markdown_enabled_makers = ['mdl']
 let g:neomake_json_enabled_makers = ['jsonlint']
 "
 " Use the fix option of eslint
-let g:neomake_javascript_eslint_args = ['-f', 'compact', '--fix']
+let g:neomake_javascript_eslint_args = ['-f', 'compact', '--fix-dry-run']
 au User NeomakeFinished checktime
 
 " work around a bug when editing files webpack watches.
