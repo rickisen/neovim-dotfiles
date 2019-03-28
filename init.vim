@@ -561,8 +561,8 @@ let g:unite_source_mark_marks =
             \   "abcdefghijklmnopqrstuvwxyz"
             \ . "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 " nnoremap <Tab>		|i_<Plug>(unite_select_next_line)|<cr>
-nnoremap <Space>s :Unite -start-insert -no-split -no-resize file_rec/async<cr>
-nnoremap <Space>p :Unite -start-insert -no-split -no-resize file_rec<cr>
+nnoremap <Space>p :Unite -start-insert -no-split -no-resize file_rec/async<cr>
+nnoremap <Space>s :Unite -start-insert -no-split -no-resize file_rec<cr>
 nnoremap <Space>f :Unite -start-insert -no-split -no-resize file file/new directory/new<cr>
 nnoremap <Space>b :Unite -start-insert -no-split -no-resize buffer<cr>
 nnoremap <Space>y :Unite -start-insert -no-split -no-resize history/yank<cr>

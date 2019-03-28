@@ -12,3 +12,4 @@ pip
 mono
 dotnet-cli
 libuv
+the_silver_searcher
