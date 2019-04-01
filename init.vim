@@ -540,16 +540,16 @@ let g:unite_source_history_yank_enable = 1
 " call unite#custom#source('file_mru,file_rec,file_rec/async,grepocate',
 "             \ 'max_candidates', 0)
 
-let g:unite_source_file_rec_max_cache_files = 0
-call unite#custom#source('file_mru,file_rec,file_rec/async,grepocate',
-            \ 'max_candidates', 0)
+" let g:unite_source_file_rec_max_cache_files = 0
+" call unite#custom#source('file_mru,file_rec,file_rec/async,grepocate',
+"             \ 'max_candidates', 0)
 
-if executable('ag')
-    let g:unite_source_rec_async_command = 'ag --nocolor --nogroup --hidden -g ""'
-    let g:unite_source_grep_command = 'ag'
-    let g:unite_source_grep_default_opts = '--nocolor --nogroup --hidden'
-    let g:unite_source_grep_recursive_opt=''
-endif
+" if executable('ag')
+"     let g:unite_source_rec_async_command = 'ag --nocolor --nogroup --hidden -g ""'
+"     let g:unite_source_grep_command = 'ag'
+"     let g:unite_source_grep_default_opts = '--nocolor --nogroup --hidden'
+"     let g:unite_source_grep_recursive_opt=''
+" endif
 
 autocmd FileType unite call s:unite_settings()
 
@@ -562,13 +562,15 @@ let g:unite_source_mark_marks =
             \   "abcdefghijklmnopqrstuvwxyz"
             \ . "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 " nnoremap <Tab>		|i_<Plug>(unite_select_next_line)|<cr>
-nnoremap <Space>s :Unite -start-insert -no-split -no-resize file_rec/async<cr>
-nnoremap <Space>p :Unite -start-insert -no-split -no-resize file_rec<cr>
-nnoremap <Space>f :Unite -start-insert -no-split -no-resize file file/new directory/new<cr>
-nnoremap <Space>b :Unite -start-insert -no-split -no-resize buffer<cr>
-nnoremap <Space>y :Unite -start-insert -no-split -no-resize history/yank<cr>
-nnoremap <Space>o :Unite -start-insert -no-split -no-resize outline<cr>
-nnoremap <Space>/ :Unite -start-insert -no-split -no-resize grep:.<cr>
+" nnoremap <Space>p :Unite -start-insert -no-split -no-resize file_rec/async<cr>
+" nnoremap <Space>s :Unite -start-insert -no-split -no-resize file_rec<cr>
+nnoremap <Space>p :Unite -start-insert file_rec/git<cr>
+nnoremap <Space>s :Unite -start-insert file_rec/async<cr>
+nnoremap <Space>f :Unite -start-insert file file/new directory/new<cr>
+nnoremap <Space>b :Unite -start-insert buffer<cr>
+nnoremap <Space>y :Unite -start-insert history/yank<cr>
+nnoremap <Space>o :Unite -start-insert outline<cr>
+nnoremap <Space>/ :Unite -start-insert grep:.<cr>
 
 " vim-go -------------------------
 " fix for loading gb projects imports
