@@ -3,6 +3,7 @@ tern
 node-scss-lint
 jshint
 mdl
+jsonlint
 
 # and the system needs:
 look
