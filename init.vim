@@ -298,6 +298,7 @@ let g:LanguageClient_serverCommands = {
     \ 'rust':           ['rustup', 'run', 'nightly', 'rls'],
     \ 'javascript':     ['/usr/bin/javascript-typescript-stdio'],
     \ 'javascript.jsx': ['/usr/bin/javascript-typescript-stdio'],
+    \ 'json':           ['/usr/bin/javascript-typescript-stdio'],
     \ 'typescript':     ['/usr/bin/javascript-typescript-stdio'],
     \ 'typescript.tsx': ['/usr/bin/javascript-typescript-stdio'],
     \ 'typescript.jsx': ['/usr/bin/javascript-typescript-stdio'],
@@ -332,7 +333,7 @@ autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.jsx
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_complete_start_length = 2
 let g:deoplete#auto_complete_delay = 150
-let deoplete#tag#cache_limit_size = 5000000 
+let deoplete#tag#cache_limit_size = 5000000
 " let g:deoplete#sources = {}
 " let g:deoplete#sources._ = ['buffer', 'tag']
 
@@ -478,7 +479,7 @@ let g:neomake_php_enabled_makers = ['php']
 let g:neomake_html_enabled_makers = ['tidy']
 let g:neomake_scss_enabled_makers = ['scsslint']
 let g:neomake_markdown_enabled_makers = ['mdl']
-let g:neomake_json_enabled_makers = ['jsonlint']
+" let g:neomake_json_enabled_makers = ['jsonlint']
 "
 " Use the fix option of eslint
 let g:neomake_javascript_eslint_args = ['-f', 'compact', '--fix-dry-run']
@@ -539,16 +540,16 @@ let g:unite_source_history_yank_enable = 1
 " call unite#custom#source('file_mru,file_rec,file_rec/async,grepocate',
 "             \ 'max_candidates', 0)
 
-let g:unite_source_file_rec_max_cache_files = 0
-call unite#custom#source('file_mru,file_rec,file_rec/async,grepocate',
-            \ 'max_candidates', 0)
+" let g:unite_source_file_rec_max_cache_files = 0
+" call unite#custom#source('file_mru,file_rec,file_rec/async,grepocate',
+"             \ 'max_candidates', 0)
 
-if executable('ag')
-    let g:unite_source_rec_async_command = 'ag --nocolor --nogroup --hidden -g ""'
-    let g:unite_source_grep_command = 'ag'
-    let g:unite_source_grep_default_opts = '--nocolor --nogroup --hidden'
-    let g:unite_source_grep_recursive_opt=''
-endif
+" if executable('ag')
+"     let g:unite_source_rec_async_command = 'ag --nocolor --nogroup --hidden -g ""'
+"     let g:unite_source_grep_command = 'ag'
+"     let g:unite_source_grep_default_opts = '--nocolor --nogroup --hidden'
+"     let g:unite_source_grep_recursive_opt=''
+" endif
 
 autocmd FileType unite call s:unite_settings()
 
@@ -561,13 +562,15 @@ let g:unite_source_mark_marks =
             \   "abcdefghijklmnopqrstuvwxyz"
             \ . "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 " nnoremap <Tab>		|i_<Plug>(unite_select_next_line)|<cr>
-nnoremap <Space>p :Unite -start-insert -no-split -no-resize file_rec/async<cr>
-nnoremap <Space>s :Unite -start-insert -no-split -no-resize file_rec<cr>
-nnoremap <Space>f :Unite -start-insert -no-split -no-resize file file/new directory/new<cr>
-nnoremap <Space>b :Unite -start-insert -no-split -no-resize buffer<cr>
-nnoremap <Space>y :Unite -start-insert -no-split -no-resize history/yank<cr>
-nnoremap <Space>o :Unite -start-insert -no-split -no-resize outline<cr>
-nnoremap <Space>/ :Unite -start-insert -no-split -no-resize grep:.<cr>
+" nnoremap <Space>p :Unite -start-insert -no-split -no-resize file_rec/async<cr>
+" nnoremap <Space>s :Unite -start-insert -no-split -no-resize file_rec<cr>
+nnoremap <Space>p :Unite -start-insert file_rec/git<cr>
+nnoremap <Space>s :Unite -start-insert file_rec/async<cr>
+nnoremap <Space>f :Unite -start-insert file file/new directory/new<cr>
+nnoremap <Space>b :Unite -start-insert buffer<cr>
+nnoremap <Space>y :Unite -start-insert history/yank<cr>
+nnoremap <Space>o :Unite -start-insert outline<cr>
+nnoremap <Space>/ :Unite -start-insert grep:.<cr>
 
 " vim-go -------------------------
 " fix for loading gb projects imports
