@@ -333,7 +333,7 @@ autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.jsx
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_complete_start_length = 2
 let g:deoplete#auto_complete_delay = 150
-let deoplete#tag#cache_limit_size = 5000000 
+let deoplete#tag#cache_limit_size = 5000000
 " let g:deoplete#sources = {}
 " let g:deoplete#sources._ = ['buffer', 'tag']
 
@@ -479,10 +479,10 @@ let g:neomake_php_enabled_makers = ['php']
 let g:neomake_html_enabled_makers = ['tidy']
 let g:neomake_scss_enabled_makers = ['scsslint']
 let g:neomake_markdown_enabled_makers = ['mdl']
-" let g:neomake_json_enabled_makers = ['jsonlint']
+let g:neomake_json_enabled_makers = ['jsonlint']
 "
 " Use the fix option of eslint
-let g:neomake_javascript_eslint_args = ['-f', 'compact', '--fix']
+let g:neomake_javascript_eslint_args = ['-f', 'compact', '--fix-dry-run']
 au User NeomakeFinished checktime
 
 " work around a bug when editing files webpack watches.
@@ -575,19 +575,19 @@ nnoremap <Space>/ :Unite -start-insert grep:.<cr>
 " vim-go -------------------------
 " fix for loading gb projects imports
 " let $GOPATH = getcwd() . ":" . getcwd() . "/vendor"
-if system('hostname') == "rickisens-MacBook.local\n"
-  let $GOPATH = '/home/rickisen/.go'
-elseif system('hostname') == "acer\n"
-  let g:deoplete_omnisharp_exe_path   = get(g:, "deoplete_omnisharp_exe_path", '/home/rickisen/Programming/mine/neovim-dotfiles/plugged/deoplete-omnisharp/omnisharp-server/OmniSharp/bin/Debug/OmniSharp.exe')
-  let $GOPATH = '/home/rickisen/.go:/home/rickisen/Programming/mine/BBH/maitress/maitres-backend:/home/rickisen/Programming/mine/BBH/maitress/maitres-backend/vendor'
-else
-  let g:deoplete_omnisharp_exe_path   = get(g:, "deoplete_omnisharp_exe_path", '/home/rickard/programming/mine/neovim-dotfiles/plugged/deoplete-omnisharp/omnisharp-server/OmniSharp/bin/Debug/OmniSharp.exe')
-  let $GOPATH = '/home/rickard/.go:/home/rickard/programming/mine/BBH/maitress/maitres-backend:/home/rickard/programming/mine/BBH/maitress/maitres-backend/vendor'
-endif
+" if system('hostname') == "rickisens-MacBook.local\n"
+"   let $GOPATH = '/home/rickisen/.go'
+" elseif system('hostname') == "acer\n"
+"   let g:deoplete_omnisharp_exe_path   = get(g:, "deoplete_omnisharp_exe_path", '/home/rickisen/Programming/mine/neovim-dotfiles/plugged/deoplete-omnisharp/omnisharp-server/OmniSharp/bin/Debug/OmniSharp.exe')
+"   let $GOPATH = '/home/rickisen/.go:/home/rickisen/Programming/mine/BBH/maitress/maitres-backend:/home/rickisen/Programming/mine/BBH/maitress/maitres-backend/vendor'
+" else
+"   let g:deoplete_omnisharp_exe_path   = get(g:, "deoplete_omnisharp_exe_path", '/home/rickard/programming/mine/neovim-dotfiles/plugged/deoplete-omnisharp/omnisharp-server/OmniSharp/bin/Debug/OmniSharp.exe')
+"   let $GOPATH = '/home/rickard/.go:/home/rickard/programming/mine/BBH/maitress/maitres-backend:/home/rickard/programming/mine/BBH/maitress/maitres-backend/vendor'
+" endif
 
 
 " disables auto formating on save
-let g:go_fmt_autosave = 0
+" let g:go_fmt_autosave = 0
 
 " editorconfig --------------------
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
