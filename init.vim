@@ -544,12 +544,12 @@ let g:unite_source_history_yank_enable = 1
 " call unite#custom#source('file_mru,file_rec,file_rec/async,grepocate',
 "             \ 'max_candidates', 0)
 
-" if executable('ag')
-"     let g:unite_source_rec_async_command = 'ag --nocolor --nogroup --hidden -g ""'
-"     let g:unite_source_grep_command = 'ag'
-"     let g:unite_source_grep_default_opts = '--nocolor --nogroup --hidden'
-"     let g:unite_source_grep_recursive_opt=''
-" endif
+if executable('ag')
+    let g:unite_source_rec_async_command = 'ag --nocolor --nogroup --hidden -g ""'
+    let g:unite_source_grep_command = 'ag'
+    let g:unite_source_grep_default_opts = '--nocolor --nogroup --hidden'
+    let g:unite_source_grep_recursive_opt=''
+endif
 
 autocmd FileType unite call s:unite_settings()
 
