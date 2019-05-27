@@ -43,6 +43,12 @@ set noea
 " automatic linebreaks
 " set tw=79
 
+let goFolder = join(['/home/', $USER, '/.go'], '')
+let $GOPATH = join([goFolder, getcwd()], ':')
+
+let goBinFolder = join(['/home/', $USER, '/.go/bin'], '')
+let $PATH = join([goBinFolder, $PATH], ':')
+
 " Plugin Management ==================================================
 call plug#begin('~/.config/nvim/plugged')
 
@@ -187,13 +193,8 @@ Plug 'sickill/vim-pasta'
 Plug 'AndrewRadev/splitjoin.vim'
 
 " enhanced golang support
-Plug 'fatih/vim-go'
-" :GoInstallBinaries
-
-Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
-
-" deoplete go source
-Plug 'zchee/deoplete-go', { 'do': 'make'}
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
+Plug 'zchee/deoplete-go', { 'do': 'make' }
 
 "c# completions
 " Plug 'OmniSharp/omnisharp-vim', { 'do': 'cd server && xbuild' }
@@ -572,19 +573,11 @@ nnoremap <Space>y :Unite -start-insert history/yank<cr>
 nnoremap <Space>o :Unite -start-insert outline<cr>
 nnoremap <Space>/ :Unite -start-insert grep:.<cr>
 
-" vim-go -------------------------
-" fix for loading gb projects imports
-" let $GOPATH = getcwd() . ":" . getcwd() . "/vendor"
-" if system('hostname') == "rickisens-MacBook.local\n"
-"   let $GOPATH = '/home/rickisen/.go'
-" elseif system('hostname') == "acer\n"
-"   let g:deoplete_omnisharp_exe_path   = get(g:, "deoplete_omnisharp_exe_path", '/home/rickisen/Programming/mine/neovim-dotfiles/plugged/deoplete-omnisharp/omnisharp-server/OmniSharp/bin/Debug/OmniSharp.exe')
-"   let $GOPATH = '/home/rickisen/.go:/home/rickisen/Programming/mine/BBH/maitress/maitres-backend:/home/rickisen/Programming/mine/BBH/maitress/maitres-backend/vendor'
-" else
-"   let g:deoplete_omnisharp_exe_path   = get(g:, "deoplete_omnisharp_exe_path", '/home/rickard/programming/mine/neovim-dotfiles/plugged/deoplete-omnisharp/omnisharp-server/OmniSharp/bin/Debug/OmniSharp.exe')
-"   let $GOPATH = '/home/rickard/.go:/home/rickard/programming/mine/BBH/maitress/maitres-backend:/home/rickard/programming/mine/BBH/maitress/maitres-backend/vendor'
-" endif
-
+" vim-go golang -------------------------
+call deoplete#custom#option('omni_patterns', {
+\ 'go': '[^. *\t]\.\w*',
+\})
+let g:go_def_mode = "gopls"
 
 " disables auto formating on save
 " let g:go_fmt_autosave = 0
