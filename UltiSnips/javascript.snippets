@@ -10,6 +10,10 @@ snippet cons
 console.log("$1$2", $1);
 endsnippet
 
+snippet coner
+console.error("$1", $2);
+endsnippet
+
 snippet <
 <$1$3>$2</$1>
 endsnippet
@@ -35,15 +39,32 @@ static propTypes = {
 endsnippet
 
 snippet clar
+import React from "react";
+import { PropTypes } from "prop-types";
+import { View$7 } from "react-native";
+
 export default class $1 extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {$3};
-	}
+	static propTypes = {$2}
+
+	static defaultProps = {$2$3}
+
+	state = {$4};
+
+	styles = StyleSheet.create({
+		container: {
+			flex: 1,
+		},
+	},
 
 	render() {
+		const {$5} = this.props
+		const {$6} = this.state
+		const { styles } = this
+
 		return(
-			$2
+			<View style={styles.container}>
+				$8
+			</View>
 		);
 	}
 }
@@ -55,4 +76,19 @@ endsnippet
 
 snippet res
 res('$1')
+endsnippet
+
+snippet styles
+styles = StyleSheet.create({
+	container: {
+		flex: 1,
+	},
+	$1: {
+		$2
+	},
+});
+endsnippet
+
+snippet todo
+// TODO: $1
 endsnippet

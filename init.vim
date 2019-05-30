@@ -255,15 +255,16 @@ call plug#end()
 " let g:WebDevIconsNerdTreeGitPluginForceVAlign = 0
 
 "vim-prettier ------------------------
-let g:prettier#autoformat = 0
-let g:prettier#exec_cmd_async = 1
 
 " run on file write on everyfile (even without @format)
 " autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
 
 " " run on every change
+" let g:prettier#exec_cmd_async = 1
 " let g:prettier#quickfix_enabled = 0
-" let g:prettier#autoformat = 0
+let g:prettier#quickfix_auto_focus = 0
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
 " autocmd BufWritePre,TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
 
 " easytags ------------------------
@@ -453,19 +454,22 @@ nnoremap <space>go  :Git checkout<Space>
 
 " Neomake  -------------------------
 " allways run on read and write and leave insert
-autocmd! BufWritePost,BufEnter,InsertLeave  * Neomake
+" autocmd! BufWritePost,BufEnter,InsertLeave  * Neomake
+
+" Run on write
+autocmd! BufWritePost,BufEnter * Neomake
 
 " Check javascript
-let g:neomake_javascript_jshint_maker = {
-    \ 'args': ['--verbose'],
-    \ 'errorformat': '%A%f: line %l\, col %v\, %m \(%t%*\d\)',
-    \ }
+" let g:neomake_javascript_jshint_maker = {
+"     \ 'args': ['--verbose'],
+"     \ 'errorformat': '%A%f: line %l\, col %v\, %m \(%t%*\d\)',
+"     \ }
 
-let g:neomake_javascript_jscs_maker = {
-    \ 'exe': 'jscs',
-    \ 'args': ['--no-color', '--preset', 'airbnb', '--reporter', 'inline'],
-    \ 'errorformat': '%f: line %l\, col %c\, %m',
-    \ }
+" let g:neomake_javascript_jscs_maker = {
+"     \ 'exe': 'jscs',
+"     \ 'args': ['--no-color', '--preset', 'airbnb', '--reporter', 'inline'],
+"     \ 'errorformat': '%f: line %l\, col %c\, %m',
+"     \ }
 
 " function! neomake#makers#ft#scss#scsslint()
 "     return {
@@ -483,7 +487,7 @@ let g:neomake_markdown_enabled_makers = ['mdl']
 let g:neomake_json_enabled_makers = ['jsonlint']
 "
 " Use the fix option of eslint
-let g:neomake_javascript_eslint_args = ['-f', 'compact', '--fix-dry-run']
+" let g:neomake_javascript_eslint_args = ['-f', 'compact', '--fix-dry-run']
 au User NeomakeFinished checktime
 
 " work around a bug when editing files webpack watches.
