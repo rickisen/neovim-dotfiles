@@ -13,6 +13,9 @@ set mouse=a
 set foldmethod=indent
 set nofoldenable
 
+" screw accidental ex mode
+nnoremap Q @@
+
 " allways diff vertically
 set diffopt+=vertical
 nnoremap du  :diffupdate<CR>
