@@ -240,6 +240,9 @@ Plug 'ianks/vim-tsx'
 " for converting betwee cases (such as snake_case camelCase etc)
 Plug 'tpope/vim-abolish'
 
+" make the preview window float next to completions
+Plug 'ncm2/float-preview.nvim'
+
 " nice icons for nerdtree and other plugins
 " Plug 'ryanoasis/vim-devicons'
 
@@ -343,12 +346,13 @@ let deoplete#tag#cache_limit_size = 5000000
 " let g:deoplete#sources._ = ['buffer', 'tag']
 
 " priority of sources
-" call deoplete#custom#set('ultisnips', 'rank', 599)
-" call deoplete#custom#set('fs', 'rank', 597)
-" call deoplete#custom#set('go', 'rank', 596)
-" call deoplete#custom#set('tern', 'rank', 595)
-" call deoplete#custom#set('buffer', 'rank', 2)
-" call deoplete#custom#set('look', 'rank', 1)
+call deoplete#custom#source('buffer', 'rank', 900)
+call deoplete#custom#source('LanguageClient', 'rank', 800)
+call deoplete#custom#source('ultisnips', 'rank', 700)
+call deoplete#custom#source('go', 'rank', 600)
+call deoplete#custom#source('tern', 'rank', 599)
+call deoplete#custom#source('fs', 'rank', 2)
+call deoplete#custom#source('look', 'rank', 1)
 
 " tern completeion deoplete-ternjs
 let g:tern_request_timeout = 1
@@ -592,7 +596,8 @@ let g:go_def_mode = "gopls"
 " editorconfig --------------------
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
-" ------------------------------------
+" float-preview -------------------------
+let g:float_preview#docked = 1
 
 " Color Configuration ==================================================
 " enable nvim truecolor
