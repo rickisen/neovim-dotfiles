@@ -43,17 +43,38 @@ Plug 'autozimu/LanguageClient-neovim', {
 \ 'do': 'bash install.sh',
 \ }
 
+" (LSP) Showing function signature and inline doc.
+Plug 'Shougo/echodoc.vim'
+
 " asynchronous execution library for Vim, others depends on this
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 
+" search for files, maybe dep of nerdtree
+Plug 'shougo/unite.vim'
+
+" auto-pairs
+Plug 'jiangmiao/auto-pairs'
+
 " colorschemes
 Plug 'rickisen/vim-gotham'
+
+" NERDtree
+Plug 'scrooloose/nerdtree'
+
+" NERDtree git
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+" Targets ( 'ci(', 'ca{', etc)
+Plug 'wellle/targets.vim'
 
 " Ultisnips
 Plug 'SirVer/ultisnips'
 
 " vim snippets
 Plug 'honza/vim-snippets'
+
+" airline
+Plug 'vim-airline/vim-airline'
 
 " vim-surround
 Plug 'tpope/vim-surround'
@@ -76,6 +97,15 @@ Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
 
+" support for .editorconfig files
+Plug 'editorconfig/editorconfig-vim'
+
+" make the preview window float next to completions
+Plug 'ncm2/float-preview.nvim'
+
+" Fugitive, git integration
+Plug 'tpope/vim-fugitive'
+
 call plug#end()
 
 " deoplete -------------------------
@@ -91,6 +121,19 @@ call deoplete#custom#source('ultisnips', 'rank', 700)
 call deoplete#custom#source('go', 'rank', 600)
 call deoplete#custom#source('fs', 'rank', 2)
 
+" close the preview window when leaving insert mode
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+
+" complete with tab
+inoremap <silent><expr><Tab> pumvisible() ? "\<C-n>"  : (<SID>is_whitespace() ? "\<Tab>" : deoplete#mappings#manual_complete())
+inoremap <expr><S-Tab>  pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" needed so tab works both for inserting tabs and scroll deoplete
+function! s:is_whitespace()
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~? '\s'
+endfunction
+
 " typescript/javascript -------------------------
 " set filetypes as typescript.jsx
 autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.jsx
@@ -99,6 +142,9 @@ let g:javascript_opfirst = '^\s*\%(\%(\%(\/\*.\{-}\)\=\*\+\/\s*\)\=\)\@>\%([<>,?
 let g:javascript_continuation = '\%([<=,.?/*:^%|&]\|+\@<!+\|-\@<!-\|\<in\%(stanceof\)\=\)\s*\%(\%(\/\%(\%(\*.\{-}\*\/\)\|\%(\*\+\)\)\)\s*\)\=$'
 
 let g:used_javascript_libs = 'react'
+" let g:used_javascript_libs = ' jquery, underscore, underscore,
+" backbone, prelude, angularjs, angularui, angularuirouter, react,
+" flux, requirejs, sugar, jasmine, chai, handlebars, ramda, vue'
 
 let g:LanguageClient_serverCommands = {
     \ 'rust':           ['rustup', 'run', 'nightly', 'rls'],
@@ -128,11 +174,39 @@ nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
+" auto-pairs -------------------------
+let g:AutoPairsShortcutFastWrap='<Nop>'
+
+" NERDtree --------------------------------------------------
+silent! nmap <C-p> :NERDTreeToggle<CR>
+silent! map <F3> :NERDTreeFind<CR>
+let g:NERDTreeMapPreview="<F4>"
+let NERDTreeMinimalUI=1
+
 " ultisnips
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsExpandTrigger="<c-space>"
 let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/UltiSnips', 'UltiSnips']
+
+" airline -------------------------------
+:set laststatus=2 "allways show airline
+let g:airline_powerline_fonts = 1
+
+" fugitive git bindings ---------------------------------
+nnoremap <space>ga  :Git add %:p<CR><CR>
+nnoremap <space>gs  :Gstatus<CR>
+nnoremap <space>gc  :Gcommit -v -q<CR>
+nnoremap <space>gt  :Gcommit -v -q %:p<CR>
+nnoremap <space>gd  :Gdiff<CR>
+nnoremap <space>ge  :Gedit<CR>
+nnoremap <space>gr  :Gread<CR>
+nnoremap <space>gw  :Gwrite<CR><CR>
+nnoremap <space>gl  :silent! Glog<CR>:bot copen<CR>
+nnoremap <space>gp  :Ggrep<Space>
+nnoremap <space>gm  :Gmove<Space>
+nnoremap <space>gb  :Git branch<Space>
+nnoremap <space>go  :Git checkout<Space>
 
 " Neomake  -------------------------
 autocmd! BufWritePost,BufEnter * Neomake
@@ -156,6 +230,51 @@ augroup omnifuncs
   autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 augroup end
+
+" unite -------------------------
+call unite#custom#source('file_rec, file_rec/async, file_rec/git', 'matchers', ['converter_relative_word', 'matcher_regexp'])
+call unite#custom_source('file,file_rec,file_rec/async,grep',
+\ 'ignore_pattern', join([
+\ '\.git/',
+\ '\.bundle/',
+\ '\.rubygems/',
+\ 'node_modules/',
+\ 'pkg/',
+\ 'dist/',
+\ 'vendor/',
+\ ], '\|'))
+
+call unite#custom#profile('default', 'context.smartcase', 1)
+call unite#custom#profile('default', 'context.ignorecase', 1)
+
+let g:unite_prompt = '» '
+let g:unite_source_history_yank_enable = 1
+
+if executable('ag')
+    let g:unite_source_rec_async_command = 'ag --nocolor --nogroup --hidden -g ""'
+    let g:unite_source_grep_command = 'ag'
+    let g:unite_source_grep_default_opts = '--nocolor --nogroup --hidden'
+    let g:unite_source_grep_recursive_opt=''
+endif
+
+autocmd FileType unite call s:unite_settings()
+
+function! s:unite_settings()
+  imap <buffer> <Tab> <Plug>(unite_select_next_line)
+  imap <buffer> <S-Tab> <Plug>(unite_select_previous_line)
+endfunction
+
+let g:unite_source_mark_marks =
+            \   "abcdefghijklmnopqrstuvwxyz"
+            \ . "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+nnoremap <Space>p :Unite -start-insert file_rec/git<cr>
+nnoremap <Space>s :Unite -start-insert file_rec/async<cr>
+nnoremap <Space>f :Unite -start-insert file file/new directory/new<cr>
+nnoremap <Space>b :Unite -start-insert buffer<cr>
+nnoremap <Space>y :Unite -start-insert history/yank<cr>
+nnoremap <Space>o :Unite -start-insert outline<cr>
+nnoremap <Space>/ :Unite -start-insert grep:.<cr>,
 
 " Color Configuration ==================================================
 " enable nvim truecolor
