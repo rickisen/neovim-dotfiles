@@ -70,6 +70,21 @@ export default class $1 extends React.Component {
 }
 endsnippet
 
+snippet flar
+import React, { memo } from "react";
+import { View } from "react-native";
+import PropTypes from "prop-types";
+
+function $1() {
+	return <View>$2</View>;
+}
+
+$1.propTypes = {};
+$1.defaultProps = {};
+
+export default memo($1);
+endsnippet
+
 snippet ires
 import res from "shared/themes"$1
 endsnippet
