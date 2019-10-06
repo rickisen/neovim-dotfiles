@@ -182,6 +182,7 @@ Plug 'jelera/vim-javascript-syntax'
 Plug 'othree/javascript-libraries-syntax.vim'
 " Plug 'othree/yajs'
 " Plug 'mxw/vim-jsx' "included in polyglot
+Plug 'jordwalke/JSDocSnippets'
 
 " vim-react-snippets
 Plug 'justinj/vim-react-snippets'
@@ -425,9 +426,9 @@ silent! map <F3> :NERDTreeFind<CR>
 let g:NERDTreeMapPreview="<F4>"
 let NERDTreeMinimalUI=1
 
-" ultisnips
+" ultisnips --------------------------------------------------
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-B>"
 " Aperently keyboards differ on my laptop and desktop
 if system('hostname') == "rickisens-MacBook.local\n"
   let g:UltiSnipsExpandTrigger="<c-@>"
@@ -437,6 +438,9 @@ else
   let g:UltiSnipsExpandTrigger="<c-space>"
 endif
 let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/UltiSnips', 'UltiSnips']
+
+" JSDocSnippets
+let g:JSDocSnippetsMapping='<C-F>'
 
 " airline -------------------------------
 :set laststatus=2 "allways show airline
@@ -658,7 +662,7 @@ vnoremap <C-a> :call Incr()<CR>
 
 " insert ; at end of line
 nmap <C-F> A;<ESC>j
-imap <C-F> <ESC>A;<CR>
+" imap <C-F> <ESC>A;<CR>
 
 " insert , at end of line
 nmap <C-G> A,<ESC>j
