@@ -580,13 +580,13 @@ let g:unite_source_mark_marks =
 " nnoremap <Tab>		|i_<Plug>(unite_select_next_line)|<cr>
 " nnoremap <Space>p :Unite -start-insert -no-split -no-resize file_rec/async<cr>
 " nnoremap <Space>s :Unite -start-insert -no-split -no-resize file_rec<cr>
-nnoremap <Space>p :Unite -start-insert file_rec/git<cr>
-nnoremap <Space>s :Unite -start-insert file_rec/async<cr>
-nnoremap <Space>f :Unite -start-insert file file/new directory/new<cr>
-nnoremap <Space>b :Unite -start-insert buffer<cr>
-nnoremap <Space>y :Unite -start-insert history/yank<cr>
-nnoremap <Space>o :Unite -start-insert outline<cr>
-nnoremap <Space>/ :Unite -start-insert grep:.<cr>
+nnoremap <Space>p :Unite -start-insert -no-split file_rec/git<cr>
+nnoremap <Space>s :Unite -start-insert -no-split file_rec/async<cr>
+nnoremap <Space>f :Unite -start-insert -no-split file file/new directory/new<cr>
+nnoremap <Space>b :Unite -start-insert -no-split buffer<cr>
+nnoremap <Space>y :Unite -start-insert -no-split history/yank<cr>
+nnoremap <Space>o :Unite -start-insert -no-split outline<cr>
+nnoremap <Space>/ :Unite -start-insert -no-split grep:.<cr>
 
 " vim-go golang -------------------------
 call deoplete#custom#option('omni_patterns', {
