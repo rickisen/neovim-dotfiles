@@ -494,7 +494,8 @@ let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_php_enabled_makers = ['php']
 let g:neomake_html_enabled_makers = ['tidy']
 let g:neomake_scss_enabled_makers = ['scsslint']
-let g:neomake_markdown_enabled_makers = ['mdl']
+" let g:neomake_markdown_enabled_makers = ['mdl']
+let g:neomake_markdown_enabled_makers = []
 let g:neomake_json_enabled_makers = ['jsonlint']
 "
 " Use the fix option of eslint
@@ -729,6 +730,8 @@ function! JumpInFile(back, forw)
 endfunction
 nnoremap <silent> <c-m> :call JumpInFile("\<c-i>", "\<c-o>")<cr>
 nnoremap <silent> <c-n> :call JumpInFile("\<c-o>", "\<c-i>")<cr>
+
+autocmd FileType markdown :set spell
 
 " visually select last insert
 nmap <Leader><Leader> v`[<CR>
