@@ -278,7 +278,7 @@ autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.gra
 " let g:easytags_async = 1
 
 " Tagbar ------------------------
-nmap <F8> :TagbarToggle<CR>
+" nmap <F8> :TagbarToggle<CR>
 let g:airline#extensions#tagbar#enabled = 1
 
 " godot-gameengine ------------------------
@@ -707,6 +707,9 @@ imap <c-b> <CR><ESC>:wa<CR>
 
 " reload vimrc
 nnoremap <F5> :so $MYVIMRC<CR>
+
+" execute current file as a bash script
+autocmd FileType sh nnoremap <F8> :%w !bash<CR>
 
 " Jump to next non-whitespace char in the same column
 nnoremap <silent> \j :<C-u>call search('\%' . virtcol('.') . 'v\S', 'W')<CR>
