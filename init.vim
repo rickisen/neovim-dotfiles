@@ -224,7 +224,7 @@ Plug 'smancill/conky-syntax.vim'
 Plug 'arecarn/vim-crunch'
 
 " python completions
-Plug 'zchee/deoplete-jedi'
+" Plug 'zchee/deoplete-jedi'
 
 " vim godot-gameengine
 " Plug 'quabug/vim-gdscript'
@@ -311,7 +311,7 @@ let g:LanguageClient_serverCommands = {
     \ 'typescript':     ['/usr/bin/javascript-typescript-stdio'],
     \ 'typescript.tsx': ['/usr/bin/javascript-typescript-stdio'],
     \ 'typescript.jsx': ['/usr/bin/javascript-typescript-stdio'],
-    \ 'python':         ['/usr/local/bin/pyls'],
+    \ 'python':         ['/usr/bin/pyls'],
     \ }
 
 " Automatically start language servers.
@@ -360,7 +360,7 @@ let g:tern_request_timeout = 1
 " This do disable full signature type on autocomplete
 let g:tern_show_signature_in_pum = 1
 " jedi for python
-let g:deoplete#sources#jedi#show_docstring = 1
+" let g:deoplete#sources#jedi#show_docstring = 1
 
 " close the preview window when leaving insert mode
 " autocmd InsertLeave * pclose!
@@ -383,7 +383,7 @@ augroup omnifuncs
   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
   autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
   " autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+  " autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 augroup end
 
@@ -709,7 +709,12 @@ imap <c-b> <CR><ESC>:wa<CR>
 nnoremap <F5> :so $MYVIMRC<CR>
 
 " execute current file as a bash script
-autocmd FileType sh nnoremap <F8> :%w !bash<CR>
+" autocmd FileType sh nnoremap <F8> :%w !bash<CR>
+" autocmd FileType sh nnoremap <F8> :wv <CR> :terminal bash % <CR>
+autocmd FileType sh nnoremap <F8> :vsplit term://bash % <CR>
+autocmd FileType javascript nnoremap <F8> :vsplit term://node %<CR>
+autocmd FileType python nnoremap <F8> :vsplit term://python %<CR>
+autocmd FileType go nnoremap <F8> :GoRun <CR>
 
 " Jump to next non-whitespace char in the same column
 nnoremap <silent> \j :<C-u>call search('\%' . virtcol('.') . 'v\S', 'W')<CR>

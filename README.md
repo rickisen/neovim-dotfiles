@@ -12,6 +12,7 @@ Generally failing to have one of these installed will only show an error
 message, but vim will still work.
 
 - javascript-typescript-langserver
+- python-language-server (pyls)
 - typescript
 - look\*
 - words\*
