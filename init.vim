@@ -52,6 +52,28 @@ let $GOPATH = join([goFolder, getcwd()], ':')
 let goBinFolder = join(['/home/', $USER, '/.go/bin'], '')
 let $PATH = join([goBinFolder, $PATH], ':')
 
+" COC ====================
+set hidden
+
+" Some servers have issues with backup files, see #649
+" set nobackup
+" set nowritebackup
+
+" Better display for messages
+" set cmdheight=2
+
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
+
+" COC ====================
+
+
 " Plugin Management ==================================================
 call plug#begin('~/.config/nvim/plugged')
 
@@ -59,10 +81,10 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'tpope/vim-sensible'
 
 " LSP client, Language server protocol
-Plug 'autozimu/LanguageClient-neovim', {
-\ 'branch': 'next',
-\ 'do': 'bash install.sh',
-\ }
+" Plug 'autozimu/LanguageClient-neovim', {
+" \ 'branch': 'next',
+" \ 'do': 'bash install.sh',
+" \ }
 
 " (LSP) Multi-entry selection UI.
 Plug 'junegunn/fzf'
@@ -74,7 +96,7 @@ Plug 'Shougo/echodoc.vim'
 Plug 'Shougo/denite.nvim'
 
 " deoplete
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " tern-tags for vim (not completeion engine)
 " Plug 'ternjs/tern_for_vim'
@@ -83,7 +105,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'carlitux/deoplete-ternjs'
 
 " neco-look, use look for english word suggestions in deoplete
-Plug 'ujihisa/neco-look'
+" Plug 'ujihisa/neco-look'
 
 " syntax package
 Plug 'sheerun/vim-polyglot'
@@ -198,7 +220,7 @@ Plug 'AndrewRadev/splitjoin.vim'
 
 " enhanced golang support
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
-Plug 'zchee/deoplete-go', { 'do': 'make' }
+" Plug 'zchee/deoplete-go', { 'do': 'make' }
 
 "c# completions
 " Plug 'OmniSharp/omnisharp-vim', { 'do': 'cd server && xbuild' }
@@ -212,7 +234,7 @@ Plug 'zchee/deoplete-go', { 'do': 'make' }
 " Plug 'cyansprite/deoplete-omnisharp' , {'do': './install.sh'}
 
 " Installs vim-dispatch (required to launch OmniSharp server) Will this crash with neomake?
-Plug 'tpope/vim-dispatch'
+" Plug 'tpope/vim-dispatch'
 
 " support for .editorconfig files
 Plug 'editorconfig/editorconfig-vim'
@@ -252,8 +274,136 @@ Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
 
+" Better LSP client and completions
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-css', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-html', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc-markdownlint', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc-omnisharp', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc-svg', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-tabnine', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
+
 call plug#end()
 " Plugin Configuration ==================================================
+
+" COC --------------------
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Or use `complete_info` if your vim support it, like:
+" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+" nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Create mappings for function text object, requires document symbols feature of languageserver.
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+
+" Use <C-d> for select selections ranges, needs server support, like: coc-tsserver, coc-python
+" nmap <silent> <C-d> <Plug>(coc-range-select)
+" xmap <silent> <C-d> <Plug>(coc-range-select)
+
+" Use <c-space> to trigger completion.
+" inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" use `:OR` for organize import of current buffer
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add status line support, for integration with other plugin, checkout `:h coc-status`
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Using CocList
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+"
+" COC --------------------
 
 " vim-devicons
 " let g:WebDevIconsUnicodeGlyphDoubleWidth = 0
@@ -295,31 +445,31 @@ let g:airline#extensions#tagbar#enabled = 1
 " let g:deoplete_omnisharp_port   = get(g:, "deoplete_omnisharp_port", 9999)
 
 " tern_for_vim --------------------
-let g:tern#command = ["tern"]
-let g:tern#arguments = ["--persistent"]
+" let g:tern#command = ["tern"]
+" let g:tern#arguments = ["--persistent"]
 
 " LSP --------------------
 "
 " Required for operations modifying multiple buffers like rename.
 set hidden
 
-let g:LanguageClient_serverCommands = {
-    \ 'rust':           ['rustup', 'run', 'nightly', 'rls'],
-    \ 'javascript':     ['/usr/bin/javascript-typescript-stdio'],
-    \ 'javascript.jsx': ['/usr/bin/javascript-typescript-stdio'],
-    \ 'json':           ['/usr/bin/javascript-typescript-stdio'],
-    \ 'typescript':     ['/usr/bin/javascript-typescript-stdio'],
-    \ 'typescript.tsx': ['/usr/bin/javascript-typescript-stdio'],
-    \ 'typescript.jsx': ['/usr/bin/javascript-typescript-stdio'],
-    \ 'python':         ['/usr/bin/pyls'],
-    \ }
+" let g:LanguageClient_serverCommands = {
+"     \ 'rust':           ['rustup', 'run', 'nightly', 'rls'],
+"     \ 'javascript':     ['/usr/bin/javascript-typescript-stdio'],
+"     \ 'javascript.jsx': ['/usr/bin/javascript-typescript-stdio'],
+"     \ 'json':           ['/usr/bin/javascript-typescript-stdio'],
+"     \ 'typescript':     ['/usr/bin/javascript-typescript-stdio'],
+"     \ 'typescript.tsx': ['/usr/bin/javascript-typescript-stdio'],
+"     \ 'typescript.jsx': ['/usr/bin/javascript-typescript-stdio'],
+"     \ 'python':         ['/usr/bin/pyls'],
+"     \ }
 
 " Automatically start language servers.
-let g:LanguageClient_autoStart = 1
+" let g:LanguageClient_autoStart = 1
 
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+" nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+" nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+" nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
 " path to python  --------------------
 "
@@ -339,26 +489,26 @@ endif
 autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.jsx
 
 " deoplete -------------------------
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#auto_complete_start_length = 2
-let g:deoplete#auto_complete_delay = 150
-let deoplete#tag#cache_limit_size = 5000000
+" let g:deoplete#enable_at_startup = 1
+" let g:deoplete#auto_complete_start_length = 2
+" let g:deoplete#auto_complete_delay = 150
+" let deoplete#tag#cache_limit_size = 5000000
 " let g:deoplete#sources = {}
 " let g:deoplete#sources._ = ['buffer', 'tag']
 
 " priority of sources
-call deoplete#custom#source('buffer', 'rank', 900)
-call deoplete#custom#source('LanguageClient', 'rank', 800)
-call deoplete#custom#source('ultisnips', 'rank', 700)
-call deoplete#custom#source('go', 'rank', 600)
-call deoplete#custom#source('tern', 'rank', 599)
-call deoplete#custom#source('fs', 'rank', 2)
-call deoplete#custom#source('look', 'rank', 1)
+" call deoplete#custom#source('buffer', 'rank', 900)
+" call deoplete#custom#source('LanguageClient', 'rank', 800)
+" call deoplete#custom#source('ultisnips', 'rank', 700)
+" call deoplete#custom#source('go', 'rank', 600)
+" call deoplete#custom#source('tern', 'rank', 599)
+" call deoplete#custom#source('fs', 'rank', 2)
+" call deoplete#custom#source('look', 'rank', 1)
 
 " tern completeion deoplete-ternjs
-let g:tern_request_timeout = 1
+" let g:tern_request_timeout = 1
 " This do disable full signature type on autocomplete
-let g:tern_show_signature_in_pum = 1
+" let g:tern_show_signature_in_pum = 1
 " jedi for python
 " let g:deoplete#sources#jedi#show_docstring = 1
 
@@ -368,14 +518,14 @@ let g:tern_show_signature_in_pum = 1
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " complete with tab
-inoremap <silent><expr><Tab> pumvisible() ? "\<C-n>"  : (<SID>is_whitespace() ? "\<Tab>" : deoplete#mappings#manual_complete())
-inoremap <expr><S-Tab>  pumvisible() ? "\<C-p>" : "\<C-h>"
-
+" inoremap <silent><expr><Tab> pumvisible() ? "\<C-n>"  : (<SID>is_whitespace() ? "\<Tab>" : deoplete#mappings#manual_complete())
+" inoremap <expr><S-Tab>  pumvisible() ? "\<C-p>" : "\<C-h>"
+"
 " needed so tab works both for inserting tabs and scroll deoplete
-function! s:is_whitespace()
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~? '\s'
-endfunction
+" function! s:is_whitespace()
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1]  =~? '\s'
+" endfunction
 
 " omnifuncs
 augroup omnifuncs
@@ -496,7 +646,7 @@ let g:neomake_html_enabled_makers = ['tidy']
 let g:neomake_scss_enabled_makers = ['scsslint']
 " let g:neomake_markdown_enabled_makers = ['mdl']
 let g:neomake_markdown_enabled_makers = []
-let g:neomake_json_enabled_makers = ['jsonlint']
+" let g:neomake_json_enabled_makers = ['jsonlint']
 "
 " Use the fix option of eslint
 " let g:neomake_javascript_eslint_args = ['-f', 'compact', '--fix-dry-run']
@@ -590,10 +740,10 @@ nnoremap <Space>o :Unite -start-insert -no-split outline<cr>
 nnoremap <Space>/ :Unite -start-insert -no-split grep:.<cr>
 
 " vim-go golang -------------------------
-call deoplete#custom#option('omni_patterns', {
-\ 'go': '[^. *\t]\.\w*',
-\})
-let g:go_def_mode = "gopls"
+" call deoplete#custom#option('omni_patterns', {
+" \ 'go': '[^. *\t]\.\w*',
+" \})
+" let g:go_def_mode = "gopls"
 
 " disables auto formating on save
 " let g:go_fmt_autosave = 0
