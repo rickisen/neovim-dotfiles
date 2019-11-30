@@ -1,0 +1,10 @@
+{
+  "coc.preferences.extensionUpdateCheck": "never",
+  "snippets.priority": 1,
+  "snippets.ultisnips.directories": [
+    "UltiSnips",
+    "gosnippets/UltiSnips",
+    "vim-snippets/UltiSnips",
+    "vim-react-snippets/UltiSnips"
+  ]
+}
