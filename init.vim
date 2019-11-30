@@ -40,9 +40,6 @@ set clipboard=unnamedplus
 " keep windows from resizing
 set noea
 
-" spellchecking
-" set spell spellang=sv
-
 " automatic linebreaks
 " set tw=79
 
@@ -52,7 +49,7 @@ let $GOPATH = join([goFolder, getcwd()], ':')
 let goBinFolder = join(['/home/', $USER, '/.go/bin'], '')
 let $PATH = join([goBinFolder, $PATH], ':')
 
-" COC ====================
+" COC prereq =============
 set hidden
 
 " Some servers have issues with backup files, see #649
@@ -71,20 +68,23 @@ set shortmess+=c
 " always show signcolumns
 set signcolumn=yes
 
-" COC ====================
+" /COC ====================
 
+" path to python  --------------------
+" overides python setup for mac osx
+if system('uname -s') == "Darwin\n"
+  let g:python_host_prog = '/usr/bin/python'
+  let g:python3_host_prog = '/usr/local/bin/python3'
+endif
+
+" close completion preview window on leaving insert
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " Plugin Management ==================================================
 call plug#begin('~/.config/nvim/plugged')
 
 " sensible vim
 Plug 'tpope/vim-sensible'
-
-" LSP client, Language server protocol
-" Plug 'autozimu/LanguageClient-neovim', {
-" \ 'branch': 'next',
-" \ 'do': 'bash install.sh',
-" \ }
 
 " (LSP) Multi-entry selection UI.
 Plug 'junegunn/fzf'
@@ -95,23 +95,8 @@ Plug 'Shougo/echodoc.vim'
 " (LSP) Multi-entry selection UI.
 Plug 'Shougo/denite.nvim'
 
-" deoplete
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-
-" tern-tags for vim (not completeion engine)
-" Plug 'ternjs/tern_for_vim'
-
-" deoplete tern source
-" Plug 'carlitux/deoplete-ternjs'
-
-" neco-look, use look for english word suggestions in deoplete
-" Plug 'ujihisa/neco-look'
-
 " syntax package
 Plug 'sheerun/vim-polyglot'
-
-" css3 syntax
-" Plug 'hail2u/vim-css3-syntax' " should be in polygot
 
 " asynchronous execution library for Vim, others depends on this
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
@@ -129,10 +114,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'lilydjwg/colorizer'
 
 " colorschemes
-" Plug 'kamwitsta/nordisk'
 " Plug 'whatyouhide/vim-gotham'
-" Plug 'morhetz/gruvbox'
-" Plug 'arcticicestudio/nord-vim'
 Plug 'rickisen/vim-gotham'
 
 " Gundo
@@ -165,16 +147,8 @@ Plug 'tommcdo/vim-exchange'
 " Fugitive
 Plug 'tpope/vim-fugitive'
 
-" sneak (like f, but with two chars)
-Plug 'justinmk/vim-sneak'
-
 " vim-surround
 Plug 'tpope/vim-surround'
-
-" vim-tags
-" Plug 'szw/vim-tags'
-" Plug 'xolox/vim-misc'
-" Plug 'xolox/vim-easytags'
 
 " tcomments
 Plug 'tomtom/tcomment_vim'
@@ -184,30 +158,6 @@ Plug 'benekastah/neomake'
 
 " highlight trailing whitespace
 Plug 'ntpeters/vim-better-whitespace'
-
-" better php/html
-" Plug 'captbaritone/better-indent-support-for-php-with-html'
-
-" php.vim on drugs
-" Plug 'StanAngeloff/php.vim' " should be in polyglot
-
-" better php omnicomplete
-" Plug 'shawncplus/phpcomplete.vim'
-" Plug 'm2mdas/phpcomplete-extended'
-
-" wordpress completeion and snippets
-" Plug 'dsawardekar/wordpress.vim'
-
-" react / jsx
-" Plug 'pangloss/vim-javascript'
-Plug 'jelera/vim-javascript-syntax'
-Plug 'othree/javascript-libraries-syntax.vim'
-" Plug 'othree/yajs'
-" Plug 'mxw/vim-jsx' "included in polyglot
-Plug 'jordwalke/JSDocSnippets'
-
-" vim-react-snippets
-Plug 'justinj/vim-react-snippets'
 
 " increment bools too
 Plug 'can3p/incbool.vim'
@@ -220,33 +170,12 @@ Plug 'AndrewRadev/splitjoin.vim'
 
 " enhanced golang support
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
-" Plug 'zchee/deoplete-go', { 'do': 'make' }
-
-"c# completions
-" Plug 'OmniSharp/omnisharp-vim', { 'do': 'cd server && xbuild' }
-" Plug 'OmniSharp/omnisharp-vim', { 'do': 'cd omnisharp-roslyn && ./build.sh' }
-" Installs whitout server. install and run roslyn sepperatly
-" Plug 'OmniSharp/omnisharp-vim'
-
-"c# completions deoplete source
-" Plug 'Robzz/deoplete-omnisharp'
-" Plug 'pkosel/deoplete-omnisharp'
-" Plug 'cyansprite/deoplete-omnisharp' , {'do': './install.sh'}
-
-" Installs vim-dispatch (required to launch OmniSharp server) Will this crash with neomake?
-" Plug 'tpope/vim-dispatch'
 
 " support for .editorconfig files
 Plug 'editorconfig/editorconfig-vim'
 
-" conky config
-Plug 'smancill/conky-syntax.vim'
-
 " calculate stuff
 Plug 'arecarn/vim-crunch'
-
-" python completions
-" Plug 'zchee/deoplete-jedi'
 
 " vim godot-gameengine
 " Plug 'quabug/vim-gdscript'
@@ -255,26 +184,32 @@ Plug 'calviken/vim-gdscript3'
 " for moving around inside indent level
 Plug 'michaeljsmith/vim-indent-object'
 
-" for jsx/tsx highlighting
-Plug 'leafgarland/typescript-vim'
-" Plug 'peitalin/vim-jsx-typescript'
-Plug 'ianks/vim-tsx'
-
-" for converting betwee cases (such as snake_case camelCase etc)
-Plug 'tpope/vim-abolish'
-
 " make the preview window float next to completions
 Plug 'ncm2/float-preview.nvim'
 
-" nice icons for nerdtree and other plugins
-" Plug 'ryanoasis/vim-devicons'
+" react / jsx
+" Plug 'pangloss/vim-javascript'
+Plug 'jelera/vim-javascript-syntax'
+" Plug 'othree/javascript-libraries-syntax.vim'
+" Plug 'othree/yajs'
+" Plug 'mxw/vim-jsx' "included in polyglot
+Plug 'jordwalke/JSDocSnippets'
+
+" for jsx/tsx highlighting
+Plug 'leafgarland/typescript-vim'
+
+" Plug 'peitalin/vim-jsx-typescript'
+Plug 'ianks/vim-tsx'
 
 " to apply prettier on typescript
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
 
-" Better LSP client and completions
+" vim-react-snippets
+Plug 'justinj/vim-react-snippets'
+
+" COC / Better LSP client and completions
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-css', {'do': 'yarn install --frozen-lockfile'}
@@ -403,13 +338,7 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 "
-" COC --------------------
-
-" vim-devicons
-" let g:WebDevIconsUnicodeGlyphDoubleWidth = 0
-" let g:webdevicons_conceal_nerdtree_brackets = 0
-" let g:WebDevIconsNerdTreeAfterGlyphPadding = ''
-" let g:WebDevIconsNerdTreeGitPluginForceVAlign = 0
+" /COC --------------------
 
 "vim-prettier ------------------------
 
@@ -424,108 +353,9 @@ let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
 " autocmd BufWritePre,TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
 
-" easytags ------------------------
-" let g:easytags_async = 1
-
-" Tagbar ------------------------
-" nmap <F8> :TagbarToggle<CR>
-let g:airline#extensions#tagbar#enabled = 1
-
-" godot-gameengine ------------------------
-" let g:tagbar_type_gdscript = { 'ctagstype' :'gdscript', 'kinds':[ 'c:constants', 'e:exports', 'o:onready', 'p:preloads', 's:signals', 'f:functions', ] }
-
-"OmniSharp ------------------------
-" let g:OmniSharp_selector_ui = 'unite'
-" let g:Omnisharp_start_server = 0
-" let g:Omnisharp_stop_server = 1
-" let g:OmniSharp_server_type = 'roslyn'
-" let g:omnicomplete_fetch_documentation=0
-" set completeopt=longest,menuone,preview
-" let g:deoplete_omnisharp_exe_path   = get(g:, "deoplete_omnisharp_exe_path", '~/.local/share/nvim/plugged/deoplete-omnisharp/omnisharp-server/OmniSharp/bin/Debug/OmniSharp.exe')
-" let g:deoplete_omnisharp_port   = get(g:, "deoplete_omnisharp_port", 9999)
-
-" tern_for_vim --------------------
-" let g:tern#command = ["tern"]
-" let g:tern#arguments = ["--persistent"]
-
-" LSP --------------------
-"
-" Required for operations modifying multiple buffers like rename.
-set hidden
-
-" let g:LanguageClient_serverCommands = {
-"     \ 'rust':           ['rustup', 'run', 'nightly', 'rls'],
-"     \ 'javascript':     ['/usr/bin/javascript-typescript-stdio'],
-"     \ 'javascript.jsx': ['/usr/bin/javascript-typescript-stdio'],
-"     \ 'json':           ['/usr/bin/javascript-typescript-stdio'],
-"     \ 'typescript':     ['/usr/bin/javascript-typescript-stdio'],
-"     \ 'typescript.tsx': ['/usr/bin/javascript-typescript-stdio'],
-"     \ 'typescript.jsx': ['/usr/bin/javascript-typescript-stdio'],
-"     \ 'python':         ['/usr/bin/pyls'],
-"     \ }
-
-" Automatically start language servers.
-" let g:LanguageClient_autoStart = 1
-
-" nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-" nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-" nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-
-" path to python  --------------------
-"
-" Python setup for mac osx
-if system('uname -s') == "Darwin\n"
-  "OSX
-  " set clipboard=unnamed
-  let g:python_host_prog = '/usr/bin/python'
-  let g:python3_host_prog = '/usr/local/bin/python3'
-else
-  "Linux
-  " set clipboard=unnamedplus
-endif
-
 " typescript -------------------------
 " set filetypes as typescript.jsx
 autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.jsx
-
-" deoplete -------------------------
-" let g:deoplete#enable_at_startup = 1
-" let g:deoplete#auto_complete_start_length = 2
-" let g:deoplete#auto_complete_delay = 150
-" let deoplete#tag#cache_limit_size = 5000000
-" let g:deoplete#sources = {}
-" let g:deoplete#sources._ = ['buffer', 'tag']
-
-" priority of sources
-" call deoplete#custom#source('buffer', 'rank', 900)
-" call deoplete#custom#source('LanguageClient', 'rank', 800)
-" call deoplete#custom#source('ultisnips', 'rank', 700)
-" call deoplete#custom#source('go', 'rank', 600)
-" call deoplete#custom#source('tern', 'rank', 599)
-" call deoplete#custom#source('fs', 'rank', 2)
-" call deoplete#custom#source('look', 'rank', 1)
-
-" tern completeion deoplete-ternjs
-" let g:tern_request_timeout = 1
-" This do disable full signature type on autocomplete
-" let g:tern_show_signature_in_pum = 1
-" jedi for python
-" let g:deoplete#sources#jedi#show_docstring = 1
-
-" close the preview window when leaving insert mode
-" autocmd InsertLeave * pclose!
-" autocmd InsertLeave * if pumvisible() == 0 | pclose | endif
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-
-" complete with tab
-" inoremap <silent><expr><Tab> pumvisible() ? "\<C-n>"  : (<SID>is_whitespace() ? "\<Tab>" : deoplete#mappings#manual_complete())
-" inoremap <expr><S-Tab>  pumvisible() ? "\<C-p>" : "\<C-h>"
-"
-" needed so tab works both for inserting tabs and scroll deoplete
-" function! s:is_whitespace()
-"   let col = col('.') - 1
-"   return !col || getline('.')[col - 1]  =~? '\s'
-" endfunction
 
 " omnifuncs
 augroup omnifuncs
@@ -563,6 +393,7 @@ let g:mta_filetypes = {
     \ 'php' : 1,
     \ 'js' : 1,
     \ 'jsx' : 1,
+    \ 'tsx' : 1,
     \ 'twig' : 1,
     \ 'xhtml' : 1,
     \ 'xml' : 1,
@@ -572,24 +403,22 @@ let g:mta_filetypes = {
 " NERDtree --------------------------------------------------
 silent! nmap <C-p> :NERDTreeToggle<CR>
 silent! map <F3> :NERDTreeFind<CR>
-" let g:NERDTreeMapActivateNode="<F3>"
 let g:NERDTreeMapPreview="<F4>"
 let NERDTreeMinimalUI=1
 
 " ultisnips --------------------------------------------------
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 " let g:UltiSnipsJumpBackwardTrigger="<c-B>"
-" Aperently keyboards differ on my laptop and desktop
-if system('hostname') == "rickisens-MacBook.local\n"
+
+" Aperently keyboards differ on osx and linux
+if system('uname -s') == "Darwin\n"
   let g:UltiSnipsExpandTrigger="<c-@>"
-elseif system('hostname') == "LaptopLinux\n"
-  let g:UltiSnipsExpandTrigger="<c-space>"
 else
   let g:UltiSnipsExpandTrigger="<c-space>"
 endif
 let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/UltiSnips', 'UltiSnips']
 
-" JSDocSnippets
+" JSDocSnippets -------------------------------
 let g:JSDocSnippetsMapping='<C-F>'
 
 " airline -------------------------------
@@ -610,8 +439,6 @@ nnoremap <space>gp  :Ggrep<Space>
 nnoremap <space>gm  :Gmove<Space>
 nnoremap <space>gb  :Git branch<Space>
 nnoremap <space>go  :Git checkout<Space>
-" nnoremap <space>gps :Dispatch! git push<CR>
-" nnoremap <space>gpl :Dispatch! git pull<CR>
 
 " Neomake  -------------------------
 " allways run on read and write and leave insert
@@ -619,25 +446,6 @@ nnoremap <space>go  :Git checkout<Space>
 
 " Run on write
 autocmd! BufWritePost,BufEnter * Neomake
-
-" Check javascript
-" let g:neomake_javascript_jshint_maker = {
-"     \ 'args': ['--verbose'],
-"     \ 'errorformat': '%A%f: line %l\, col %v\, %m \(%t%*\d\)',
-"     \ }
-
-" let g:neomake_javascript_jscs_maker = {
-"     \ 'exe': 'jscs',
-"     \ 'args': ['--no-color', '--preset', 'airbnb', '--reporter', 'inline'],
-"     \ 'errorformat': '%f: line %l\, col %c\, %m',
-"     \ }
-
-" function! neomake#makers#ft#scss#scsslint()
-"     return {
-"         \ 'exe': 'node-scss-lint',
-"         \ 'errorformat': '%f:%l [%t] %m'
-"     \ }
-" endfunction
 
 let g:neomake_jsx_enabled_makers = ['eslint']
 let g:neomake_javascript_enabled_makers = ['eslint']
@@ -647,34 +455,29 @@ let g:neomake_scss_enabled_makers = ['scsslint']
 " let g:neomake_markdown_enabled_makers = ['mdl']
 let g:neomake_markdown_enabled_makers = []
 " let g:neomake_json_enabled_makers = ['jsonlint']
-"
+
 " Use the fix option of eslint
 " let g:neomake_javascript_eslint_args = ['-f', 'compact', '--fix-dry-run']
+
 au User NeomakeFinished checktime
 
 " work around a bug when editing files webpack watches.
 " But tares on a ssd drive
+autocmd FileType javascript :set backupcopy=yes
 autocmd FileType javascript.jsx :set backupcopy=yes
-autocmd FileType javascript.jsx :set signcolumn=yes
-autocmd FileType javascript :set signcolumn=yes
+autocmd FileType typescript :set backupcopy=yes
+autocmd FileType typescript.tsx :set backupcopy=yes
 
-let g:neomake_logfile='/tmp/error.log'
+autocmd FileType javascript :set signcolumn=yes
+autocmd FileType javascript.jsx :set signcolumn=yes
+autocmd FileType typescript :set signcolumn=yes
+autocmd FileType typescript.tsx :set signcolumn=yes
 
 " jsx react -------------------------
 let g:jsx_ext_required = 0
 
-" let g:javascript_opfirst = '^\s*\%(\%(\%(\/\*.\{-}\)\=\*\+\/\s*\)\=\)\@>\%([<>,:?^%|*&]\|\([-/.+]\)\1\@!\|=>\@!\|in\%(sta nceof\)\=\>\)'
 let g:javascript_opfirst = '^\s*\%(\%(\%(\/\*.\{-}\)\=\*\+\/\s*\)\=\)\@>\%([<>,?^%|*&]\|\([-/.+]\)\1\@!\|=>\@!\|in\%(sta nceof\)\=\>\)'
-" let g:javascript_continuation = '\%([<=,.?/*:^%|&]\|+\@<!+\|-\@<!-\|=\@<!>\|\<in\%(stanceof\)\=\)\s*\%(\%(\/\%(\%(\*.\{-}\*\/\)\|\%(\*\+\)\)\)\s*\)\=$'
 let g:javascript_continuation = '\%([<=,.?/*:^%|&]\|+\@<!+\|-\@<!-\|\<in\%(stanceof\)\=\)\s*\%(\%(\/\%(\%(\*.\{-}\*\/\)\|\%(\*\+\)\)\)\s*\)\=$'
-
-" javascript-libraries-syntax -------------------------
-
-" let g:used_javascript_libs = ' jquery, underscore, underscore,
-" backbone, prelude, angularjs, angularui, angularuirouter, react,
-" flux, requirejs, sugar, jasmine, chai, handlebars, ramda, vue'
-" let g:used_javascript_libs = 'jquery, backbone, underscore'
-let g:used_javascript_libs = 'react'
 
 " unite -------------------------
 " call unite#custom#source('file_rec/neovim,buffer', 'sorters', 'sorter_selecta')
@@ -684,6 +487,7 @@ let g:used_javascript_libs = 'react'
 call unite#custom#source('file_rec, file_rec/async, file_rec/git', 'matchers', ['converter_relative_word', 'matcher_regexp'])
 " call unite#custom#source('file_rec/async', 'ignore_pattern', 'vendor/')
 " call unite#custom#source('file_rec,file_rec/async', 'ignore_pattern', '\(\node_modules$\|\vendor\/$\)')
+
 call unite#custom_source('file,file_rec,file_rec/async,grep',
 \ 'ignore_pattern', join([
 \ '\.git/',
@@ -694,6 +498,7 @@ call unite#custom_source('file,file_rec,file_rec/async,grep',
 \ 'dist/',
 \ 'vendor/',
 \ ], '\|'))
+
 " call unite#filters#sorter_default#use(['sorter_rank'])
 call unite#custom#profile('default', 'context.smartcase', 1)
 call unite#custom#profile('default', 'context.ignorecase', 1)
@@ -702,14 +507,6 @@ let g:unite_prompt = '» '
 let g:unite_source_history_yank_enable = 1
 " let g:unite_source_rec_unit = 3000
 " let g:unite_source_rec_async_unit = 3000
-
-" let g:unite_source_file_rec_max_cache_files = 0
-" call unite#custom#source('file_mru,file_rec,file_rec/async,grepocate',
-"             \ 'max_candidates', 0)
-
-" let g:unite_source_file_rec_max_cache_files = 0
-" call unite#custom#source('file_mru,file_rec,file_rec/async,grepocate',
-"             \ 'max_candidates', 0)
 
 if executable('ag')
     let g:unite_source_rec_async_command = 'ag --nocolor --nogroup --hidden -g ""'
@@ -739,20 +536,12 @@ nnoremap <Space>y :Unite -start-insert -no-split history/yank<cr>
 nnoremap <Space>o :Unite -start-insert -no-split outline<cr>
 nnoremap <Space>/ :Unite -start-insert -no-split grep:.<cr>
 
-" vim-go golang -------------------------
-" call deoplete#custom#option('omni_patterns', {
-" \ 'go': '[^. *\t]\.\w*',
-" \})
-" let g:go_def_mode = "gopls"
-
-" disables auto formating on save
-" let g:go_fmt_autosave = 0
-
 " editorconfig --------------------
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 " float-preview -------------------------
 let g:float_preview#docked = 1
+
 
 " Color Configuration ==================================================
 " enable nvim truecolor
@@ -795,10 +584,6 @@ if has('nvim')
 
 " terminal management
 tnoremap <Esc> <C-\><C-n>
-" tnoremap <A-h> <C-\><C-n><C-w>h
-" tnoremap <A-j> <C-\><C-n><C-w>j
-" tnoremap <A-k> <C-\><C-n><C-w>k
-" tnoremap <A-l> <C-\><C-n><C-w>l
 
 " icrementally increase a number inside ctrl v boxes
 function! Incr()
@@ -819,38 +604,6 @@ nmap <C-F> A;<ESC>j
 nmap <C-G> A,<ESC>j
 imap <C-G> <ESC>A,<CR>
 
-" insert symbols instead of numbers
-function! NumberReplace()
-  if g:NumberReplace_toggle == 0
-    imap 1 !
-    imap 2 "
-    imap 3 £
-    imap 4 $
-    imap 5 %
-    imap 6 ^
-    imap 7 &
-    imap 8 *
-    imap 9 (
-    imap 0 )
-    let g:NumberReplace_toggle = 1
-  else
-    imap 1 1
-    imap 2 2
-    imap 3 3
-    imap 4 4
-    imap 5 5
-    imap 6 6
-    imap 7 7
-    imap 8 8
-    imap 9 9
-    imap 0 0
-    let g:NumberReplace_toggle = 0
-  endif
-endfunction
-let g:NumberReplace_toggle = 1
-:call NumberReplace()
-nnoremap <space>n :call NumberReplace()<CR>: echo g:NumberReplace_toggle<CR>
-
 " map :wa to keybinding
 nmap <c-b> :wa<CR>
 imap <c-b> <CR><ESC>:wa<CR>
@@ -858,7 +611,7 @@ imap <c-b> <CR><ESC>:wa<CR>
 " reload vimrc
 nnoremap <F5> :so $MYVIMRC<CR>
 
-" execute current file as a bash script
+" execute current file as script
 " autocmd FileType sh nnoremap <F8> :%w !bash<CR>
 " autocmd FileType sh nnoremap <F8> :wv <CR> :terminal bash % <CR>
 autocmd FileType sh nnoremap <F8> :vsplit term://bash % <CR>
