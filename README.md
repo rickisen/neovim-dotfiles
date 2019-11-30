@@ -11,8 +11,6 @@ preferences, and don't need golang support.
 Generally failing to have one of these installed will only show an error
 message, but vim will still work.
 
-- javascript-typescript-langserver
-- python-language-server (pyls)
 - typescript
 - look\*
 - words\*
@@ -22,6 +20,7 @@ message, but vim will still work.
 - tidy
 - scsslint\*\*
 - eslint\*\*
+- nodejs v8.10.0
 
 \* = Not if you are using init-smaller.vim
 \*\* = Available on npm
