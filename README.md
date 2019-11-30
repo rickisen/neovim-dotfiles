@@ -27,6 +27,8 @@ message, but vim will still work.
 
 ### Running
 
-just run PlugInstall at first run and things should work
+Run PlugInstall at first run and things should work
+
+run `CocInstall coc-ultisnips` for ultisnips usage
 
 ![Screenshot](/screenshot.png?raw=true 'Screenshot')
