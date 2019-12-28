@@ -1,6 +1,10 @@
 {
   "coc.preferences.extensionUpdateCheck": "never",
-  "snippets.priority": 1,
+  "tabnine.limit": 10,
+  "tabnine.priority": 1,
+  "diagnostic.messageTarget": "echo",
+  "coc.source.ultisnips.priority": 100,
+  "snippets.priority": 100,
   "snippets.ultisnips.directories": [
     "UltiSnips",
     "gosnippets/UltiSnips",
