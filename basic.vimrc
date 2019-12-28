@@ -49,6 +49,9 @@ let $GOPATH = join([goFolder, getcwd()], ':')
 let goBinFolder = join(['/home/', $USER, '/.go/bin'], '')
 let $PATH = join([goBinFolder, $PATH], ':')
 
+" Native completion popup window conf
+set pumheight=5
+
 " COC prereq =============
 set hidden
 
@@ -140,25 +143,6 @@ autocmd FileType go nnoremap <F8> :GoRun <CR>
 " Jump to next non-whitespace char in the same column
 nnoremap <silent> \j :<C-u>call search('\%' . virtcol('.') . 'v\S', 'W')<CR>
 nnoremap <silent> \k :<C-u>call search('\%' . virtcol('.') . 'v\S', 'bW')<CR>
-
-" Jump like <c-o> and <c-i> but only in current buffer
-function! JumpInFile(back, forw)
-    let [n, i] = [bufnr('%'), 1]
-    let p = [n] + getpos('.')[1:]
-    sil! exe 'norm!1' . a:forw
-    while 1
-        let p1 = [bufnr('%')] + getpos('.')[1:]
-        if n == p1[0] | break | endif
-        if p == p1
-            sil! exe 'norm!' . (i-1) . a:back
-            break
-        endif
-        let [p, i] = [p1, i+1]
-        sil! exe 'norm!1' . a:forw
-    endwhile
-endfunction
-nnoremap <silent> <c-m> :call JumpInFile("\<c-i>", "\<c-o>")<cr>
-nnoremap <silent> <c-n> :call JumpInFile("\<c-o>", "\<c-i>")<cr>
 
 autocmd FileType markdown :set spell
 
