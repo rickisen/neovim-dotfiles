@@ -128,6 +128,8 @@ imap <C-G> <ESC>A,<CR>
 " map :wa to keybinding
 nmap <c-b> :wa<CR>
 imap <c-b> <CR><ESC>:wa<CR>
+nmap <c-c> :noa wa<CR>
+imap <c-c> <CR><ESC>:noa wa<CR>
 
 " reload vimrc
 nnoremap <F5> :so $MYVIMRC<CR>
