@@ -139,6 +139,7 @@ nnoremap <F5> :so $MYVIMRC<CR>
 " autocmd FileType sh nnoremap <F8> :wv <CR> :terminal bash % <CR>
 autocmd FileType sh nnoremap <F8> :vsplit term://bash % <CR>
 autocmd FileType javascript nnoremap <F8> :vsplit term://node %<CR>
+autocmd FileType typescript nnoremap <F8> :vsplit term://ts-node %<CR>
 autocmd FileType python nnoremap <F8> :vsplit term://python %<CR>
 autocmd FileType go nnoremap <F8> :GoRun <CR>
 
