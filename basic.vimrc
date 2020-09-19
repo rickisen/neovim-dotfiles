@@ -117,6 +117,23 @@ function! Incr()
 endfunction
 vnoremap <C-a> :call Incr()<CR>
 
+function! AutoWinSplit(target)
+  if winwidth(0) * 8 > winheight(0) * 18
+    if a:target == " "
+      vsplit
+    else
+      execute ":vsplit " . a:target
+    endif
+  else
+    if a:target == " "
+      split
+    else
+      execute ":split " . a:target
+    endif
+  endif
+endfunction
+nnoremap <F9> :call AutoWinSplit(" ")<CR>
+
 " insert ; at end of line
 nmap <C-F> A;<ESC>j
 " imap <C-F> <ESC>A;<CR>
@@ -137,11 +154,12 @@ nnoremap <F5> :so $MYVIMRC<CR>
 " execute current file as script
 " autocmd FileType sh nnoremap <F8> :%w !bash<CR>
 " autocmd FileType sh nnoremap <F8> :wv <CR> :terminal bash % <CR>
-autocmd FileType sh nnoremap <F8> :vsplit term://bash % <CR>
-autocmd FileType javascript nnoremap <F8> :vsplit term://node %<CR>
-autocmd FileType typescript nnoremap <F8> :vsplit term://ts-node %<CR>
-autocmd FileType python nnoremap <F8> :vsplit term://python %<CR>
-autocmd FileType go nnoremap <F8> :GoRun <CR>
+autocmd FileType sh nnoremap <F8> :call AutoWinSplit("term://bash %")<CR>
+autocmd FileType javascript nnoremap <F8> :call AutoWinSplit("term://node %")<CR>
+autocmd FileType typescript nnoremap <F8> :call AutoWinSplit("term://ts-node %")<CR>
+autocmd FileType python nnoremap <F8> :call AutoWinSplit("term://python %")<CR>
+autocmd FileType go nnoremap <F8> :call AutoWinSplit("term://go run .") <CR>
+" autocmd FileType go nnoremap <F8> :GoRun <CR>
 
 " Jump to next non-whitespace char in the same column
 nnoremap <silent> \j :<C-u>call search('\%' . virtcol('.') . 'v\S', 'W')<CR>

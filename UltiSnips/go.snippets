@@ -8,3 +8,17 @@ if _$2, err := $1; err != nil {
 	$3
 }
 endsnippet
+
+snippet funci
+func (*$1) $2($3) ($4) {
+	$5
+}
+endsnippet
+
+snippet implements
+var _ ${1:interface} = ${2:T}{}       // Verify that $2 implements $1.
+endsnippet
+
+snippet implements*
+var _ ${1:interface} = (*${2:T})(nil) // Verify that *$2 implements $1.
+endsnippet
