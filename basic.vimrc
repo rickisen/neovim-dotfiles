@@ -150,3 +150,12 @@ autocmd FileType markdown :set spell
 
 " visually select last insert
 nmap <Leader><Leader> v`[<CR>
+
+" search and replace accross all files that contains first arg
+function! SAR(old, new, in)
+  exe ':args ' . '`grep -Rl ' . a:old  . ' ' . a:in . '`'
+  exe ':argdo %s/' . a:old . '/' . a:new . '/ge | update'
+endfunction
+
+" Add tack quotes
+imap <C-Q> ``<ESC>i
