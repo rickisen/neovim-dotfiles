@@ -116,9 +116,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'ianks/vim-tsx'
 
 " to apply prettier on typescript
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 " vim-react-snippets
 Plug 'justinj/vim-react-snippets'
@@ -134,7 +132,7 @@ Plug 'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
 " Plug 'neoclide/coc-omnisharp', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
 " Plug 'neoclide/coc-svg', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-tabnine', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc-tabnine', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-pairs', {'do': 'yarn install --frozen-lockfile'}
 " Plug 'neoclide/coc-sources', {'do': 'cd packages/ultisnips/; yarn install'}
 " Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
