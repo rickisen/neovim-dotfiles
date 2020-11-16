@@ -318,3 +318,7 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 " float-preview -------------------------
 let g:float_preview#docked = 1
 
+" vim-go -------------------------
+" set foldmethod=syntax
+set foldnestmax=1
+let g:go_fmt_experimental = 1

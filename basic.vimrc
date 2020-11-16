@@ -12,6 +12,8 @@ set cursorline
 set mouse=a
 set foldmethod=indent
 set nofoldenable
+set title
+set titlestring=%t
 
 " screw accidental ex mode
 nnoremap Q @@
@@ -158,7 +160,7 @@ autocmd FileType sh nnoremap <F8> :call AutoWinSplit("term://bash %")<CR>
 autocmd FileType javascript nnoremap <F8> :call AutoWinSplit("term://node %")<CR>
 autocmd FileType typescript nnoremap <F8> :call AutoWinSplit("term://ts-node %")<CR>
 autocmd FileType python nnoremap <F8> :call AutoWinSplit("term://python %")<CR>
-autocmd FileType go nnoremap <F8> :call AutoWinSplit("term://go run .") <CR>
+autocmd FileType go nnoremap <F8> :call AutoWinSplit("term://go run .")<CR>
 " autocmd FileType go nnoremap <F8> :GoRun <CR>
 
 " Jump to next non-whitespace char in the same column

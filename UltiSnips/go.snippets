@@ -22,3 +22,12 @@ endsnippet
 snippet implements*
 var _ ${1:interface} = (*${2:T})(nil) // Verify that *$2 implements $1.
 endsnippet
+
+snippet errorf
+fmt.Errorf("$1: %w", err)
+endsnippet
+
+snippet errorfv
+fmt.Errorf("$1 %v: %w", ${2: value}, err)
+endsnippet
+
