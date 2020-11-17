@@ -64,6 +64,9 @@ Plug 'tpope/vim-fugitive'
 " vim-surround
 Plug 'tpope/vim-surround'
 
+" adds fi after if in bash (and other similair things)
+Plug 'tpope/vim-endwise'
+
 " tcomments
 Plug 'tomtom/tcomment_vim'
 
@@ -121,21 +124,18 @@ Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 " vim-react-snippets
 Plug 'justinj/vim-react-snippets'
 
-" COC / Better LSP client and completions
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-css', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-html', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-markdownlint', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-omnisharp', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-svg', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-tabnine', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-pairs', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-sources', {'do': 'cd packages/ultisnips/; yarn install'}
-" Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+
+" auto completion lite
+Plug 'lifepillar/vim-mucomplete'
+
+" auto pairs like
+" Plug 'jiangmiao/auto-pairs'
+Plug 'tmsvg/pear-tree'
+" Plug 'Raimondi/delimitMate'
 
 call plug#end()
 " Plugin Configuration ==================================================

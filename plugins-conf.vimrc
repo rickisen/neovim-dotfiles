@@ -1,116 +1,98 @@
-" COC --------------------
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" pair tree
+" Default rules for matching:
+let g:pear_tree_pairs = {
+            \ '(': {'closer': ')'},
+            \ '[': {'closer': ']'},
+            \ '{': {'closer': '}'},
+            \ "'": {'closer': "'"},
+            \ '"': {'closer': '"'}
+            \ }
+" See pear-tree/after/ftplugin/ for filetype-specific matching rules
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+" Pear Tree is enabled for all filetypes by default:
+let g:pear_tree_ft_disabled = []
 
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" Or use `complete_info` if your vim support it, like:
-" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+" Pair expansion is dot-repeatable by default:
+let g:pear_tree_repeatable_expand = 1
 
-" Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+" Smart pairs are disabled by default:
+let g:pear_tree_smart_openers = 1
+let g:pear_tree_smart_closers = 1
+let g:pear_tree_smart_backspace = 1
 
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-" nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+" If enabled, smart pair functions timeout after 60ms:
+let g:pear_tree_timeout = 60
 
-" Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+" Automatically map <BS>, <CR>, and <Esc>
+let g:pear_tree_map_special_keys = 1
 
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
+" Default mappings:
+imap <BS> <Plug>(PearTreeBackspace)
+imap <CR> <Plug>(PearTreeExpand)
+imap <Esc> <Plug>(PearTreeFinishExpansion)
+" Pear Tree also makes <Plug> mappings for each opening and closing string.
+"     :help <Plug>(PearTreeOpener)
+"     :help <Plug>(PearTreeCloser)
 
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" Not mapped by default:
+" <Plug>(PearTreeSpace)
+" <Plug>(PearTreeJump)
+" <Plug>(PearTreeExpandOne)
+" <Plug>(PearTreeJNR)
+" mucomplete ------------------------
+set completeopt-=preview
+set completeopt+=menuone
+" set completeopt+=longest,menuone,noselect
+let g:mucomplete#enable_auto_at_startup = 1
+" set shortmess+=c   " Shut off completion messages
+set belloff+=ctrlg " If Vim beeps during completion
+" let g:mucomplete#chains.default = ['path', 'omni', 'keyn', 'dict', 'uspl']
+" let g:mucomplete#chains.default = ['path', 'ulti', 'omni', 'keyn', 'dict', 'uspl']
+" inoremap <expr> <cr> pumvisible() ? "(" : "<cr>"
 
-" Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
+let g:mucomplete#minimum_prefix_length = 1
+augroup insert_dot
+  au!
+  au InsertEnter * set iskeyword+=.
+  au InsertLeave * set iskeyword-=.
+augroup END
 
-" Remap for format selected region
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+" for vim > 7.4 < 8.0 this
+set completeopt+=noselect
+" or this
+" set completeopt+=noinsert
+set pumblend=20
 
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
+" languageserver-neovim ------------------------
+" Required for operations modifying multiple buffers like rename.
+set hidden
 
-" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+    \ 'javascript': ['javascript-typescript-stdio'],
+    \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
+    \ 'python': ['/usr/local/bin/pyls'],
+    \ 'ruby': ['~/.rbenv/shims/solargraph', 'stdio']
+    \ }
+" \ 'go': ['gopls'],
 
-" Remap for do codeAction of current line
-nmap <leader>ac  <Plug>(coc-codeaction)
-" Fix autofix problem of current line
-nmap <leader>qf  <Plug>(coc-fix-current)
+" note that if you are using Plug mapping you should not use `noremap` mappings.
+" nmap <F5> <Plug>(lcn-menu)
+" Or map each action separately
+nmap <silent>K <Plug>(lcn-hover)
+nmap <silent> gd <Plug>(lcn-definition)
+nmap <silent> <F2> <Plug>(lcn-rename)
 
-" Create mappings for function text object, requires document symbols feature of languageserver.
-xmap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap if <Plug>(coc-funcobj-i)
-omap af <Plug>(coc-funcobj-a)
-
-" Use <C-d> for select selections ranges, needs server support, like: coc-tsserver, coc-python
-" nmap <silent> <C-d> <Plug>(coc-range-select)
-" xmap <silent> <C-d> <Plug>(coc-range-select)
-
-" Use <c-space> to trigger completion.
-" inoremap <silent><expr> <c-space> coc#refresh()
-
-" Use `:Format` to format current buffer
-command! -nargs=0 Format :call CocAction('format')
-
-" Use `:Fold` to fold current buffer
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" use `:OR` for organize import of current buffer
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-" Add status line support, for integration with other plugin, checkout `:h coc-status`
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
-" Using CocList
-" Show all diagnostics
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-" Show commands
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-
-"
-" /COC --------------------
+" echodoc ------------------------
+	"If the value of this variable is non-zero, echodoc is automatically enabled at startup.
+let g:echodoc#enable_at_startup=1
+"Where the documentation is displayed. Choose between: "echo", "signature", "virtual" or "floating"
+let g:echodoc#type="floating"
+" g:echodoc#events	['CompleteDone']	"If the autocmd-events are fired, echodoc is enabled.
+" g:g:echodoc#highlight_identifier	"Identifier"	"The highlight of identifier.
+" g:echodoc#highlight_arguments	"Special"	"The highlight of current argument.
+" g:echodoc#highlight_trailing	"Type"	"The highlight of trailing.
+" autocmd CompleteDone *.* :echo "hej"
 
 "vim-prettier ------------------------
 
@@ -129,19 +111,6 @@ let g:prettier#autoformat = 0
 " autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.json,*.graphql,*.md,*.vue PrettierAsync
 
-" typescript -------------------------
-" set filetypes as typescript.jsx
-autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.jsx
-
-" omnifuncs
-augroup omnifuncs
-  autocmd!
-  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  " autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-  " autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-augroup end
 
 " easy align -------------------------
 xmap ga <Plug>(EasyAlign)
@@ -228,9 +197,8 @@ let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_php_enabled_makers = ['php']
 let g:neomake_html_enabled_makers = ['tidy']
 let g:neomake_scss_enabled_makers = ['scsslint']
-" let g:neomake_markdown_enabled_makers = ['mdl']
-let g:neomake_markdown_enabled_makers = []
-" let g:neomake_json_enabled_makers = ['jsonlint']
+let g:neomake_markdown_enabled_makers = ['markdownlint', 'writegood', 'proselint']
+let g:neomake_json_enabled_makers = ['jsonlint']
 
 " Use the fix option of eslint
 " let g:neomake_javascript_eslint_args = ['-f', 'compact', '--fix-dry-run']
@@ -322,3 +290,5 @@ let g:float_preview#docked = 1
 " set foldmethod=syntax
 set foldnestmax=1
 let g:go_fmt_experimental = 1
+let g:go_list_type = "quickfix"
+let g:go_fmt_command = "goimports"

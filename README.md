@@ -12,12 +12,15 @@ Generally failing to have one of these installed will only show an error
 message, but vim will still work.
 
 - typescript
-- look\*
-- words\*
+- look \*
+- words \*
 - libuv
 - the_silver_searcher
-- mdl\*\*
-- tidy
+- fzf \*
+- markdownlint \*
+- proselint \*
+- write-good \*
+- tidy \*
 - scsslint\*\*
 - eslint\*\*
 - nodejs v8.10.0
@@ -28,7 +31,5 @@ message, but vim will still work.
 ### Running
 
 Run PlugInstall at first run and things should work
-
-run `CocInstall coc-ultisnips` for ultisnips usage
 
 ![Screenshot](/screenshot.png?raw=true 'Screenshot')
