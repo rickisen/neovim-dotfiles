@@ -16,6 +16,7 @@ message, but vim will still work.
 - words \*
 - libuv
 - the_silver_searcher
+- python-pynvim \*
 - fzf \*
 - markdownlint \*
 - proselint \*

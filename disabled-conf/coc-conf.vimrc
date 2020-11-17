@@ -1,8 +1,22 @@
 "
+set hidden
 
-" COC / Better LSP client and completions
-" Put in plugins-install.vimrc
-"
+" Some servers have issues with backup files, see #649
+" set nobackup
+" set nowritebackup
+
+" Better display for messages
+" set cmdheight=2
+
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
+
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
 " Plug 'neoclide/coc-css', {'do': 'yarn install --frozen-lockfile'}
@@ -120,5 +134,4 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-
 

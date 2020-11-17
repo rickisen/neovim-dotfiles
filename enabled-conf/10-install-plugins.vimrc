@@ -6,20 +6,20 @@ Plug 'tpope/vim-sensible'
 " (LSP) Multi-entry selection UI.
 Plug 'junegunn/fzf'
 
-" (LSP) Showing function signature and inline doc.
-Plug 'Shougo/echodoc.vim'
-
-" (LSP) Multi-entry selection UI.
-Plug 'Shougo/denite.nvim'
-
 " syntax package
 Plug 'sheerun/vim-polyglot'
 
 " asynchronous execution library for Vim, others depends on this
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 
-" search for files, maybe dep of nerdtree
-Plug 'shougo/unite.vim'
+" Search for files
+if has('nvim')
+  Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/denite.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 
 " vim-easy-align
 Plug 'junegunn/vim-easy-align'
@@ -129,8 +129,12 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'do': 'bash install.sh',
     \ }
 
-" auto completion lite
-Plug 'lifepillar/vim-mucomplete'
+" ncm2 autocomplete
+Plug 'roxma/nvim-yarp'
+Plug 'ncm2/ncm2'
+Plug 'ncm2/ncm2-ultisnips'
+Plug 'ncm2/ncm2-tmux'
+Plug 'entombedvirus/ncm2-vim-go'
 
 " auto pairs like
 " Plug 'jiangmiao/auto-pairs'
