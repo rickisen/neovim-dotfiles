@@ -2,7 +2,7 @@
 " allways run on read and write and leave insert
 " autocmd! BufWritePost,BufEnter,InsertLeave  * Neomake
 
-" Run on write
+" Run on write, and open
 autocmd! BufWritePost,BufEnter * Neomake
 
 let g:neomake_jsx_enabled_makers = ['eslint']

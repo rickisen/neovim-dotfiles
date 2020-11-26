@@ -4,7 +4,8 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'tpope/vim-sensible'
 
 " (LSP) Multi-entry selection UI.
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 " syntax package
 Plug 'sheerun/vim-polyglot'
