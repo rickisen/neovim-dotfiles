@@ -48,6 +48,16 @@ function! AutoWinSplit(target)
 endfunction
 nnoremap <F9> :call AutoWinSplit(" ")<CR>
 
+function! TestOrRunGo()
+  let file_name = expand('%')
+  echo file_name
+  if file_name =~ "\._test"
+    execute ':call AutoWinSplit("term://go test %:p:h")'
+  else
+    execute ':call AutoWinSplit("term://go run %")'
+  endif
+endfunction
+
 " insert ; at end of line
 nmap <C-F> A;<ESC>j
 " imap <C-F> <ESC>A;<CR>
@@ -72,7 +82,7 @@ autocmd FileType sh nnoremap <F8> :call AutoWinSplit("term://bash %")<CR>
 autocmd FileType javascript nnoremap <F8> :call AutoWinSplit("term://node %")<CR>
 autocmd FileType typescript nnoremap <F8> :call AutoWinSplit("term://ts-node %")<CR>
 autocmd FileType python nnoremap <F8> :call AutoWinSplit("term://python %")<CR>
-autocmd FileType go nnoremap <F8> :call AutoWinSplit("term://go run .")<CR>
+autocmd FileType go nnoremap <F8> :call TestOrRunGo()<CR>
 " autocmd FileType go nnoremap <F8> :GoRun <CR>
 
 " Jump to next non-whitespace char in the same column
