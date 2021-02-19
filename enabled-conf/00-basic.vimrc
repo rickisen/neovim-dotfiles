@@ -11,7 +11,7 @@ set smartcase
 set cursorline
 set mouse=a
 set foldmethod=indent
-set foldnestmax=1
+" set foldnestmax=1
 set nofoldenable
 set title
 set titlestring=%t
