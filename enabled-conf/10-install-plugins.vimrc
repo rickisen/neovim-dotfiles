@@ -114,10 +114,11 @@ Plug 'jelera/vim-javascript-syntax'
 Plug 'jordwalke/JSDocSnippets'
 
 " for jsx/tsx highlighting
-Plug 'leafgarland/typescript-vim'
+" Plug 'leafgarland/typescript-vim'
+Plug 'HerringtonDarkholme/yats.vim'
 
 " Plug 'peitalin/vim-jsx-typescript'
-Plug 'ianks/vim-tsx'
+" Plug 'ianks/vim-tsx'
 
 " to apply prettier on typescript
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }

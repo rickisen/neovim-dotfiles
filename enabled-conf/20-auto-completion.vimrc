@@ -44,12 +44,18 @@ augroup END
 " Required for operations modifying multiple buffers like rename.
 set hidden
 
+" let g:LanguageClient_usePopupHover = 0
+let g:LanguageClient_useFloatingHover = 0
+let g:LanguageClient_useVirtualText = "No"
+let g:LanguageClient_diagnosticsMaxSeverity = "Warning"
 let g:LanguageClient_serverCommands = {
-    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-    \ 'javascript': ['javascript-typescript-stdio'],
-    \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
-    \ 'python': ['/usr/local/bin/pyls'],
-    \ 'ruby': ['~/.rbenv/shims/solargraph', 'stdio']
+    \ 'rust':           ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+    \ 'typescript':     ['~/.fnm/current/bin/typescript-language-server', '--stdio'],
+    \ 'typescript.tsx': ['~/.fnm/current/bin/typescript-language-server', '--stdio'],
+    \ 'javascript':     ['~/.fnm/current/bin/typescript-language-server', '--stdio'],
+    \ 'javascript.jsx': ['~/.fnm/current/bin/typescript-language-server', '--stdio'],
+    \ 'python':         ['/usr/local/bin/pyls'],
+    \ 'ruby':           ['~/.rbenv/shims/solargraph', 'stdio']
     \ }
 " add if vim-go isn't good enough
 " \ 'go': ['gopls'],
