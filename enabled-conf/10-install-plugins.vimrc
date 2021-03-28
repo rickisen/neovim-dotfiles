@@ -121,7 +121,9 @@ Plug 'HerringtonDarkholme/yats.vim'
 " Plug 'ianks/vim-tsx'
 
 " to apply prettier on typescript
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 
 " vim-react-snippets
 Plug 'justinj/vim-react-snippets'

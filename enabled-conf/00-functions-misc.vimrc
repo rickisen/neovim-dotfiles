@@ -79,8 +79,8 @@ nnoremap <F5> :so $MYVIMRC<CR>
 " autocmd FileType sh nnoremap <F8> :%w !bash<CR>
 " autocmd FileType sh nnoremap <F8> :wv <CR> :terminal bash % <CR>
 autocmd FileType sh nnoremap <F8> :call AutoWinSplit("term://bash %")<CR>
-autocmd FileType javascript nnoremap <F8> :call AutoWinSplit("term://node %")<CR>
-autocmd FileType typescript nnoremap <F8> :call AutoWinSplit("term://ts-node %")<CR>
+autocmd FileType javascript nnoremap <F8> :call AutoWinSplit("term://node --trace-uncaught %")<CR>
+autocmd FileType typescript nnoremap <F8> :call AutoWinSplit("term://ts-node --trace-uncaught %")<CR>
 autocmd FileType python nnoremap <F8> :call AutoWinSplit("term://python %")<CR>
 autocmd FileType go nnoremap <F8> :call TestOrRunGo()<CR>
 " autocmd FileType go nnoremap <F8> :GoRun <CR>
