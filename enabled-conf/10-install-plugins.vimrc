@@ -30,7 +30,8 @@ Plug 'lilydjwg/colorizer'
 
 " colorschemes
 " Plug 'whatyouhide/vim-gotham'
-Plug 'rickisen/vim-gotham'
+" Plug 'rickisen/vim-gotham'
+Plug 'dracula/vim', { 'as': 'dracula' }
 
 " Gundo
 Plug 'sjl/gundo.vim'
@@ -142,6 +143,9 @@ Plug 'entombedvirus/ncm2-vim-go'
 " Plug 'jiangmiao/auto-pairs'
 Plug 'tmsvg/pear-tree'
 " Plug 'Raimondi/delimitMate'
+
+" nvim tree sitter, for better highlight and more
+" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 call plug#end()
 " Plugin Configuration ==================================================

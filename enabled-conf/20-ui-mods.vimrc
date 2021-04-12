@@ -1,7 +1,7 @@
-" colorizer -------------------------
+" colorizer -----------------------------
 let g:colorizer_maxlines = 1500
 
-" gundo ---------------------------------------------
+" gundo ---------------------------------
 nnoremap <F4> :GundoToggle<CR>
 set undodir=~/.config/nvim/tmp/undo//
 set backupdir=~/.config/nvim/tmp/backup//
@@ -11,13 +11,13 @@ set undofile
 set history=100
 set undolevels=100
 
-" NERDtree --------------------------------------------------
+" NERDtree ------------------------------
 silent! nmap <C-p> :NERDTreeToggle<CR>
 silent! map <F3> :NERDTreeFind<CR>
 let g:NERDTreeMapPreview="<F4>"
 let NERDTreeMinimalUI=1
 
-" MatchTagAllways -------------------------------------------------
+" MatchTagAllways -----------------------
 let g:mta_filetypes = {
     \ 'html' : 1,
     \ 'php' : 1,
@@ -33,6 +33,8 @@ let g:mta_filetypes = {
 " airline -------------------------------
 :set laststatus=2 "allways show airline
 let g:airline_powerline_fonts = 1
+let g:airline_left_sep=''
+let g:airline_right_sep=''
 
 " float-preview -------------------------
 let g:float_preview#docked = 1
