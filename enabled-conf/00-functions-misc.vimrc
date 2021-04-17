@@ -50,11 +50,10 @@ nnoremap <F9> :call AutoWinSplit(" ")<CR>
 
 function! TestOrRunGo()
   let file_name = expand('%')
-  echo file_name
-  if file_name =~ "\._test"
-    execute ':call AutoWinSplit("term://go test %:p:h")'
-  else
+  if file_name =~ "main.go" || file_name =~ "cmd"
     execute ':call AutoWinSplit("term://go run %")'
+  else
+    execute ':call AutoWinSplit("term://go test %:p:h")'
   endif
 endfunction
 
@@ -75,7 +74,7 @@ imap <c-c> <CR><ESC>:noa wa<CR>
 " reload vimrc
 nnoremap <F5> :so $MYVIMRC<CR>
 
-" execute current file as script
+" execute current file
 " autocmd FileType sh nnoremap <F8> :%w !bash<CR>
 " autocmd FileType sh nnoremap <F8> :wv <CR> :terminal bash % <CR>
 autocmd FileType sh nnoremap <F8> :call AutoWinSplit("term://bash %")<CR>
