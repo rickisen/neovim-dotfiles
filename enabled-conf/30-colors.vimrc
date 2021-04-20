@@ -12,6 +12,7 @@ endif
 augroup MyColors
 autocmd!
 autocmd ColorScheme * highlight Normal  cterm=NONE ctermbg=3  gui=NONE guibg=#1f1f1f
+                  \ | highlight CursorLine cterm=NONE guibg=#282a36
                   \ | highlight Comment cterm=NONE ctermfg=14 gui=NONE guifg=#8f9ed3
 augroup END
 
