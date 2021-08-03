@@ -10,8 +10,8 @@ if _$2, err := $1; err != nil {
 endsnippet
 
 snippet funci
-func (*$1) $2($3) ($4) {
-	$5
+func (${5:this}*$1) $2($3) ${4:error} {
+	$6
 }
 endsnippet
 
@@ -31,3 +31,14 @@ snippet errorfv
 fmt.Errorf("$1 %v: %w", ${2: value}, err)
 endsnippet
 
+
+snippet typeswitch
+switch ${2:value} := $1.(type) {
+	case ${3:int}:
+		$6
+	case ${4:string}:
+		$7
+	default:
+		$5
+}
+endsnippet
