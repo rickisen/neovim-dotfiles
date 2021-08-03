@@ -33,8 +33,9 @@ Plug 'lilydjwg/colorizer'
 " Plug 'rickisen/vim-gotham'
 Plug 'dracula/vim', { 'as': 'dracula' }
 
-" Gundo
-Plug 'sjl/gundo.vim'
+" Gundo/mundo
+" Plug 'sjl/gundo.vim'
+Plug 'simnalamburt/vim-mundo'
 
 " Match tag allways
 Plug 'Valloric/MatchTagAlways'
