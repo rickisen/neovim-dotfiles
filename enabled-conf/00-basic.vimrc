@@ -55,6 +55,15 @@ let $PATH = join([goBinFolder, $PATH], ':')
 " Native completion popup window conf
 set pumheight=5
 
+" Undo/backup/swap settings
+set undodir=~/.config/nvim/tmp/undo//
+set backupdir=~/.config/nvim/tmp/backup//
+set directory=~/.config/nvim/tmp/swap//
+set backupskip=/tmp/*,/private/tmp/*"
+set undofile
+set history=100
+set undolevels=100
+
 " path to python  --------------------
 " overides python setup for mac osx
 if system('uname -s') == "Darwin\n"

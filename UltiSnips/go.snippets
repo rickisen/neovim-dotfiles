@@ -10,8 +10,8 @@ if _$2, err := $1; err != nil {
 endsnippet
 
 snippet funci
-func (*$1) $2($3) ($4) {
-	$5
+func (${5:this}*$1) $2($3) ${4:error} {
+	$6
 }
 endsnippet
 
@@ -39,5 +39,5 @@ switch t := ${1:value}.(type){
 		${5:t}
 	default:
 		${6:t}
-}
+
 endsnippet

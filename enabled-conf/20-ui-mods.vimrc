@@ -2,14 +2,7 @@
 let g:colorizer_maxlines = 1500
 
 " gundo ---------------------------------
-nnoremap <F4> :GundoToggle<CR>
-set undodir=~/.config/nvim/tmp/undo//
-set backupdir=~/.config/nvim/tmp/backup//
-set directory=~/.config/nvim/tmp/swap//
-set backupskip=/tmp/*,/private/tmp/*"
-set undofile
-set history=100
-set undolevels=100
+nnoremap <F4> :MundoToggle<CR>
 
 " NERDtree ------------------------------
 silent! nmap <C-p> :NERDTreeToggle<CR>
