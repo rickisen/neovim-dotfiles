@@ -88,7 +88,11 @@ autocmd FileType go nnoremap <F8> :call TestOrRunGo()<CR>
 nnoremap <silent> \j :<C-u>call search('\%' . virtcol('.') . 'v\S', 'W')<CR>
 nnoremap <silent> \k :<C-u>call search('\%' . virtcol('.') . 'v\S', 'bW')<CR>
 
-autocmd FileType markdown :set spell
+augroup markdownSpell
+    autocmd!
+    autocmd FileType markdown setlocal spell
+    autocmd BufRead,BufNewFile *.md setlocal spell
+augroup END
 
 " visually select last insert
 nmap <Leader><Leader> v`[<CR>
