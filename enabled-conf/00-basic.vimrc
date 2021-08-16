@@ -19,6 +19,9 @@ set titlestring=%t
 " screw accidental ex mode
 nnoremap Q @@
 
+" Press space twice to switch between last two buffers
+nnoremap <space><space> <c-^>
+
 " allways diff vertically
 set diffopt+=vertical
 nnoremap du  :diffupdate<CR>
