@@ -1,13 +1,15 @@
-snippet flart
-import React from 'react';
+snippet imp
+import $3{ $1 }$4 from "$1$2";
+endsnippet
 
-interface Props {
-	$2
-}
+snippet co
+console.log('$1');
+endsnippet
 
-export default function $1({$2}: Props) {
-	return (
-		<div></div>
-	)
-}
+snippet cons
+console.log("$1$2", $1);
+endsnippet
+
+snippet coner
+console.error("$1", $2);
 endsnippet

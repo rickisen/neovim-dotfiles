@@ -43,32 +43,37 @@ augroup END
 "
 " Required for operations modifying multiple buffers like rename.
 set hidden
-
-" let g:LanguageClient_usePopupHover = 0
-let g:LanguageClient_useFloatingHover = 0
-let g:LanguageClient_useVirtualText = "No"
 let g:LanguageClient_diagnosticsMaxSeverity = "Warning"
+let g:LanguageClient_diagnosticsList = "Disabled"
+let g:LanguageClient_diagnosticsEnable = 1
+" let g:LanguageClient_usePopupHover = 0
+" let g:LanguageClient_useFloatingHover = 0
+let g:LanguageClient_useVirtualText = "No"
 let g:LanguageClient_serverCommands = {
-    \ 'rust':           ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-    \ 'typescript':     ['~/.fnm/current/bin/typescript-language-server', '--stdio'],
-    \ 'typescript.tsx': ['~/.fnm/current/bin/typescript-language-server', '--stdio'],
-    \ 'javascript':     ['~/.fnm/current/bin/typescript-language-server', '--stdio'],
-    \ 'javascript.jsx': ['~/.fnm/current/bin/typescript-language-server', '--stdio'],
-    \ 'python':         ['/usr/local/bin/pyls'],
-    \ 'ruby':           ['~/.rbenv/shims/solargraph', 'stdio']
+    \ 'rust':            ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+    \ 'typescript':      ['typescript-language-server', '--stdio'],
+    \ 'typescript.tsx':  ['typescript-language-server', '--stdio'],
+    \ 'typescriptreact': ['typescript-language-server', '--stdio'],
+    \ 'javascript':      ['javascript-typescript-stdio'],
+    \ 'javascriptreact': ['javascript-typescript-stdio'],
+    \ 'javascript.jsx':  ['javascript-typescript-stdio'],
+    \ 'python':          ['/usr/local/bin/pyls'],
+    \ 'ruby':            ['~/.rbenv/shims/solargraph', 'stdio']
     \ }
 " add if vim-go isn't good enough
 " \ 'go': ['gopls'],
+
+command! OrganizeImports call LanguageClient#executeCodeAction('source.organizeImports')
 
 " note that if you are using Plug mapping you should not use `noremap` mappings.
 " nmap <F5> <Plug>(lcn-menu)
 " Or map each action separately
 nmap <silent>K <Plug>(lcn-hover)
 nmap <silent> gd <Plug>(lcn-definition)
-nmap <silent> <F2> <Plug>(lcn-rename)
+nmap <silent> <F2> <Plug>(lcn-menu)
 
 " ncm2/float-preview
-let g:float_preview#docked = 1
+" let g:float_preview#docked = 0
 
-:let g:float_preview#auto_close = 0
+:let g:float_preview#auto_close = 1
 au InsertLeave * call float_preview#close()

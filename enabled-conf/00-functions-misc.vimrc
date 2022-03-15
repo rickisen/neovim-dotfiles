@@ -48,15 +48,6 @@ function! AutoWinSplit(target)
 endfunction
 nnoremap <F9> :call AutoWinSplit(" ")<CR>
 
-function! TestOrRunGo()
-  let file_name = expand('%')
-  if file_name =~ "main.go" || file_name =~ "cmd"
-    execute ':call AutoWinSplit("term://go run %")'
-  else
-    execute ':call AutoWinSplit("term://go test %:p:h")'
-  endif
-endfunction
-
 " insert ; at end of line
 nmap <C-F> A;<ESC>j
 " imap <C-F> <ESC>A;<CR>

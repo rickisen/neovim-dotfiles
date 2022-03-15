@@ -19,4 +19,5 @@ autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.json,*.graphql,*.
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
-
+" markdown preview -------------------
+let g:mkdp_browser = 'qutebrowser'

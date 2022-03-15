@@ -21,10 +21,14 @@ au User NeomakeFinished checktime
 " But tares on a ssd drive
 autocmd FileType javascript :set backupcopy=yes
 autocmd FileType javascript.jsx :set backupcopy=yes
+autocmd FileType javascriptreact :set backupcopy=yes
 autocmd FileType typescript :set backupcopy=yes
 autocmd FileType typescript.tsx :set backupcopy=yes
+autocmd FileType typescriptreact :set backupcopy=yes
 
 autocmd FileType javascript :set signcolumn=yes
 autocmd FileType javascript.jsx :set signcolumn=yes
+autocmd FileType javascriptreact :set signcolumn=yes
 autocmd FileType typescript :set signcolumn=yes
 autocmd FileType typescript.tsx :set signcolumn=yes
+autocmd FileType typescriptreact :set signcolumn=yes

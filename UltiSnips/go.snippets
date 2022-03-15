@@ -3,9 +3,16 @@ if $1 {
 	$2
 }$3
 endsnippet
+
 snippet iferr
 if _$2, err := $1; err != nil {
 	$3
+}
+endsnippet
+
+snippet ifer
+if err != nil {
+	return err
 }
 endsnippet
 
