@@ -28,6 +28,9 @@ let g:mta_filetypes = {
 let g:airline_powerline_fonts = 1
 let g:airline_left_sep=''
 let g:airline_right_sep=''
+let g:airline_exclude_preview = 1
+let g:airline#extensions#tabline#exclude_preview = 1
+
 
 " float-preview -------------------------
 let g:float_preview#docked = 1

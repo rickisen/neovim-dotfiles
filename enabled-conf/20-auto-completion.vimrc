@@ -46,8 +46,13 @@ set hidden
 let g:LanguageClient_diagnosticsMaxSeverity = "Warning"
 let g:LanguageClient_diagnosticsList = "Disabled"
 let g:LanguageClient_diagnosticsEnable = 1
-" let g:LanguageClient_usePopupHover = 0
-" let g:LanguageClient_useFloatingHover = 0
+
+let g:LanguageClient_hoverPreview = "Auto"
+let g:LanguageClient_useFloatingHover = 1
+
+let g:LanguageClient_preferredMarkupKind = ['plaintext', 'markdown']
+let g:LanguageClient_floatingHoverHighlight = "Normal:CursorLine"
+
 let g:LanguageClient_useVirtualText = "No"
 let g:LanguageClient_serverCommands = {
     \ 'rust':            ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
@@ -74,6 +79,19 @@ nmap <silent> <F2> <Plug>(lcn-menu)
 
 " ncm2/float-preview
 " let g:float_preview#docked = 0
+"
+" function! DisableExtras()
+"   call nvim_win_set_option(g:float_preview#win, 'number', v:true)
+"   call nvim_win_set_option(g:float_preview#win, 'relativenumber', v:true)
+"   call nvim_win_set_option(g:float_preview#win, 'cursorline', v:true)
+"   call nvim_win_set_width(g:float_preview#win, 2)
+" endfunction
+"
+" autocmd User FloatPreviewWinOpen call DisableExtras()
+" :let g:float_preview#auto_close = 1
+"
+" au InsertLeave * call float_preview#close()
 
-:let g:float_preview#auto_close = 1
-au InsertLeave * call float_preview#close()
+" lua << EOF
+" require("stabilize").setup()
+" EOF

@@ -104,9 +104,6 @@ Plug 'calviken/vim-gdscript3'
 " for moving around inside indent level
 Plug 'michaeljsmith/vim-indent-object'
 
-" make the preview window float next to completions
-Plug 'ncm2/float-preview.nvim'
-
 " react / jsx
 " Plug 'pangloss/vim-javascript'
 Plug 'jelera/vim-javascript-syntax'
@@ -145,6 +142,10 @@ Plug 'ncm2/ncm2'
 Plug 'ncm2/ncm2-ultisnips'
 Plug 'ncm2/ncm2-tmux'
 Plug 'entombedvirus/ncm2-vim-go'
+
+" make the preview window float next to completions
+" Plug 'ncm2/float-preview.nvim'
+" Plug 'luukvbaal/stabilize.nvim'
 
 " auto pairs like
 " Plug 'jiangmiao/auto-pairs'
