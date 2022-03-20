@@ -12,6 +12,8 @@ let NERDTreeMinimalUI=1
 
 " MatchTagAllways -----------------------
 let g:mta_filetypes = {
+    \ 'typescriptreact' : 1,
+    \ 'javascriptreact' : 1,
     \ 'html' : 1,
     \ 'php' : 1,
     \ 'js' : 1,
@@ -33,4 +35,4 @@ let g:airline#extensions#tabline#exclude_preview = 1
 
 
 " float-preview -------------------------
-let g:float_preview#docked = 1
+" let g:float_preview#docked = 1

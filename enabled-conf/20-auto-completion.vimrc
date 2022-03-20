@@ -43,7 +43,7 @@ augroup END
 "
 " Required for operations modifying multiple buffers like rename.
 set hidden
-let g:LanguageClient_diagnosticsMaxSeverity = "Warning"
+let g:LanguageClient_diagnosticsMaxSeverity = "Information"
 let g:LanguageClient_diagnosticsList = "Disabled"
 let g:LanguageClient_diagnosticsEnable = 1
 
@@ -64,6 +64,15 @@ let g:LanguageClient_serverCommands = {
     \ 'javascript.jsx':  ['javascript-typescript-stdio'],
     \ 'python':          ['/usr/local/bin/pyls'],
     \ 'ruby':            ['~/.rbenv/shims/solargraph', 'stdio']
+    \ }
+let g:LanguageClient_rootMarkers = {
+    \ 'javascript': ['package.json'],
+    \ 'javascriptreact': ['package.json'],
+    \ 'javascript.jsx': ['package.json'],
+    \ 'typescript': ['tsconfig.json'],
+    \ 'typescript.tsx': ['tsconfig.json'],
+    \ 'typescriptreact': ['tsconfig.json'],
+    \ 'go': ['go.mod'],
     \ }
 " add if vim-go isn't good enough
 " \ 'go': ['gopls'],

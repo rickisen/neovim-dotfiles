@@ -76,6 +76,10 @@ Plug 'tomtom/tcomment_vim'
 " neomake (like dispatch and syntastic)
 Plug 'benekastah/neomake'
 
+" makes it easier/faster to run local npm bins over system.
+" fixes eslint issues
+Plug 'jaawerth/nrun.vim'
+
 " highlight trailing whitespace
 Plug 'ntpeters/vim-better-whitespace'
 

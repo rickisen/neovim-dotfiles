@@ -6,7 +6,9 @@
 autocmd! BufWritePost,BufEnter * Neomake
 
 let g:neomake_jsx_enabled_makers = ['eslint']
+let g:neomake_tsx_enabled_makers = ['eslint']
 let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_typescriptreact_enabled_makers = ['eslint']
 let g:neomake_php_enabled_makers = ['php']
 let g:neomake_html_enabled_makers = ['tidy']
 let g:neomake_scss_enabled_makers = ['scsslint']
@@ -26,9 +28,16 @@ autocmd FileType typescript :set backupcopy=yes
 autocmd FileType typescript.tsx :set backupcopy=yes
 autocmd FileType typescriptreact :set backupcopy=yes
 
-autocmd FileType javascript :set signcolumn=yes
-autocmd FileType javascript.jsx :set signcolumn=yes
-autocmd FileType javascriptreact :set signcolumn=yes
-autocmd FileType typescript :set signcolumn=yes
-autocmd FileType typescript.tsx :set signcolumn=yes
-autocmd FileType typescriptreact :set signcolumn=yes
+" autocmd FileType javascript :set signcolumn=yes
+" autocmd FileType javascript.jsx :set signcolumn=yes
+" autocmd FileType javascriptreact :set signcolumn=yes
+" autocmd FileType typescript :set signcolumn=yes
+" autocmd FileType typescript.tsx :set signcolumn=yes
+" autocmd FileType typescriptreact :set signcolumn=yes
+
+let g:neomake_jsx_eslint_exe = nrun#Which('eslint')
+let g:neomake_javascript_eslint_exe = nrun#Which('eslint')
+let g:neomake_javascriptreact_eslint_exe = nrun#Which('eslint')
+let g:neomake_tsx_eslint_exe = nrun#Which('eslint')
+let g:neomake_typescript_eslint_exe = nrun#Which('eslint')
+let g:neomake_typescriptreact_eslint_exe = nrun#Which('eslint')
