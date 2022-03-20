@@ -43,17 +43,41 @@ augroup END
 "
 " Required for operations modifying multiple buffers like rename.
 set hidden
-let g:LanguageClient_diagnosticsMaxSeverity = "Information"
-let g:LanguageClient_diagnosticsList = "Disabled"
-let g:LanguageClient_diagnosticsEnable = 1
 
+" if large, show in preview, otherwise echo
 let g:LanguageClient_hoverPreview = "Auto"
 let g:LanguageClient_useFloatingHover = 1
-
 let g:LanguageClient_preferredMarkupKind = ['plaintext', 'markdown']
-let g:LanguageClient_floatingHoverHighlight = "Normal:CursorLine"
 
+" less spammy diag input
+let g:LanguageClient_diagnosticsMaxSeverity = "Information"
+" let g:LanguageClient_diagnosticsList = "Disabled"
+let g:LanguageClient_diagnosticsEnable = 1
+let g:LanguageClient_hideVirtualTextsOnInsert = 1
 let g:LanguageClient_useVirtualText = "No"
+
+function! ShowLess()
+    exec(":set signcolumn=no")
+    hi link LanguageClientError Normal
+    hi link LanguageClientError Normal
+    hi link LanguageClientWarning Normal
+    hi link LanguageClientInfo Normal
+endfunction
+
+function! ShowMore()
+    exec(":set signcolumn=auto")
+    hi link LanguageClientError SpellBad
+    hi link LanguageClientWarning SpellCap
+    hi link LanguageClientInfo LanguageClientWarning
+endfunction
+
+" Hides diagnostics while typing, and shows it after, if it contains something.
+augroup LanguageClient_config
+    autocmd!
+    autocmd InsertEnter * :call ShowLess()
+    autocmd InsertLeavePre * :call ShowMore()
+augroup END
+
 let g:LanguageClient_serverCommands = {
     \ 'rust':            ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
     \ 'typescript':      ['typescript-language-server', '--stdio'],
