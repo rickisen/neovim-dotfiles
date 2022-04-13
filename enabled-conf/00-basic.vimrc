@@ -27,7 +27,7 @@ set diffopt+=vertical
 nnoremap du  :diffupdate<CR>
 
 " close preview window if open
-nnoremap <esc>  :pc<CR>
+nnoremap <esc>  :pc<CR> :noh<CR>
 
 " indent
 filetype plugin indent on
@@ -79,4 +79,3 @@ endif
 
 set splitbelow
 set previewheight=5
-
