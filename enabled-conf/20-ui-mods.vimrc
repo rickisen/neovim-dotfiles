@@ -26,7 +26,7 @@ let g:mta_filetypes = {
     \}
 
 " airline -------------------------------
-:set laststatus=2 "allways show airline
+:set laststatus=3
 let g:airline_powerline_fonts = 1
 let g:airline_left_sep=''
 let g:airline_right_sep=''

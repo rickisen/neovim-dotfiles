@@ -31,7 +31,14 @@ Plug 'lilydjwg/colorizer'
 " colorschemes
 " Plug 'whatyouhide/vim-gotham'
 " Plug 'rickisen/vim-gotham'
-Plug 'dracula/vim', { 'as': 'dracula' }
+" Plug 'dracula/vim', { 'as': 'dracula' }
+" Plug 'mhartington/oceanic-next'
+" Plug 'lourenci/github-colors', { 'branch': 'main' }
+" Plug 'projekt0n/github-nvim-theme'
+" Plug 'catppuccin/nvim', {'as': 'catppuccin'}
+" Plug 'kdheepak/monochrome.nvim'
+" Plug 'rebelot/kanagawa.nvim'
+Plug 'sainnhe/sonokai'
 
 " Gundo/mundo
 " Plug 'sjl/gundo.vim'
@@ -152,12 +159,12 @@ Plug 'entombedvirus/ncm2-vim-go'
 " Plug 'luukvbaal/stabilize.nvim'
 
 " auto pairs like
-" Plug 'jiangmiao/auto-pairs'
-Plug 'tmsvg/pear-tree'
+Plug 'jiangmiao/auto-pairs'
+" Plug 'tmsvg/pear-tree'
 " Plug 'Raimondi/delimitMate'
 
 " nvim tree sitter, for better highlight and more
-" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 call plug#end()
 " Plugin Configuration ==================================================
