@@ -27,7 +27,7 @@ set diffopt+=vertical
 nnoremap du  :diffupdate<CR>
 
 " close preview window if open
-nnoremap <esc>  :pc<CR> :noh<CR>
+nnoremap <esc> :pc<CR>:noh<CR>:<c-c>
 
 " indent
 filetype plugin indent on

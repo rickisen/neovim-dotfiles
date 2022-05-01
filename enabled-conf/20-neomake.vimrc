@@ -12,8 +12,12 @@ let g:neomake_typescriptreact_enabled_makers = ['eslint']
 let g:neomake_php_enabled_makers = ['php']
 let g:neomake_html_enabled_makers = ['tidy']
 let g:neomake_scss_enabled_makers = ['scsslint']
-" let g:neomake_markdown_enabled_makers = ['markdownlint', 'writegood', 'proselint']
 let g:neomake_json_enabled_makers = ['jsonlint']
+
+"  Enable more golang linters by removing this line, disabled while waiting
+"  for 1.18 support
+" let g:neomake_go_enabled_makers = ['go', 'golint']
+let g:neomake_go_enabled_makers = ['go', 'golangci_lint']
 
 " Use the fix option of eslint
 " let g:neomake_javascript_eslint_args = ['-f', 'compact', '--fix-dry-run']

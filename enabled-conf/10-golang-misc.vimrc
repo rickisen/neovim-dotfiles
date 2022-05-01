@@ -1,3 +1,4 @@
+
 " vim-go -------------------------
 let g:go_fmt_experimental = 1
 let g:go_list_type = "quickfix"
@@ -18,6 +19,9 @@ let g:go_debug_mappings = {
   \ '(go-debug-stepout)': {'key': 'b'},
 \}
 
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+
 function! TestOrRunGo()
   let file_name = expand('%')
   if file_name =~ "main.go" || file_name =~ "cmd"
@@ -26,6 +30,17 @@ function! TestOrRunGo()
     execute ':call AutoWinSplit("term://go test -bench=. -v %:p:h")'
   endif
 endfunction
+
+
+function! SetGuruScope()
+   let s:tmp = matchlist(expand('%:p'), '/home/rickisen/Programming/other/trail/pastanaga/(gitlab.com/trailgames/[^/]\+\)')
+   if len(s:tmp) > 1
+     exe 'silent :GoGuruScope ' . s:tmp[1]
+   endif
+   unlet s:tmp
+endfunction
+
+" autocmd BufRead /home/rickisen/Programming/other/trail/pastanaga/**.go call SetGuruScope()
 
 " function! OpenInRealPreview()
 "   execute ":pedit"

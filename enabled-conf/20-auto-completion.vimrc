@@ -45,8 +45,8 @@ augroup END
 set hidden
 
 " if large, show in preview, otherwise echo
-let g:LanguageClient_hoverPreview = "Auto"
-let g:LanguageClient_useFloatingHover = 1
+let g:LanguageClient_hoverPreview = "Preview"
+let g:LanguageClient_useFloatingHover = 0
 let g:LanguageClient_preferredMarkupKind = ['plaintext', 'markdown']
 
 " less spammy diag input
@@ -100,6 +100,12 @@ let g:LanguageClient_rootMarkers = {
     \ }
 " add if vim-go isn't good enough
 " \ 'go': ['gopls'],
+" Launch gopls when Go files are in use
+" let g:LanguageClient_serverCommands = {
+"        \ 'go': ['gopls']
+"        \ }
+" Run gofmt on save
+" autocmd BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()
 
 command! OrganizeImports call LanguageClient#executeCodeAction('source.organizeImports')
 
