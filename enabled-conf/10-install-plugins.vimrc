@@ -13,6 +13,9 @@ Plug 'sheerun/vim-polyglot'
 " asynchronous execution library for Vim, others depends on this
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 
+" show function signatures from autocompletion in echo area
+Plug 'Shougo/echodoc.vim'
+
 " Search for files
 if has('nvim')
   Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }

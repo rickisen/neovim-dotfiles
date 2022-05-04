@@ -27,7 +27,7 @@ set diffopt+=vertical
 nnoremap du  :diffupdate<CR>
 
 " close preview window if open
-nnoremap <esc> :lua vim.diagnostic.reset()<CR>:pc<CR>:noh<CR>:<c-c>
+nnoremap <esc> :lua vim.diagnostic.config({virtual_text = false})<CR>:pc<CR>:noh<CR>:<c-c>
 
 " indent
 filetype plugin indent on

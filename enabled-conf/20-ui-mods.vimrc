@@ -36,3 +36,7 @@ let g:airline#extensions#tabline#exclude_preview = 1
 
 " float-preview -------------------------
 " let g:float_preview#docked = 1
+
+" echodoc -------------------------
+set noshowmode
+let g:echodoc_enable_at_startup = 1"
