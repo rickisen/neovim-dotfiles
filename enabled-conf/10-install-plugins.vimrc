@@ -142,10 +142,11 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 " vim-react-snippets
 Plug 'justinj/vim-react-snippets'
 
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+" Plug 'autozimu/LanguageClient-neovim', {
+"     \ 'branch': 'next',
+"     \ 'do': 'bash install.sh',
+"     \ }
+Plug 'neovim/nvim-lspconfig'
 
 " ncm2 autocomplete
 Plug 'roxma/nvim-yarp'
