@@ -31,8 +31,8 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
   -- Show line diagnostics automatically in hover window
-  vim.o.updatetime = 500
-  vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+  -- vim.o.updatetime = 500
+  -- vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
@@ -49,16 +49,9 @@ for _, lsp in pairs(servers) do
       -- debounce_text_changes = 150,
     },
     handlers = {
-      ["textDocument/references"] = vim.lsp.with(
-        on_references, {
-          -- Use location list instead of quickfix list
-          loclist = true,
-        }
-      ),
       ["textDocument/publishDiagnostics"] = vim.lsp.with(
         vim.lsp.diagnostic.on_publish_diagnostics, {
-          -- Disable virtual_text
-          virtual_text = false,
+          virtual_text = { severity = {min=vim.diagnostic.severity.WARN} },
           underline = false,
           update_in_insert = false,
         }
