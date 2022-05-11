@@ -21,7 +21,7 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
@@ -50,7 +50,8 @@ for _, lsp in pairs(servers) do
     handlers = {
       ["textDocument/publishDiagnostics"] = vim.lsp.with(
         vim.lsp.diagnostic.on_publish_diagnostics, {
-          -- virtual_text = { severity = {min=vim.diagnostic.severity.WARN} },
+          virtual_text = true,
+          signs = { severity = {min=vim.diagnostic.severity.WARN} },
           underline = false,
           update_in_insert = false,
         }
@@ -58,5 +59,37 @@ for _, lsp in pairs(servers) do
     }
   }
 end
+
+-- -- set this if you haven't set it elsewhere, ideally inside on_attach
+-- -- vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
+--
+-- -- define global function
+-- _G.lsp_import_on_completion = function()
+--     local completed_item = vim.v.completed_item
+--     if not (completed_item and completed_item.user_data and
+--         completed_item.user_data.nvim and completed_item.user_data.nvim.lsp and
+--         completed_item.user_data.nvim.lsp.completion_item) then return end
+--
+--     local item = completed_item.user_data.nvim.lsp.completion_item
+--     local bufnr = vim.api.nvim_get_current_buf()
+--     vim.lsp.buf_request(bufnr, "completionItem/resolve", item,
+--                     function(_, _, result)
+--         if result and result.additionalTextEdits then
+--             vim.lsp.util.apply_text_edits(result.additionalTextEdits, bufnr)
+--         end
+--     end)
+-- end
+--
+-- -- define autocmd to listen for CompleteDone
+-- vim.api.nvim_exec([[
+-- augroup LSPImportOnCompletion
+--     autocmd!
+--     autocmd CompleteDone * lua lsp_import_on_completion()
+-- augroup END
+-- ]], false)
+
 EOF
+
+
+
 

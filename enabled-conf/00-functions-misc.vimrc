@@ -48,17 +48,20 @@ function! AutoWinSplit(target)
 endfunction
 nnoremap <F9> :call AutoWinSplit(" ")<CR>
 
+" close preview window if open
+nnoremap <esc> :lua vim.diagnostic.config({virtual_text = false})<CR>:pc<CR>:noh<CR>:<c-c>
+
 " insert ; at end of line
 nmap <C-F> A;<ESC>j
 " imap <C-F> <ESC>A;<CR>
 
 " insert , at end of line
 nmap <C-G> A,<ESC>j
-imap <C-G> <ESC>A,<CR>
+imap <C-G> <ESC>A,<ESC><CR>,
 
 " map :wa to keybinding
-nmap <c-b> :wa<CR>:lua vim.diagnostic.config({virtual_text = { severity = {min=vim.diagnostic.severity.WARN} }})<CR>
-imap <c-b> <CR><ESC>:wa<CR>
+nmap <c-b> :wa<CR>:lua vim.diagnostic.config({virtual_text = true})<CR>:<c-c>
+imap <c-b> <CR><ESC>:wa<CR>:lua vim.diagnostic.config({virtual_text = true})<CR>:<c-c>
 nmap <c-c> :noa wa<CR>
 imap <c-c> <CR><ESC>:noa wa<CR>
 

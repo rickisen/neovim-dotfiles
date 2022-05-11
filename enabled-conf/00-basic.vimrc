@@ -26,9 +26,6 @@ nnoremap <space><space> <c-^>
 set diffopt+=vertical
 nnoremap du  :diffupdate<CR>
 
-" close preview window if open
-nnoremap <esc> :lua vim.diagnostic.config({virtual_text = false})<CR>:pc<CR>:noh<CR>:<c-c>
-
 " indent
 filetype plugin indent on
 " set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
