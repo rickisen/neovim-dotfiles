@@ -32,6 +32,12 @@ local on_attach = function(client, bufnr)
   -- Show line diagnostics automatically in hover window
   -- vim.o.updatetime = 500
   -- vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+
+  vim.cmd [[autocmd TextChanged,InsertEnter * :lua vim.diagnostic.disable()]]
+  vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]]
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<c-b>', ':wa<CR>:lua vim.diagnostic.enable()<CR>:<c-c>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'i', '<c-b>', '<CR><ESC>:wa<CR>:lua vim.diagnostic.enable()<CR>:<c-c>', opts)
+
 end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and

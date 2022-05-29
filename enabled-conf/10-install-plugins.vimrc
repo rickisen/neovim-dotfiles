@@ -120,7 +120,7 @@ Plug 'michaeljsmith/vim-indent-object'
 
 " react / jsx
 " Plug 'pangloss/vim-javascript'
-Plug 'jelera/vim-javascript-syntax'
+" Plug 'jelera/vim-javascript-syntax'
 " Plug 'othree/javascript-libraries-syntax.vim'
 " Plug 'othree/yajs'
 " Plug 'mxw/vim-jsx' "included in polyglot
@@ -128,7 +128,7 @@ Plug 'jordwalke/JSDocSnippets'
 
 " for jsx/tsx highlighting
 " Plug 'leafgarland/typescript-vim'
-Plug 'HerringtonDarkholme/yats.vim'
+" Plug 'HerringtonDarkholme/yats.vim'
 
 " Plug 'peitalin/vim-jsx-typescript'
 " Plug 'ianks/vim-tsx'

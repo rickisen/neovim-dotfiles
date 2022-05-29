@@ -13,9 +13,12 @@ let g:prettier#exec_cmd_async = 1
 let g:prettier#quickfix_enabled = 0
 let g:prettier#autoformat = 0
 " autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.json,*.graphql,*.md,*.vue PrettierAsync
+" autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.json,*.graphql,*.md,*.vue PrettierAsync
 
-" easy align -------------------------
+nmap gp * mp vip :PrettierFragment <CR> 'p <c-c> zz
+xmap gp * :PrettierFragment
+
+" easy align -------------------------,
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 

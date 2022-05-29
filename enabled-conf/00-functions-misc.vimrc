@@ -60,8 +60,8 @@ nmap <C-G> A,<ESC>j
 imap <C-G> <ESC>A,<ESC><CR>,
 
 " map :wa to keybinding
-nmap <c-b> :wa<CR>:lua vim.diagnostic.config({virtual_text = true})<CR>:<c-c>
-imap <c-b> <CR><ESC>:wa<CR>:lua vim.diagnostic.config({virtual_text = true})<CR>:<c-c>
+nmap <c-b> :wa<CR><c-c>
+imap <c-b> <CR><ESC>:wa<CR>:<c-c>
 nmap <c-c> :noa wa<CR>
 imap <c-c> <CR><ESC>:noa wa<CR>
 
