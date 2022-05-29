@@ -132,6 +132,7 @@ Plug 'jordwalke/JSDocSnippets'
 
 " Plug 'peitalin/vim-jsx-typescript'
 " Plug 'ianks/vim-tsx'
+Plug 'jose-elias-alvarez/typescript.nvim'
 
 " to apply prettier on typescript
 " Plug 'prettier/vim-prettier', {
