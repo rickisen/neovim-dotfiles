@@ -1,6 +1,6 @@
 function! OnBeforeWrite()
   TypescriptAddMissingImports
-  TypescriptRemoveUnused
+  " TypescriptRemoveUnused
   lua vim.lsp.buf.formatting_sync()
 endfunction
 
@@ -34,14 +34,27 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+
   -- Show line diagnostics automatically in hover window
   -- vim.o.updatetime = 500
   -- vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+  -- vim.cmd [[autocmd CursorHold,CursorHoldI * call OnLineHold(bufnr)]]
+  -- vim.api.nvim_create_autocmd('CursorHold,CursorHoldI', {
+  --   pattern = '*',
+  --   callback = function()
+  --     --local dia = vim.lsp.diagnostic.get(bufnr, {lnum = vim.api.nvim_win_get_cursor(0)[0]})
+  --     local dia = vim.diagnostic.get(bufnr, {lnum = vim.api.nvim_win_get_cursor(0)[1]})
+  --     print(dia.message)
+  --     -- vim.api.nvim_echo({ {'diag: ', 'None'}, {dia.message, 'None'} }, true, {})
+  --   end
+  -- })
 
   vim.cmd [[autocmd TextChanged,InsertEnter * :lua vim.diagnostic.disable()]]
   vim.cmd [[autocmd BufWritePre <buffer> call OnBeforeWrite()]]
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<c-b>', ':wa<CR>:lua vim.diagnostic.enable()<CR>:<c-c>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'i', '<c-b>', '<CR><ESC>:wa<CR>:lua vim.diagnostic.enable()<CR>:<c-c>', opts)
+  -- vim.api.nvim_buf_del_keymap(bufnr, 'n', '<esc>')
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<esc>', ':lua vim.diagnostic.disable()<CR>:pc<CR>:noh<CR>:<c-c>', opts)
 end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and

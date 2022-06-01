@@ -49,7 +49,7 @@ endfunction
 nnoremap <F9> :call AutoWinSplit(" ")<CR>
 
 " close preview window if open
-nnoremap <esc> :lua vim.diagnostic.config({virtual_text = false})<CR>:pc<CR>:noh<CR>:<c-c>
+nnoremap <esc> :pc<CR>:noh<CR>:<c-c>
 
 " insert ; at end of line
 nmap <C-F> A;<ESC>j
