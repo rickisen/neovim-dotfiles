@@ -151,6 +151,7 @@ Plug 'justinj/vim-react-snippets'
 "     \ 'do': 'bash install.sh',
 "     \ }
 Plug 'neovim/nvim-lspconfig'
+Plug 'seblj/nvim-echo-diagnostics'
 
 " ncm2 autocomplete
 Plug 'roxma/nvim-yarp'

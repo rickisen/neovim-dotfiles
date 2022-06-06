@@ -4,6 +4,11 @@ function! OnBeforeWrite()
   lua vim.lsp.buf.formatting_sync()
 endfunction
 
+set updatetime=300
+" This will echo the diagnostics on CursorHold, and will also consider cmdheight
+" This could be set with `set updatetime=300`
+autocmd CursorHold * lua require('echo-diagnostics').echo_line_diagnostic()
+
 lua << EOF
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -34,6 +39,7 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>k', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
 
   -- Show line diagnostics automatically in hover window
   -- vim.o.updatetime = 500
@@ -55,6 +61,11 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'i', '<c-b>', '<CR><ESC>:wa<CR>:lua vim.diagnostic.enable()<CR>:<c-c>', opts)
   -- vim.api.nvim_buf_del_keymap(bufnr, 'n', '<esc>'),
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<esc>', ':lua vim.diagnostic.disable()<CR>:pc<CR>:noh<CR>:<c-c>', opts)
+
+  require("echo-diagnostics").setup{
+      show_diagnostic_number = true,
+      show_diagnostic_source = false,
+  }
 end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
@@ -97,8 +108,9 @@ require('typescript').setup({
       handlers = {
         ['textDocument/publishDiagnostics'] = vim.lsp.with(
           vim.lsp.diagnostic.on_publish_diagnostics, {
-            virtual_text = true,
-            signs = { severity = {min=vim.diagnostic.severity.WARN} },
+            virtual_text = false,
+            --signs = { severity = {min=vim.diagnostic.severity.WARN} },
+            signs = true,
             underline = false,
             update_in_insert = false,
           }
