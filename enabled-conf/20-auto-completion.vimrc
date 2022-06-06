@@ -1,9 +1,10 @@
 " ncm2 ------------------------
 " enable ncm2 for all buffers
-autocmd BufEnter * call ncm2#enable_for_buffer()
+" autocmd BufEnter * call ncm2#enable_for_buffer()
+" See bellow
 
 " IMPORTANT: :help Ncm2PopupOpen for more information
-" set completeopt=noinsert,menuone,noselect
+set completeopt=noinsert,menuone,noselect
 au User Ncm2PopupOpen set completeopt=noinsert,menuone,noselect
 au User Ncm2PopupClose set completeopt=menuone
 " :autocmd User Ncm2Plugin
@@ -24,6 +25,13 @@ au User Ncm2PopupClose set completeopt=menuone
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
+inoremap <expr> <C-N> "\<C-x>\<C-o>"
+
+" inoremap <expr> . MayComplete()
+" func MayComplete()
+"   return ".\<C-X>\<C-O>"
+" endfunc
+
 " wrap existing omnifunc
 " Note that omnifunc does not run in background and may probably block the
 " editor. If you don't want to be blocked by omnifunc too often, you could
@@ -38,6 +46,7 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 let g:UltiSnipsExpandTrigger = "<Plug>(ultisnips_expand)"
 
 function! My_ncm2_expand()
+    let g:ncm2#auto_popup = 0
     call ncm2#enable_for_buffer()
     " NOTE: this key binding has to be defined after
     " ncm2#enable_for_buffer() for it to actually trigger the expansion
