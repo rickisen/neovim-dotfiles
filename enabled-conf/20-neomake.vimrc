@@ -10,11 +10,11 @@ autocmd! BufWritePost,BufEnter * Neomake
 " let g:neomake_javascript_enabled_makers = ['eslint']
 " let g:neomake_typescriptreact_enabled_makers = ['eslint']
 
-let g:neomake_jsx_enabled_makers = []
-let g:neomake_tsx_enabled_makers = []
-let g:neomake_javascript_enabled_makers = []
-let g:neomake_typescriptreact_enabled_makers = []
-let g:neomake_typescript_enabled_makers = []
+" let g:neomake_jsx_enabled_makers = []
+" let g:neomake_tsx_enabled_makers = []
+" let g:neomake_javascript_enabled_makers = []
+" let g:neomake_typescriptreact_enabled_makers = []
+" let g:neomake_typescript_enabled_makers = []
 
 let g:neomake_php_enabled_makers = ['php']
 let g:neomake_html_enabled_makers = ['tidy']
@@ -46,9 +46,33 @@ autocmd FileType typescriptreact :set backupcopy=yes
 " autocmd FileType typescript.tsx :set signcolumn=yes
 " autocmd FileType typescriptreact :set signcolumn=yes
 
-let g:neomake_jsx_eslint_exe = nrun#Which('eslint')
-let g:neomake_javascript_eslint_exe = nrun#Which('eslint')
-let g:neomake_javascriptreact_eslint_exe = nrun#Which('eslint')
-let g:neomake_tsx_eslint_exe = nrun#Which('eslint')
-let g:neomake_typescript_eslint_exe = nrun#Which('eslint')
-let g:neomake_typescriptreact_eslint_exe = nrun#Which('eslint')
+" let g:neomake_jsx_eslint_exe = nrun#Which('eslint')
+" let g:neomake_javascript_eslint_exe = nrun#Which('eslint')
+" let g:neomake_javascriptreact_eslint_exe = nrun#Which('eslint')
+" let g:neomake_tsx_eslint_exe = nrun#Which('eslint')
+" let g:neomake_typescript_eslint_exe = nrun#Which('eslint')
+" let g:neomake_typescriptreact_eslint_exe = nrun#Which('eslint')
+
+" let g:neomake_javascript_local_eslint_maker = {
+"         \ 'exe': getcwd().'/node_modules/.bin/eslint',
+"         \ 'args': ['-f', 'compact'],
+"         \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
+"         \   '%W%f: line %l\, col %c\, Warning - %m,%-G,%-G%*\d problems%#'
+"         \ }
+" let g:neomake_javascript_enabled_makers = ['local_eslint']
+
+let g:neomake_javascript_eslint_d_maker = {
+        \ 'exe': 'eslint_d',
+        \ 'args': ['--fix', '-f', 'compact'],
+        \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
+        \   '%W%f: line %l\, col %c\, Warning - %m,%-G,%-G%*\d problems%#'
+        \ }
+let g:neomake_javascript_enabled_makers = ['eslint_d']
+
+let g:neomake_typescript_eslint_d_maker = {
+        \ 'exe': 'eslint_d',
+        \ 'args': ['--fix', '-f', 'compact'],
+        \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
+        \   '%W%f: line %l\, col %c\, Warning - %m,%-G,%-G%*\d problems%#'
+        \ }
+let g:neomake_typescript_enabled_makers = ['eslint_d']
