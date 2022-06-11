@@ -24,7 +24,8 @@ message, but vim will still work.
 - tidy \*
 - scsslint\*\*
 - eslint\*\*
-- nodejs v8.10.0
+- eslint_d\*\*
+- nodejs
 
 \* = Not if you are using init-smaller.vim
 \*\* = Available on npm

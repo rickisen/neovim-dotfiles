@@ -76,3 +76,6 @@ let g:neomake_typescript_eslint_d_maker = {
         \   '%W%f: line %l\, col %c\, Warning - %m,%-G,%-G%*\d problems%#'
         \ }
 let g:neomake_typescript_enabled_makers = ['eslint_d']
+
+
+autocmd VimLeavePre * !eslint_d stop &
