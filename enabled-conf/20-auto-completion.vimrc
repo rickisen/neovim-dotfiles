@@ -5,7 +5,8 @@
 
 " IMPORTANT: :help Ncm2PopupOpen for more information
 set completeopt=noinsert,menuone,noselect
-au User Ncm2PopupOpen set completeopt=noinsert,menuone,noselect
+" au User Ncm2PopupOpen set completeopt=noinsert,menuone,noselect
+au User Ncm2PopupOpen set completeopt=noinsert,menuone
 au User Ncm2PopupClose set completeopt=menuone
 " :autocmd User Ncm2Plugin
 

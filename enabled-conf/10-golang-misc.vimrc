@@ -11,6 +11,8 @@ function! AltTab()
   wincmd w
 endfunction
 
+autocmd FileType go nnoremap gr :GoReferrers<CR>
+
 let g:go_debug_mappings = {
   \ '(go-debug-continue)': {'key': 'c', 'arguments': '<nowait>'},
   \ '(go-debug-stop)': {'key': 'q'},
