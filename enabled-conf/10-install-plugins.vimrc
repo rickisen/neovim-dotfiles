@@ -113,7 +113,7 @@ Plug 'arecarn/vim-crunch'
 
 " vim godot-gameengine
 " Plug 'quabug/vim-gdscript'
-Plug 'calviken/vim-gdscript3'
+" Plug 'calviken/vim-gdscript3'
 
 " for moving around inside indent level
 Plug 'michaeljsmith/vim-indent-object'
@@ -171,6 +171,10 @@ Plug 'jiangmiao/auto-pairs'
 
 " nvim tree sitter, for better highlight and more
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+" smarter spell checking
+Plug 'kamykn/spelunker.vim'
+Plug 'kamykn/popup-menu.nvim'
 
 call plug#end()
 " Plugin Configuration ==================================================
