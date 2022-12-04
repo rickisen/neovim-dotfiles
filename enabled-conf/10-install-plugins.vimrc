@@ -113,7 +113,7 @@ Plug 'arecarn/vim-crunch'
 
 " vim godot-gameengine
 " Plug 'quabug/vim-gdscript'
-Plug 'calviken/vim-gdscript3'
+" Plug 'calviken/vim-gdscript3'
 
 " for moving around inside indent level
 Plug 'michaeljsmith/vim-indent-object'
