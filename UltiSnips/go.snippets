@@ -16,6 +16,12 @@ if err != nil {
 }
 endsnippet
 
+snippet ifter
+if err != nil {
+	return ter.Errorf("${1}, ${2:%w}", ${3:err})
+}
+endsnippet
+
 snippet funci
 func (${5:this}*$1) $2($3) ${4:error} {
 	$6
