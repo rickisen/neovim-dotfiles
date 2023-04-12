@@ -176,6 +176,9 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'kamykn/spelunker.vim'
 Plug 'kamykn/popup-menu.nvim'
 
+" change case with 'gsu' 'gsc'
+Plug 'arthurxavierx/vim-caser'
+
 call plug#end()
 " Plugin Configuration ==================================================
 
