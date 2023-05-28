@@ -12,6 +12,9 @@ function! AltTab()
 endfunction
 
 autocmd FileType go nnoremap gr :GoReferrers<CR>
+autocmd FileType go nnoremap gm :GoImplements<CR>
+autocmd FileType go nnoremap <space>rn :GoRename<CR>
+autocmd FileType go nnoremap <space>gr :GoRename<CR>
 
 let g:go_debug_mappings = {
   \ '(go-debug-continue)': {'key': 'c', 'arguments': '<nowait>'},

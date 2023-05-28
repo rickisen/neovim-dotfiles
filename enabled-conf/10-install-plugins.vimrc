@@ -73,6 +73,8 @@ Plug 'tommcdo/vim-exchange'
 
 " Fugitive
 Plug 'tpope/vim-fugitive'
+Plug 'shumphrey/fugitive-gitlab.vim'
+Plug 'tpope/vim-rhubarb'
 
 " vim-surround
 Plug 'tpope/vim-surround'

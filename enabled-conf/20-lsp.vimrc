@@ -95,6 +95,14 @@ local ncm2 = require('ncm2')
 --   }
 -- end
 
+require('lspconfig')['clangd'].setup {
+  on_attach = on_attach,
+  cmd = { '/usr/bin/clangd' },
+  flags = {
+    debounce_text_changes = 150
+  }
+}
+
 require('typescript').setup({
     disable_commands = false, -- prevent the plugin from creating Vim commands
     debug = false, -- enable debug logging for commands
