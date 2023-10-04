@@ -100,3 +100,5 @@ endfunction
 " Add tack quotes
 imap <C-Q> ``<ESC>i
 
+" search text selected in visual mode
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>

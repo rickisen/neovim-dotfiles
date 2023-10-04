@@ -8,6 +8,7 @@ if system('whoami') != "root\n"
   source $HOME/.config/nvim/enabled-conf/20-auto-completion.vimrc
   source $HOME/.config/nvim/enabled-conf/20-code-formating.vimrc
   source $HOME/.config/nvim/enabled-conf/20-git-integration.vimrc
+  source $HOME/.config/nvim/enabled-conf/20-gitlab.vimrc
   source $HOME/.config/nvim/enabled-conf/20-javascript-misc.vimrc
   source $HOME/.config/nvim/enabled-conf/20-neomake.vimrc
   source $HOME/.config/nvim/enabled-conf/20-pair-plugins.vimrc
