@@ -1,7 +1,7 @@
 function! OnBeforeWrite()
   TypescriptAddMissingImports
   " TypescriptRemoveUnused
-  lua vim.lsp.buf.formatting_sync()
+  lua vim.lsp.buf.format()
 endfunction
 
 set updatetime=300
