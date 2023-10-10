@@ -47,6 +47,10 @@ snippet errorfv
 fmt.Errorf("$1 %v: %w", ${2: value}, err)
 endsnippet
 
+snippet append
+$1 = append($1, ${2:v})
+endsnippet
+
 snippet typeswitch
 switch t := ${1:value}.(type){
 	case ${2:string}:
@@ -58,11 +62,22 @@ switch t := ${1:value}.(type){
 
 endsnippet
 
-
 snippet main
 package main
 
 func main() {
 	$1
 }
+endsnippet
+
+snippet It
+It("Should $1", func() {
+	$2
+})
+endsnippet
+
+snippet Describe
+Describe("$1", func() {
+	$2
+})
 endsnippet
