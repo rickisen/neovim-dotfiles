@@ -23,4 +23,6 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " markdown preview -------------------
-let g:mkdp_browser = 'qutebrowser'
+" let g:mkdp_browser = 'qutebrowser'
+let g:mkdp_port = '1337'
+let g:mkdp_echo_preview_url = 1
