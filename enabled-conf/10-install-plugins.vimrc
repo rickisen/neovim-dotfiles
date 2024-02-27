@@ -179,8 +179,15 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'kamykn/spelunker.vim'
 Plug 'kamykn/popup-menu.nvim'
 
+" :%Subvert/facilit{y,ies}/building{,s}/g
+"
+" Want to turn fooBar into foo_bar? Press crs (coerce to snake_case).
+" MixedCase (crm), camelCase (crc), UPPER_CASE (cru), dash-case (cr-), and
+" dot.case (cr.) are all just 3 keystrokes away.
+Plug 'tpope/vim-abolish'
+
 " change case with 'gsu' 'gsc'
-Plug 'arthurxavierx/vim-caser'
+" Plug 'arthurxavierx/vim-caser'
 
 call plug#end()
 " Plugin Configuration ==================================================
