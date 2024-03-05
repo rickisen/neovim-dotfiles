@@ -1,4 +1,13 @@
 
+autocmd FileType go nnoremap <F8> :call TestOrRunGo()<CR>
+" autocmd FileType go nnoremap <F8> :GoRun <CR>
+
+let goFolder = join(['/home/', $USER, '/.go'], '')
+let $GOPATH = join([goFolder, getcwd()], ':')
+
+let goBinFolder = join(['/home/', $USER, '/.go/bin'], '')
+let $PATH = join([goBinFolder, $PATH], ':')
+
 " vim-go -------------------------
 let g:go_fmt_experimental = 1
 let g:go_list_type = "quickfix"

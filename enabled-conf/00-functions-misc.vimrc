@@ -75,8 +75,6 @@ autocmd FileType sh nnoremap <F8> :call AutoWinSplit("term://bash %")<CR>
 autocmd FileType javascript nnoremap <F8> :call AutoWinSplit("term://node --trace-uncaught %")<CR>
 autocmd FileType typescript nnoremap <F8> :call AutoWinSplit("term://ts-node --trace-uncaught %")<CR>
 autocmd FileType python nnoremap <F8> :call AutoWinSplit("term://python %")<CR>
-autocmd FileType go nnoremap <F8> :call TestOrRunGo()<CR>
-" autocmd FileType go nnoremap <F8> :GoRun <CR>
 
 " Jump to next non-whitespace char in the same column
 nnoremap <silent> \j :<C-u>call search('\%' . virtcol('.') . 'v\S', 'W')<CR>
@@ -102,3 +100,8 @@ imap <C-Q> ``<ESC>i
 
 " search text selected in visual mode
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+
+function! AltTab()
+  wincmd w
+endfunction
+

@@ -49,12 +49,6 @@ set noea
 " automatic linebreaks
 " set tw=79
 
-let goFolder = join(['/home/', $USER, '/.go'], '')
-let $GOPATH = join([goFolder, getcwd()], ':')
-
-let goBinFolder = join(['/home/', $USER, '/.go/bin'], '')
-let $PATH = join([goBinFolder, $PATH], ':')
-
 " Native completion popup window conf
 set pumheight=5
 

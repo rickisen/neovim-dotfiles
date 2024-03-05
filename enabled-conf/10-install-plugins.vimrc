@@ -105,7 +105,7 @@ Plug 'sickill/vim-pasta'
 Plug 'AndrewRadev/splitjoin.vim'
 
 " enhanced golang support
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go', 'commit': '7fb3826'}
 
 " support for .editorconfig files
 Plug 'editorconfig/editorconfig-vim'
