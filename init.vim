@@ -3,6 +3,7 @@ source $HOME/.config/nvim/enabled-conf/00-functions-misc.vimrc
 
 if system('whoami') != "root\n"
   source $HOME/.config/nvim/enabled-conf/10-golang-misc.vimrc
+  source $HOME/.config/nvim/enabled-conf/10-sql-misc.vimrc
   source $HOME/.config/nvim/enabled-conf/10-install-plugins.vimrc
 
   source $HOME/.config/nvim/enabled-conf/20-auto-completion.vimrc

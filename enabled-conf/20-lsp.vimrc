@@ -95,13 +95,13 @@ local ncm2 = require('ncm2')
 --   }
 -- end
 
-require('lspconfig')['clangd'].setup {
-  on_attach = on_attach,
-  cmd = { '/usr/bin/clangd' },
-  flags = {
-    debounce_text_changes = 150
-  }
-}
+-- require('lspconfig')['clangd'].setup {
+--   on_attach = on_attach,
+--   cmd = { '/usr/bin/clangd' },
+--   flags = {
+--     debounce_text_changes = 150
+--   }
+-- }
 
 require('typescript').setup({
     disable_commands = false, -- prevent the plugin from creating Vim commands
@@ -155,8 +155,20 @@ require('typescript').setup({
 -- augroup END
 -- ]], false)
 
+-- require('lspconfig').sqlls.setup{
+--   cmd = {"/home/rickisen/.fnm/current/bin/sql-language-server", "up", "--method", "stdio"},
+-- }
+
+-- require('lspconfig.configs').postgres_lsp = {
+--   default_config = {
+--     name = 'postgres_lsp',
+--     cmd = {'postgres_lsp'},
+--     filetypes = {'sql'},
+--     single_file_support = true,
+--     root_dir = util.root_pattern 'root-file.txt'
+--   }
+-- }
+-- lsp.configure("postgres_lsp", {force_setup = true})
 EOF
 
-
-
-
+" let g:omni_sql_default_compl_type = 'syntax'

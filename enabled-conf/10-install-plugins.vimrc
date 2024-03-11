@@ -82,6 +82,19 @@ Plug 'tpope/vim-surround'
 " adds fi after if in bash (and other similair things)
 Plug 'tpope/vim-endwise'
 
+" :Abolish {despa,sepe}rat{e,es,ed,ing,ely,ion,ions,or}  {despe,sepa}rat{}
+"
+" :%s/Facility/Building/g
+"
+" Want to turn fooBar into foo_bar?
+"   Press crs (coerce to snake_case).
+"   MixedCase (crm),
+"   camelCase (crc),
+"   UPPER_CASE (cru),
+"   dash-case (cr-),
+"   and dot.case (cr.)
+Plug 'https://tpope.io/vim/abolish.git'
+
 " tcomments
 Plug 'tomtom/tcomment_vim'
 
@@ -188,6 +201,8 @@ Plug 'tpope/vim-abolish'
 
 " change case with 'gsu' 'gsc'
 " Plug 'arthurxavierx/vim-caser'
+
+Plug 'vim-scripts/dbext.vim'
 
 call plug#end()
 " Plugin Configuration ==================================================
