@@ -299,7 +299,7 @@ require'nvim-treesitter.configs'.setup {
    "vue",
    "wgsl",
    "wgsl_bevy",
-   "wing",
+   -- "wing",
    "xcompose",
    "xml",
    "yaml",
