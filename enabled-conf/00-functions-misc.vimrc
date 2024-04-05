@@ -105,3 +105,5 @@ function! AltTab()
   wincmd w
 endfunction
 
+nnoremap <leader>n :bnext<CR>
+nnoremap <leader>p :bprev<CR>

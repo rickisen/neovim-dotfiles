@@ -11,6 +11,7 @@ endif
 nnoremap <Space>p :Files <cr>
 " nnoremap <Space>p :GFiles --exclude-standard -c -o <cr>
 nnoremap <Space>/ :Ag<space>
+nnoremap <Space>b :Buffers <cr>
 
 " let g:fzf_colors =
 " \ { 'fg':      ['fg', 'Normal'],
