@@ -38,10 +38,12 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 " :syntax region cppSnip matchgroup=Snip start="@begin=cpp@" end="@end=cpp@" contains=@CPP
 " :hi link Snip SpecialComment
 
+" TODO: disable grammar.js
+
 lua << EOF
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "all",
-  ignore_install = {},
+  ignore_install = {"wing"},
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false,
