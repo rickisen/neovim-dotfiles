@@ -15,6 +15,7 @@ set foldmethod=indent
 set nofoldenable
 set title
 set titlestring=%t
+set timeoutlen=200
 
 " screw accidental ex mode
 nnoremap Q @@

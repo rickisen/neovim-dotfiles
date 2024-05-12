@@ -6,6 +6,7 @@ if system('whoami') != "root\n"
   source $HOME/.config/nvim/enabled-conf/10-sql-misc.vimrc
   source $HOME/.config/nvim/enabled-conf/10-install-plugins.vimrc
 
+  source $HOME/.config/nvim/enabled-conf/20-ai.vimrc
   source $HOME/.config/nvim/enabled-conf/20-auto-completion.vimrc
   source $HOME/.config/nvim/enabled-conf/20-code-formating.vimrc
   source $HOME/.config/nvim/enabled-conf/20-git-integration.vimrc
