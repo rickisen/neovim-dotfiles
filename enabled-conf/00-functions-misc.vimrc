@@ -118,3 +118,11 @@ function! EditMessages()
 endfunction
 
 command! EditMessages call EditMessages()
+
+function! CopyAbsolutePath()
+  let l:current_path = expand('%:p') . ':' . line('.')
+  let @+ = l:current_path
+  echo "Copied absolute path with line number: " . l:current_path
+endfunction
+
+command! CopyAbsolutePath call CopyAbsolutePath()
