@@ -110,3 +110,11 @@ nnoremap <leader>p :bprev<CR>
 
 nnoremap <leader>. :lne<CR>
 nnoremap <leader>m :lpre<CR>
+
+function! EditMessages()
+    new
+    put =execute('messages')
+    0d_
+endfunction
+
+command! EditMessages call EditMessages()
