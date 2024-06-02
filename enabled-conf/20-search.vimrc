@@ -3,7 +3,7 @@
 if executable('ag')
   " let $FZF_DEFAULT_OPTS="--ignore={'*.git/*','*.bundle/*','*.rubygems/*','*node_modules/*','*pkg/*','*dist/*','*vendor/*'}"
   " let $FZF_DEFAULT_COMMAND="ag -l --ignore={'*.git/*','*.bundle/*','*.rubygems/*','*node_modules/*','*pkg/*','*dist/*','*vendor/*'} --nocolor --hidden -g ''"
-  let $FZF_DEFAULT_COMMAND="ag -l --ignore={'*.git/*','*.bundle/*','*.rubygems/*','*node_modules/*','*pkg/*','*dist/*','*vendor/*'} --hidden -g ''"
+  let $FZF_DEFAULT_COMMAND="ag -l --ignore={'*.git/*','*.bundle/*','*.rubygems/*','*node_modules/*','*dist/*','*vendor/*'} --hidden -g ''"
   let g:fzf_layout = { 'down': '33%' }
 endif
 
