@@ -10,6 +10,8 @@ set updatetime=300
 autocmd CursorHold * lua require('echo-diagnostics').echo_line_diagnostic()
 
 lua << EOF
+require("mason").setup()
+require("mason-lspconfig").setup()
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap=true, silent=true }
@@ -103,7 +105,7 @@ local ncm2 = require('ncm2')
 --   }
 -- }
 
-require('typescript').setup({
+require('lspconfig')["tsserver"].setup {
     disable_commands = false, -- prevent the plugin from creating Vim commands
     debug = false, -- enable debug logging for commands
     server = { -- pass options to lspconfig's setup method
@@ -125,7 +127,49 @@ require('typescript').setup({
         ),
       }
     },
-})
+}
+-- require('typescript').setup({
+--     disable_commands = false, -- prevent the plugin from creating Vim commands
+--     debug = false, -- enable debug logging for commands
+--     server = { -- pass options to lspconfig's setup method
+--       on_init = ncm2.register_lsp_source,
+--       on_attach = on_attach,
+--       flags = {
+--         -- This will be the default in neovim 0.7+
+--         -- debounce_text_changes = 150,
+--       },
+--       handlers = {
+--         ['textDocument/publishDiagnostics'] = vim.lsp.with(
+--           vim.lsp.diagnostic.on_publish_diagnostics, {
+--             virtual_text = false,
+--             --signs = { severity = {min=vim.diagnostic.severity.WARN} },
+--             signs = true,
+--             underline = false,
+--             update_in_insert = false,
+--           }
+--         ),
+--       }
+--     },
+-- })
+
+require('lspconfig')["tailwindcss"].setup {
+  on_init = ncm2.register_lsp_source,
+  on_attach = on_attach,
+  flags = {
+    -- This will be the default in neovim 0.7+
+    -- debounce_text_changes = 150,
+  },
+  handlers = {
+    ["textDocument/publishDiagnostics"] = vim.lsp.with(
+      vim.lsp.diagnostic.on_publish_diagnostics, {
+        virtual_text = true,
+        signs = { severity = {min=vim.diagnostic.severity.WARN} },
+        underline = false,
+        update_in_insert = false,
+      }
+    ),
+  }
+}
 
 -- -- set this if you haven't set it elsewhere, ideally inside on_attach
 -- -- vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"

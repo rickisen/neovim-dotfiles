@@ -173,6 +173,8 @@ Plug 'justinj/vim-react-snippets'
 "     \ 'branch': 'next',
 "     \ 'do': 'bash install.sh',
 "     \ }
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'seblj/nvim-echo-diagnostics'
 
