@@ -1,5 +1,5 @@
 function! OnBeforeWrite()
-  TypescriptAddMissingImports
+  " TypescriptAddMissingImports
   " TypescriptRemoveUnused
   lua vim.lsp.buf.format()
 endfunction
