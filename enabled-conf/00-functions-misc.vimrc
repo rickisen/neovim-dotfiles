@@ -76,6 +76,9 @@ autocmd FileType javascript nnoremap <F8> :call AutoWinSplit("term://node --trac
 autocmd FileType typescript nnoremap <F8> :call AutoWinSplit("term://ts-node --trace-uncaught %")<CR>
 autocmd FileType python nnoremap <F8> :call AutoWinSplit("term://python %")<CR>
 
+" chatgpt about a file
+nnoremap <F10> :call AutoWinSplit("term://catgpt %")<CR>
+
 " Jump to next non-whitespace char in the same column
 nnoremap <silent> \j :<C-u>call search('\%' . virtcol('.') . 'v\S', 'W')<CR>
 nnoremap <silent> \k :<C-u>call search('\%' . virtcol('.') . 'v\S', 'bW')<CR>
@@ -126,3 +129,26 @@ function! CopyAbsolutePath()
 endfunction
 
 command! CopyAbsolutePath call CopyAbsolutePath()
+
+" " failed attempt at improving catgpt
+" function! s:JobHandler(job_id, data, event)
+"     " if a:event == 'exit'
+"         " Open the file after curl completes
+"         execute 'edit ' . a:data[0]
+"     " endif
+" endfunction
+"
+" function! RunCurlAndOpenFile()
+"     let cmd = ['sleepy.sh']
+"     let job_id = termopen(cmd, {
+"                 \ 'on_exit': function('s:JobHandler'),
+"                 \ })
+"     if job_id < 0
+"         echo "Failed to start job"
+"     endif
+" endfunction
+"
+" command! RunCurlAndOpenFile call RunCurlAndOpenFile()
+
+" nnoremap <F7> :call GenAndOpen()<CR>
+"
