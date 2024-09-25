@@ -206,7 +206,7 @@ Plug 'kamykn/popup-menu.nvim'
 
 Plug 'vim-scripts/dbext.vim'
 
-Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
+" Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
 
 call plug#end()
 " Plugin Configuration ==================================================
