@@ -37,6 +37,8 @@ set shiftwidth=2
 " On pressing tab, insert y spaces
 set expandtab
 
+au FileType csv set noexpandtab
+
 au FileType stylus setl sw=4 ts=4
 au FileType cs setl sw=4 ts=4
 
