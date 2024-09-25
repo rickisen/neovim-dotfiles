@@ -9,3 +9,9 @@ let g:dbext_default_dbname   = 'maindev'
 let g:dbext_default_host     = '127.0.0.1'
 let g:dbext_default_port     = '5432'
 let g:dbext_default_passwd   = ''
+
+" " pip install sqlparse
+augroup FormatSQL
+    autocmd!
+    autocmd BufWritePre *.sql %!sqlformat -rsk upper -
+augroup END
