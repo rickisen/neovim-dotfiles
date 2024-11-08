@@ -152,24 +152,29 @@ require('lspconfig')["tsserver"].setup {
 --     },
 -- })
 
-require('lspconfig')["tailwindcss"].setup {
+require'lspconfig'.gdscript.setup{
   on_init = ncm2.register_lsp_source,
   on_attach = on_attach,
-  flags = {
-    -- This will be the default in neovim 0.7+
-    -- debounce_text_changes = 150,
-  },
-  handlers = {
-    ["textDocument/publishDiagnostics"] = vim.lsp.with(
-      vim.lsp.diagnostic.on_publish_diagnostics, {
-        virtual_text = true,
-        signs = { severity = {min=vim.diagnostic.severity.WARN} },
-        underline = false,
-        update_in_insert = false,
-      }
-    ),
-  }
 }
+
+-- require('lspconfig')["tailwindcss"].setup {
+--   on_init = ncm2.register_lsp_source,
+--   on_attach = on_attach,
+--   flags = {
+--     -- This will be the default in neovim 0.7+
+--     -- debounce_text_changes = 150,
+--   },
+--   handlers = {
+--     ["textDocument/publishDiagnostics"] = vim.lsp.with(
+--       vim.lsp.diagnostic.on_publish_diagnostics, {
+--         virtual_text = true,
+--         signs = { severity = {min=vim.diagnostic.severity.WARN} },
+--         underline = false,
+--         update_in_insert = false,
+--       }
+--     ),
+--   }
+-- }
 
 -- -- set this if you haven't set it elsewhere, ideally inside on_attach
 -- -- vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
@@ -213,6 +218,7 @@ require('lspconfig')["tailwindcss"].setup {
 --   }
 -- }
 -- lsp.configure("postgres_lsp", {force_setup = true})
+
 EOF
 
 " let g:omni_sql_default_compl_type = 'syntax'

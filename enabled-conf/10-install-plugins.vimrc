@@ -208,6 +208,12 @@ Plug 'vim-scripts/dbext.vim'
 
 " Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
 
+Plug 'habamax/vim-godot'
+
+Plug 'mfussenegger/nvim-dap'
+
+Plug '3rd/image.nvim'
+
 call plug#end()
 " Plugin Configuration ==================================================
 
