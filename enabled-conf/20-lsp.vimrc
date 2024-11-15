@@ -1,7 +1,9 @@
 function! OnBeforeWrite()
-  TypescriptAddMissingImports
-  TypescriptRemoveUnused
-  lua vim.lsp.buf.format()
+  execute 'RemoveUnusedVariables'
+  execute 'AddMissingImports'
+  execute 'OrganizeImports'
+  lua vim.lsp.buf.format({ async = false })
+  sleep 100m
 endfunction
 
 " This will echo the diagnostics on CursorHold, and will also consider cmdheight
@@ -13,6 +15,18 @@ lua << EOF
 
 require("mason").setup()
 require("mason-lspconfig").setup()
+
+-- used to assure run code actions are run synchronously
+local function apply_first_code_action(actions)
+  if not actions or #actions == 0 then return end
+  local action = actions[1]
+  if action.edit then
+    vim.lsp.util.apply_workspace_edit(action.edit, "utf-16")
+  end
+  if action.command then
+    vim.lsp.buf.execute_command(action.command)
+  end
+end
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -38,8 +52,6 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>k', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
 
   -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-  vim.cmd [[autocmd TextChanged,InsertEnter * :lua vim.diagnostic.disable()]]
-  vim.cmd [[autocmd BufWritePre <buffer> call OnBeforeWrite()]]
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<c-b>', ':wa<CR>:lua vim.diagnostic.enable()<CR>:<c-c>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'i', '<c-b>', '<CR><ESC>:wa<CR>:lua vim.diagnostic.enable()<CR>:<c-c>', opts)
   -- vim.api.nvim_buf_del_keymap(bufnr, 'n', '<esc>'),
@@ -49,6 +61,43 @@ local on_attach = function(client, bufnr)
     show_diagnostic_number = true,
     show_diagnostic_source = false,
   }
+
+  vim.api.nvim_create_user_command("OrganizeImports", function()
+    local params = vim.lsp.util.make_range_params()
+    params.context = { only = { "source.organizeImports" } }
+    local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, 1000)
+    if result then
+      for _, res in pairs(result) do
+        apply_first_code_action(res.result)
+      end
+    end
+  end, {})
+
+  vim.api.nvim_create_user_command("AddMissingImports", function()
+    local params = vim.lsp.util.make_range_params()
+    params.context = { only = { "quickfix" } }
+    local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, 1000)
+    if result then
+      for _, res in pairs(result) do
+        apply_first_code_action(res.result)
+      end
+    end
+  end, {})
+
+
+  vim.api.nvim_create_user_command("RemoveUnusedVariables", function()
+    local params = vim.lsp.util.make_range_params()
+    params.context = { only = { "source.fixAll" } }
+    local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, 1000)
+    if result then
+      for _, res in pairs(result) do
+        apply_first_code_action(res.result)
+      end
+    end
+  end, {})
+
+  vim.cmd [[autocmd BufWritePre <buffer> call OnBeforeWrite()]]
+  vim.cmd [[autocmd TextChanged,InsertEnter * :lua vim.diagnostic.disable()]]
 end
 
 local ncm2 = require('ncm2')
