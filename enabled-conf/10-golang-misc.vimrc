@@ -43,7 +43,7 @@ function! TestOrRunGo()
   if file_name =~ "main.go" || file_name =~ "cmd"
     execute ':call AutoWinSplit("term://go run %")'
   else
-    execute ':call AutoWinSplit("term://go test -bench=. -v %:p:h")'
+    execute ':call AutoWinSplit("term://go test -race -bench=. -v %:p:h")'
   endif
 endfunction
 
