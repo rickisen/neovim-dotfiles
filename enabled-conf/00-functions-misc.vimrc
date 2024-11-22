@@ -77,6 +77,7 @@ autocmd FileType typescript nnoremap <F8> :call AutoWinSplit("term://ts-node --t
 autocmd FileType python nnoremap <F8> :call AutoWinSplit("term://python %")<CR>
 
 " chatgpt about a file
+nnoremap <F9> :call AutoWinSplit("term://catgpt % Please complete the tasks I have laid out for you in comments in the submitted file")<CR>
 nnoremap <F10> :call AutoWinSplit("term://catgpt %")<CR>
 
 " Jump to next non-whitespace char in the same column
