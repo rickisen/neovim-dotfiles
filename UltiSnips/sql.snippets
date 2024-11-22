@@ -1,0 +1,42 @@
+snippet sel "SELECT statement"
+SELECT ${1:*} FROM ${2:table_name};
+endsnippet
+
+snippet ins "INSERT statement"
+INSERT INTO ${1:table_name} (${2:column1, column2}) VALUES (${3:value1, value2});
+endsnippet
+
+snippet upd "UPDATE statement"
+UPDATE ${1:table_name} SET ${2:column1} = ${3:value1} WHERE ${4:condition};
+endsnippet
+
+snippet del "DELETE statement"
+DELETE FROM ${1:table_name} WHERE ${2:condition};
+endsnippet
+
+snippet ctab "CREATE TABLE statement"
+CREATE TABLE ${1:table_name} (
+  ${2:column1} ${3:datatype} ${4:constraints},
+  ${5:column2} ${6:datatype} ${7:constraints}
+);
+endsnippet
+
+snippet atab "ALTER TABLE statement"
+ALTER TABLE ${1:table_name} ${2:ADD|DROP|MODIFY} ${3:column_name} ${4:datatype};
+endsnippet
+
+snippet join "JOIN statement"
+SELECT ${1:*} FROM ${2:table1}
+JOIN ${3:table2} ON ${4:table1.column} = ${5:table2.column};
+endsnippet
+
+snippet cte "Common Table Expression (CTE) query"
+WITH ${1:cte_name} AS (
+  SELECT ${2:columns}
+  FROM ${3:table_name}
+  WHERE ${4:condition}
+)
+SELECT ${5:*}
+FROM ${1:cte_name}
+${6:WHERE additional_condition};
+endsnippet
