@@ -102,7 +102,7 @@ end
 
 local ncm2 = require('ncm2')
 
-require('lspconfig')["tsserver"].setup {
+require('lspconfig')["ts_ls"].setup {
   disable_commands = false, -- prevent the plugin from creating Vim commands
   debug = false, -- enable debug logging for commands
   on_init = ncm2.register_lsp_source,
