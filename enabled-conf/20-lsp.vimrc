@@ -15,6 +15,22 @@ lua << EOF
 
 require("mason").setup()
 require("mason-lspconfig").setup()
+-- require("mason-lspconfig").setup_handlers {
+--     -- The first entry (without a key) will be the default handler
+--     -- and will be called for each installed server that doesn't have
+--     -- a dedicated handler.
+--     function (server_name) -- default handler (optional)
+--         require("lspconfig")[server_name].setup {}
+--     end,
+--     -- Next, you can provide a dedicated handler for specific servers.
+--     -- For example, a handler override for the `rust_analyzer`:
+--     -- ["rust_analyzer"] = function ()
+--     --     require("rust-tools").setup {}
+--     -- end
+--     -- ["rust_analyzer"] = function ()
+--     --     require("rust-tools").setup {}
+--     -- end
+-- }
 
 -- used to assure run code actions are run synchronously
 local function apply_first_code_action(actions)
@@ -102,7 +118,7 @@ end
 
 local ncm2 = require('ncm2')
 
-require('lspconfig')["tsserver"].setup {
+require('lspconfig')["ts_ls"].setup {
   disable_commands = false, -- prevent the plugin from creating Vim commands
   debug = false, -- enable debug logging for commands
   on_init = ncm2.register_lsp_source,
@@ -127,6 +143,23 @@ require('lspconfig')["tsserver"].setup {
 require'lspconfig'.gdscript.setup{
   on_init = ncm2.register_lsp_source,
   on_attach = on_attach,
+}
+
+require'lspconfig'.sqls.setup{
+  on_attach = function(client, bufnr)
+    require('sqls').on_attach(client, bufnr) -- require sqls.nvim
+  end,
+  on_init = ncm2.register_lsp_source,
+  settings = {
+    sqls = {
+      connections = {
+        {
+          driver = 'postgresql',
+          dataSourceName = 'host=127.0.0.1 port=5432 user=main password=password dbname=test',
+        },
+      },
+    },
+  },
 }
 
 EOF

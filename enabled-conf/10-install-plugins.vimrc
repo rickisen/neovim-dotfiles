@@ -204,7 +204,11 @@ Plug 'kamykn/popup-menu.nvim'
 " change case with 'gsu' 'gsc'
 " Plug 'arthurxavierx/vim-caser'
 
-Plug 'vim-scripts/dbext.vim'
+" Plug 'vim-scripts/dbext.vim'
+Plug 'nanotee/sqls.nvim'
+Plug 'MunifTanjim/nui.nvim'
+Plug 'MattiasMTS/cmp-dbee'
+Plug 'kndndrj/nvim-dbee', {'do': ':lua require(\"dbee\").install()'}
 
 " Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
 
@@ -216,4 +220,6 @@ Plug '3rd/image.nvim'
 
 call plug#end()
 " Plugin Configuration ==================================================
-
+lua << EOF
+require("dbee").setup()
+EOF

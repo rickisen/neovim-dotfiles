@@ -51,7 +51,7 @@ function! My_ncm2_expand()
     call ncm2#enable_for_buffer()
     " NOTE: this key binding has to be defined after
     " ncm2#enable_for_buffer() for it to actually trigger the expansion
-    imap <silent> <expr> <c-u> ncm2_ultisnips#expand_or("\<Plug>(ultisnips_expand)", 'm')
+    " imap <silent> <expr> <c-u> ncm2_ultisnips#expand_or("\<Plug>(ultisnips_expand)", 'm')
 endfunction
 
 augroup ncm2_completion
