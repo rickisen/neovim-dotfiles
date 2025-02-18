@@ -179,11 +179,11 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'seblj/nvim-echo-diagnostics'
 
 " ncm2 autocomplete
-Plug 'roxma/nvim-yarp'
-Plug 'ncm2/ncm2'
-Plug 'ncm2/ncm2-ultisnips'
-Plug 'ncm2/ncm2-tmux'
-Plug 'entombedvirus/ncm2-vim-go'
+" Plug 'roxma/nvim-yarp'
+" Plug 'ncm2/ncm2'
+" Plug 'ncm2/ncm2-ultisnips'
+" Plug 'ncm2/ncm2-tmux'
+" Plug 'entombedvirus/ncm2-vim-go'
 
 " make the preview window float next to completions
 " Plug 'ncm2/float-preview.nvim'

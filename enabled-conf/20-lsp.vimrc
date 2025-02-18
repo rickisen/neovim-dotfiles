@@ -32,6 +32,7 @@ end
 -- after the language server attaches to the current buffer
 local opts = { noremap=true, silent=true }
 local on_attach = function(client, bufnr)
+  -- This populates the omni completion results with lsp entries
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- Mappings.
@@ -100,12 +101,9 @@ local on_attach = function(client, bufnr)
   vim.cmd [[autocmd TextChanged,InsertEnter * :lua vim.diagnostic.disable()]]
 end
 
-local ncm2 = require('ncm2')
-
 require('lspconfig')["ts_ls"].setup {
   disable_commands = false, -- prevent the plugin from creating Vim commands
   debug = false, -- enable debug logging for commands
-  on_init = ncm2.register_lsp_source,
   on_attach = on_attach,
   flags = {
     -- This will be the default in neovim 0.7+
