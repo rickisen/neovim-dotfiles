@@ -204,7 +204,7 @@ Plug 'kamykn/popup-menu.nvim'
 " change case with 'gsu' 'gsc'
 " Plug 'arthurxavierx/vim-caser'
 
-Plug 'vim-scripts/dbext.vim'
+Plug 'nanotee/sqls.nvim'
 
 " Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
 
@@ -216,4 +216,3 @@ Plug '3rd/image.nvim'
 
 call plug#end()
 " Plugin Configuration ==================================================
-

@@ -122,9 +122,20 @@ require('lspconfig')["ts_ls"].setup {
   }
 }
 
-require'lspconfig'.gdscript.setup{
-  on_init = ncm2.register_lsp_source,
-  on_attach = on_attach,
+require'lspconfig'.sqls.setup{
+  on_attach = function(client, bufnr)
+    require('sqls').on_attach(client, bufnr) -- require sqls.nvim
+  end,
+  settings = {
+    sqls = {
+      connections = {
+        {
+          driver = 'postgresql',
+          dataSourceName = 'host=127.0.0.1 port=5432 user=main password=password dbname=test',
+        },
+      },
+    },
+  },
 }
 
 EOF
