@@ -206,6 +206,9 @@ Plug 'kamykn/popup-menu.nvim'
 
 Plug 'nanotee/sqls.nvim'
 
+Plug 'MunifTanjim/nui.nvim'
+Plug 'kndndrj/nvim-dbee', {'do': ':lua require(\"dbee\").install()'}
+
 " Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
 
 Plug 'habamax/vim-godot'
@@ -215,4 +218,8 @@ Plug 'mfussenegger/nvim-dap'
 Plug '3rd/image.nvim'
 
 call plug#end()
+
 " Plugin Configuration ==================================================
+lua << EOF
+require("dbee").setup()
+EOF
