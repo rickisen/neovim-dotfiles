@@ -214,5 +214,9 @@ Plug 'mfussenegger/nvim-dap'
 
 Plug '3rd/image.nvim'
 
+Plug 'preservim/vim-pencil'
+
+Plug 'folke/zen-mode.nvim'
+
 call plug#end()
 " Plugin Configuration ==================================================
