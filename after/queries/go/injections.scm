@@ -4,7 +4,7 @@
   (call_expression
     function: (selector_expression
       field: (field_identifier) @_method_name
-        (#match? @_method_name "^(ExecContext|QueryContext|Exec|Query)$")
+        (#match? @_method_name "^(ExecOneContext|QueryOneContext|ExecContext|QueryContext|Exec|Query)$")
     )
     arguments: (argument_list
       (raw_string_literal
