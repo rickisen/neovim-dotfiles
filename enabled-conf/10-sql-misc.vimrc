@@ -1,18 +1,24 @@
-" " pip install sqlparse
 function! SQLIndent()
-  let l:save_cursor = getpos(".")
-  let l:save_view = winsaveview()
-  normal! gv"ay
-  let l:formatted = system('sqlformat -r --reindent', @a)
-  if v:shell_error
-    echoerr "SQL formatting failed"
+  " Save the current view settings
+  let l:view = winsaveview()
+
+  " Get the contents of the buffer
+  let l:contents = join(getline(1, '$'), "\n")
+
+  " Use system() to call sqlformat and capture the output
+  let l:formatted = system('sqlformat -r --reindent -', l:contents)
+
+  " Check if the command was successful
+  if v:shell_error == 0
+    " Replace the buffer contents with the formatted output
+    call setline(1, split(l:formatted, "\n"))
   else
-    normal! gv
-    put! =l:formatted
-    normal! gvdd
+    " If there was an error, notify the user
+    echoerr "Error formatting SQL: " . l:formatted
   endif
-  call setpos('.', l:save_cursor)
-  call winrestview(l:save_view)
+
+  " Restore the view settings
+  call winrestview(l:view)
 endfunction
 
 augroup FormatSQL
