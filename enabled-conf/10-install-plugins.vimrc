@@ -8,7 +8,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " syntax package
-Plug 'sheerun/vim-polyglot'
+" Plug 'sheerun/vim-polyglot'
 
 " asynchronous execution library for Vim, others depends on this
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
@@ -125,7 +125,8 @@ Plug 'sickill/vim-pasta'
 Plug 'AndrewRadev/splitjoin.vim'
 
 " enhanced golang support
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go', 'commit': '7fb3826'}
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go', 'commit': '7fb3826'}
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
 
 " support for .editorconfig files
 Plug 'editorconfig/editorconfig-vim'
