@@ -101,7 +101,7 @@ local on_attach = function(client, bufnr)
   vim.cmd [[autocmd TextChanged,InsertEnter * :lua vim.diagnostic.disable()]]
 end
 
-require('lspconfig')["ts_ls"].setup {
+vim.lsp.config('ts_ls', {
   disable_commands = false, -- prevent the plugin from creating Vim commands
   debug = false, -- enable debug logging for commands
   on_attach = on_attach,
@@ -120,9 +120,9 @@ require('lspconfig')["ts_ls"].setup {
       }
     ),
   }
-}
+})
 
-require'lspconfig'.sqls.setup{
+vim.lsp.config('sqls', {
   on_attach = function(client, bufnr)
     require('sqls').on_attach(client, bufnr) -- require sqls.nvim
   end,
@@ -136,6 +136,6 @@ require'lspconfig'.sqls.setup{
       },
     },
   },
-}
+})
 
 EOF
