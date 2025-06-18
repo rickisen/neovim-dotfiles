@@ -3,7 +3,10 @@
 " autocmd! BufWritePost,BufEnter,InsertLeave  * Neomake
 
 " Run on write, and open
-autocmd! BufWritePost,BufEnter * Neomake
+" autocmd! BufWritePost,BufEnter * Neomake
+call neomake#configure#automake('rw', 1000)
+
+" let g:neomake_open_list = 2 " opens a list window with all detected problems on start
 
 " let g:neomake_jsx_enabled_makers = ['eslint']
 " let g:neomake_tsx_enabled_makers = ['eslint']
@@ -24,7 +27,8 @@ let g:neomake_json_enabled_makers = ['jsonlint']
 "  Enable more golang linters by removing this line, disabled while waiting
 "  for 1.18 support
 " let g:neomake_go_enabled_makers = ['go', 'golint']
-let g:neomake_go_enabled_makers = ['go', 'golangci_lint']
+" let g:neomake_go_enabled_makers = ['go', 'golangci_lint', 'govet']
+let g:neomake_go_enabled_makers = ['go', 'golangci_lint', 'govet']
 
 " Use the fix option of eslint
 " let g:neomake_javascript_eslint_args = ['-f', 'compact', '--fix-dry-run']
