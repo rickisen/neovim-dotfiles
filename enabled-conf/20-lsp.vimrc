@@ -80,20 +80,21 @@ local function hover_bottom_right(timeout_ms)
 
   vim.api.nvim_win_set_config(win, {relative = "editor", row = final_row, col = final_col})
 end
+_G.hover_bottom_right = hover_bottom_right
 
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-local opts = { noremap=true, silent=true }
 local on_attach = function(client, bufnr)
+  local opts = { noremap=true, silent=true }
   -- This populates the omni completion results with lsp entries
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   --vim.keymap.set("n", "K", hover_bottom_right, {silent = true, noremap = true})
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', hover_bottom_right, opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua _G.hover_bottom_right()<CR>", opts)
+
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gm', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
@@ -214,5 +215,34 @@ vim.lsp.config('pyright', {
   },
 })
 
+vim.lsp.config('basedpyright', {
+  on_attach = on_attach,
+  settings = {
+    python = {
+      analysis = {
+        typeCheckingMode = "basic", -- Options: "off", "basic", "strict"
+        autoImportCompletions = true,
+        diagnosticMode = "workspace", -- Options: "workspace", "openFilesOnly"
+        pythonPath = vim.g.python3_host_prog, -- match the venv python that nvim is running in
+      },
+      venvPath = "./v_env",
+    },
+  },
+})
+
+vim.lsp.config('ruff', {
+  on_attach = on_attach,
+  settings = {
+    python = {
+      analysis = {
+        typeCheckingMode = "basic", -- Options: "off", "basic", "strict"
+        autoImportCompletions = true,
+        diagnosticMode = "workspace", -- Options: "workspace", "openFilesOnly"
+        pythonPath = vim.g.python3_host_prog, -- match the venv python that nvim is running in
+      },
+      venvPath = "./v_env",
+    },
+  },
+})
 
 EOF
