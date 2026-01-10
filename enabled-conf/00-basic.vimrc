@@ -88,3 +88,24 @@ if $XDG_SESSION_TYPE != "wayland" && $XDG_SESSION_TYPE != "x11"
 EOF
 endif
 
+
+let g:diagnostics_visible = 1
+
+function! ToggleDiagnosticsDisplay()
+  if g:diagnostics_visible
+    lua vim.diagnostic.config({virtual_text = false, signs = false, underline = false})
+    let g:diagnostics_visible = 0
+    echo "Diagnostics display disabled"
+  else
+    lua vim.diagnostic.config({virtual_text = true, signs = true, underline = true})
+    let g:diagnostics_visible = 1
+    echo "Diagnostics display enabled"
+  endif
+endfunction
+
+" Map the toggle function to a keybinding, for example <leader>d
+nnoremap <silent> <leader>d :call ToggleDiagnosticsDisplay()<CR>
+
+
+
+
