@@ -219,5 +219,8 @@ Plug 'preservim/vim-pencil'
 
 Plug 'folke/zen-mode.nvim'
 
+" run and configure linters
+Plug 'mfussenegger/nvim-lint'
+
 call plug#end()
 " Plugin Configuration ==================================================

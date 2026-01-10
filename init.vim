@@ -17,6 +17,7 @@ if system('whoami') != "root\n"
   source $HOME/.config/nvim/enabled-conf/20-snippet-management.vimrc
   source $HOME/.config/nvim/enabled-conf/20-ui-mods.vimrc
   source $HOME/.config/nvim/enabled-conf/20-search.vimrc
+  source $HOME/.config/nvim/enabled-conf/20-lint.vimrc
   source $HOME/.config/nvim/enabled-conf/20-lsp.vimrc
   source $HOME/.config/nvim/enabled-conf/20-debugger.vimrc
   source $HOME/.config/nvim/enabled-conf/20-spellcheck.vimrc

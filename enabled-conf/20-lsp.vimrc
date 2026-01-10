@@ -131,7 +131,13 @@ vim.lsp.config('sqls', {
       connections = {
         {
           driver = 'postgresql',
-          dataSourceName = 'host=127.0.0.1 port=5432 user=main password=password dbname=test',
+          dataSourceName = string.format(
+            'host=%s port=%s user=%s dbname=%s',
+            os.getenv('PGHOST') or '127.0.0.1',  -- Default to '127.0.0.1' if PGHOST is not set
+            os.getenv('PGPORT') or '5432',       -- Default to '5432' if PGPORT is not set
+            os.getenv('PGUSER') or 'main',       -- Default to 'main' if PGUSER is not set
+            os.getenv('PGDATABASE') or 'main'    -- Default to 'main' if PGDATABASE is not set
+          ),
         },
       },
     },
