@@ -42,10 +42,6 @@ au FileType csv set noexpandtab
 au FileType stylus setl sw=4 ts=4
 au FileType cs setl sw=4 ts=4
 
-" clipboard linux fix
-set clipboard=unnamed
-set clipboard=unnamedplus
-
 " keep windows from resizing
 set noea
 
@@ -73,3 +69,22 @@ endif
 
 set splitbelow
 set previewheight=5
+
+if $XDG_SESSION_TYPE != "wayland" && $XDG_SESSION_TYPE != "x11"
+  lua << EOF
+    local g = vim.g
+
+    g.clipboard = {
+      name = "OSC 52",
+      copy = {
+        ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+        ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+      },
+      paste = {
+        ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
+        ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+      },
+    }
+EOF
+endif
+
