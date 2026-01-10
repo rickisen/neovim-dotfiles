@@ -28,6 +28,59 @@ local function apply_first_code_action(actions)
   end
 end
 
+local function hover_bottom_right(timeout_ms)
+  timeout_ms = timeout_ms or 5000
+
+  local clients = vim.lsp.get_clients({bufnr = 0})
+  local client = clients[1]
+  local pos_encoding = (client and client.offset_encoding) or "utf-16"
+
+  local params = vim.lsp.util.make_position_params(nil, pos_encoding)
+  local results = vim.lsp.buf_request_sync(0, "textDocument/hover", params, timeout_ms)
+  if not results or vim.tbl_isempty(results) then return end
+
+  local md = {}
+  for _, res in pairs(results) do
+    if res and res.result and res.result.contents then
+      md = vim.lsp.util.convert_input_to_markdown_lines(res.result.contents)
+      break
+    end
+  end
+  if vim.tbl_isempty(md) then return end
+
+  local function trim_lines(lines)
+    local s, e = 1, #lines
+    while s <= e and lines[s]:match("^%s*$") do s = s + 1 end
+    while e >= s and lines[e]:match("^%s*$") do e = e - 1 end
+    local out = {}
+    for i = s, e do out[#out+1] = lines[i] end
+    return out
+  end
+  md = trim_lines(md)
+
+  local max_w = math.floor(vim.o.columns * 0.6)
+
+  -- creates a normal floating preview
+  local bufnr, win = vim.lsp.util.open_floating_preview(md, "markdown", {
+    border = "single",
+    max_width = max_w,
+  })
+
+  vim.api.nvim_win_set_option(win, "winhl", "Normal:Normal,FloatBorder:Normal")
+  vim.api.nvim_win_set_option(win, "winblend", 0)
+  config = vim.api.nvim_win_get_config(win)
+  config.anchor = "NW" -- otherwise this is set dynamically depending on cursor position.
+  vim.api.nvim_win_set_config(win, config)
+
+  -- Computes the actual size and place bottom-right consistently.
+  local height = vim.api.nvim_win_get_height(win)
+  local width = vim.api.nvim_win_get_width(win)
+  local final_row = vim.o.lines - height - 4  -- airline + status bar padding
+  local final_col = math.max(2, vim.o.columns - width - 2)
+
+  vim.api.nvim_win_set_config(win, {relative = "editor", row = final_row, col = final_col})
+end
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local opts = { noremap=true, silent=true }
@@ -39,6 +92,8 @@ local on_attach = function(client, bufnr)
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  --vim.keymap.set("n", "K", hover_bottom_right, {silent = true, noremap = true})
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', hover_bottom_right, opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gm', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
@@ -159,59 +214,5 @@ vim.lsp.config('pyright', {
   },
 })
 
-local function hover_bottom_right(timeout_ms)
-  timeout_ms = timeout_ms or 5000
-
-  local clients = vim.lsp.get_clients({bufnr = 0})
-  local client = clients[1]
-  local pos_encoding = (client and client.offset_encoding) or "utf-16"
-
-  local params = vim.lsp.util.make_position_params(nil, pos_encoding)
-  local results = vim.lsp.buf_request_sync(0, "textDocument/hover", params, timeout_ms)
-  if not results or vim.tbl_isempty(results) then return end
-
-  local md = {}
-  for _, res in pairs(results) do
-    if res and res.result and res.result.contents then
-      md = vim.lsp.util.convert_input_to_markdown_lines(res.result.contents)
-      break
-    end
-  end
-  if vim.tbl_isempty(md) then return end
-
-  local function trim_lines(lines)
-    local s, e = 1, #lines
-    while s <= e and lines[s]:match("^%s*$") do s = s + 1 end
-    while e >= s and lines[e]:match("^%s*$") do e = e - 1 end
-    local out = {}
-    for i = s, e do out[#out+1] = lines[i] end
-    return out
-  end
-  md = trim_lines(md)
-
-  local max_w = math.floor(vim.o.columns * 0.6)
-
-  -- creates a normal floating preview
-  local bufnr, win = vim.lsp.util.open_floating_preview(md, "markdown", {
-    border = "single",
-    max_width = max_w,
-  })
-
-  vim.api.nvim_win_set_option(win, "winhl", "Normal:Normal,FloatBorder:Normal")
-  vim.api.nvim_win_set_option(win, "winblend", 0)
-  config = vim.api.nvim_win_get_config(win)
-  config.anchor = "NW" -- otherwise this is set dynamically depending on cursor position.
-  vim.api.nvim_win_set_config(win, config)
-
-  -- Computes the actual size and place bottom-right consistently.
-  local height = vim.api.nvim_win_get_height(win)
-  local width = vim.api.nvim_win_get_width(win)
-  local final_row = vim.o.lines - height - 4  -- airline + status bar padding
-  local final_col = math.max(2, vim.o.columns - width - 2)
-
-  vim.api.nvim_win_set_config(win, {relative = "editor", row = final_row, col = final_col})
-end
-
-vim.keymap.set("n", "K", hover_bottom_right, {silent = true, noremap = true})
 
 EOF
