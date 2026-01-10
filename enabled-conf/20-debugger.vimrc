@@ -1,5 +1,31 @@
 lua <<EOF
 local dap = require("dap")
+
+-- dap.adapters.python = {
+--     type = 'server',
+--     host = "127.0.0.1",
+--     port = 5678,  -- The default debugpy port
+-- }
+
+dap.adapters.python = { type = 'executable'; command = vim.fn.exepath('python') or 'python'; args = { '-m', 'debugpy.adapter' }; }
+
+dap.configurations.python = { { type = 'python', request = 'launch', name = 'Launch VisiData', module = 'visidata', console = 'integratedTerminal', justMyCode = false, }, }
+
+-- dap.configurations.python = {
+--     {
+--         type = 'python',
+--         name = 'Debug VisiData',
+--         module = 'visidata',  -- Name of the package to debug
+--         -- request = 'attach',
+--         -- host = '127.0.0.1',
+--         -- port = 5678,
+--         request = 'launch',
+--         program = '${workspaceFolder}/visidata/__main__.py',  -- Entry point for the project
+--         console = 'integratedTerminal',  -- Use an integrated terminal for output
+--         justMyCode = false,  -- Set to false to step into library code; true to only use user code
+--     },
+-- }
+
 dap.adapters.godot = {
 	type = "server",
 	host = "127.0.0.1",

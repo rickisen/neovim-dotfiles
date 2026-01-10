@@ -106,6 +106,12 @@ endfunction
 " Map the toggle function to a keybinding, for example <leader>d
 nnoremap <silent> <leader>d :call ToggleDiagnosticsDisplay()<CR>
 
-
-
-
+" Check if VIRTUAL_ENV is set, we'll want to use the python installation in
+" the venv then
+if $VIRTUAL_ENV != ''
+    " Use Python from the virtual environment
+    let g:python3_host_prog = $VIRTUAL_ENV . '/bin/python'
+else
+    " Fallback to the system Python
+    let g:python3_host_prog = '/usr/bin/python3'
+endif

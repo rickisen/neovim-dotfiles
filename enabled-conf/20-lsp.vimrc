@@ -144,6 +144,21 @@ vim.lsp.config('sqls', {
   },
 })
 
+vim.lsp.config('pyright', {
+  on_attach = on_attach,
+  settings = {
+    python = {
+      analysis = {
+        typeCheckingMode = "basic", -- Options: "off", "basic", "strict"
+        autoImportCompletions = true,
+        diagnosticMode = "workspace", -- Options: "workspace", "openFilesOnly"
+        pythonPath = vim.g.python3_host_prog, -- match the venv python that nvim is running in
+      },
+      venvPath = "./v_env",
+    },
+  },
+})
+
 local function hover_bottom_right(timeout_ms)
   timeout_ms = timeout_ms or 5000
 
