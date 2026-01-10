@@ -43,7 +43,7 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 lua << EOF
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "all",
-  ignore_install = {"wing", "ipkg"},
+  ignore_install = {"wing","cc1plus","ipkg"},
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false,
