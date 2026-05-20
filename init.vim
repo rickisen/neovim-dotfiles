@@ -6,7 +6,6 @@ if system('whoami') != "root\n"
   source $HOME/.config/nvim/enabled-conf/10-sql-misc.vimrc
   source $HOME/.config/nvim/enabled-conf/10-install-plugins.vimrc
 
-  source $HOME/.config/nvim/enabled-conf/20-ai.vimrc
   source $HOME/.config/nvim/enabled-conf/20-auto-completion.vimrc
   source $HOME/.config/nvim/enabled-conf/20-code-formating.vimrc
   source $HOME/.config/nvim/enabled-conf/20-git-integration.vimrc
@@ -29,4 +28,5 @@ source $HOME/.config/nvim/enabled-conf/30-colors.vimrc
 if system('whoami') != "root\n"
   " needs to be loaded after colors.vimrc
   source $HOME/.config/nvim/enabled-conf/31-zen-mode.vimrc
+  source $HOME/.config/nvim/enabled-conf/20-ai.vimrc
 endif

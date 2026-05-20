@@ -222,5 +222,27 @@ Plug 'folke/zen-mode.nvim'
 " run and configure linters
 Plug 'mfussenegger/nvim-lint'
 
+"============= avante ===================
+" Deps
+Plug 'nvim-lua/plenary.nvim'
+Plug 'MunifTanjim/nui.nvim'
+Plug 'MeanderingProgrammer/render-markdown.nvim'
+
+" Optional deps
+Plug 'hrsh7th/nvim-cmp'
+Plug 'nvim-tree/nvim-web-devicons' "or Plug 'echasnovski/mini.icons'
+Plug 'HakonHarnes/img-clip.nvim'
+Plug 'zbirenbaum/copilot.lua'
+Plug 'stevearc/dressing.nvim' " for enhanced input UI
+Plug 'folke/snacks.nvim' " for modern input UI
+
+" Yay, pass source=true if you want to build from source
+" I had to install 2 things in dnf:
+"   sudo dnf install perl-IPC-Cmd
+"   sudo dnf install perl-core
+Plug 'yetone/avante.nvim', { 'branch': 'main', 'do': 'make' }
+
+"========================================
+
 call plug#end()
 " Plugin Configuration ==================================================

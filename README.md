@@ -26,6 +26,8 @@ message, but vim will still work.
 - eslint\*\*
 - eslint_d\*\*
 - nodejs
+- perl-IPC-Cmd
+- perl-core
 
 \* = Not if you are using init-smaller.vim
 \*\* = Available on npm
