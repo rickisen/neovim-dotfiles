@@ -29,4 +29,5 @@ if system('whoami') != "root\n"
   " needs to be loaded after colors.vimrc
   source $HOME/.config/nvim/enabled-conf/31-zen-mode.vimrc
   source $HOME/.config/nvim/enabled-conf/20-ai.vimrc
+  source $HOME/.config/nvim/enabled-conf/20-coverage.vimrc
 endif

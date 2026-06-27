@@ -242,6 +242,11 @@ Plug 'folke/snacks.nvim' " for modern input UI
 "   sudo dnf install perl-core
 Plug 'yetone/avante.nvim', { 'branch': 'main', 'do': 'make' }
 
+" for nvim-coverage
+" This plugin depends on plenary and optionally on the lua-xmlreader luarock to parse the cobertura format.
+" Plug 'nvim-lua/plenary.nvim'
+Plug 'andythigpen/nvim-coverage'
+
 "========================================
 
 call plug#end()
