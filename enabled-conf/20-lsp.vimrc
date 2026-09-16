@@ -112,7 +112,7 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<c-b>', ':wa<CR>:lua vim.diagnostic.enable()<CR>:<c-c>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'i', '<c-b>', '<CR><ESC>:wa<CR>:lua vim.diagnostic.enable()<CR>:<c-c>', opts)
   -- vim.api.nvim_buf_del_keymap(bufnr, 'n', '<esc>'),
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<esc>', ':lua vim.diagnostic.disable()<CR>:pc<CR>:noh<CR>:<c-c>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<esc>', ':lua vim.diagnostic.hide()<CR>:pc<CR>:noh<CR>:<c-c>', opts)
 
   require("echo-diagnostics").setup{
     show_diagnostic_number = true,
@@ -154,7 +154,7 @@ local on_attach = function(client, bufnr)
   end, {})
 
   vim.cmd [[autocmd BufWritePre <buffer> call OnBeforeWrite()]]
-  vim.cmd [[autocmd TextChanged,InsertEnter * :lua vim.diagnostic.disable()]]
+  vim.cmd [[autocmd TextChanged,InsertEnter * :lua vim.diagnostic.hide()]]
 end
 
 vim.lsp.config('ts_ls', {

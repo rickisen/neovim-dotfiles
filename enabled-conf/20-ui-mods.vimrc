@@ -40,3 +40,11 @@ let g:airline#extensions#tabline#exclude_preview = 1
 " echodoc -------------------------
 set noshowmode
 let g:echodoc_enable_at_startup = 1"
+
+" folke/snacks -------------------------
+lua << EOF
+require("snacks").setup({
+  picker = { enabled = true },
+  notifier = { enabled = true },
+})
+EOF

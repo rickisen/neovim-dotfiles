@@ -1,48 +1,11 @@
 " enable nvim truecolor
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
-" call TextEnableCodeSnip(  'c',   '@begin=c@',   '@end=c@', 'SpecialComment')
-" call TextEnableCodeSnip('cpp', '@begin=cpp@', '@end=cpp@', 'SpecialComment')
-" call TextEnableCodeSnip('sql', '@begin=sql@', '@end=sql@', 'SpecialComment')
-" call TextEnableCodeSnip('html' ,'#{{{html' ,'#html}}}', 'SpecialComment')
-" function! TextEnableCodeSnip(filetype,start,end,textSnipHl) abort
-"   let ft=toupper(a:filetype)
-"   let group='textGroup'.ft
-"   if exists('b:current_syntax')
-"     let s:current_syntax=b:current_syntax
-"     " Remove current syntax definition, as some syntax files (e.g. cpp.vim)
-"     " do nothing if b:current_syntax is defined.
-"     unlet b:current_syntax
-"   endif
-"   execute 'syntax include @'.group.' syntax/'.a:filetype.'.vim'
-"   try
-"     execute 'syntax include @'.group.' after/syntax/'.a:filetype.'.vim'
-"   catch
-"   endtry
-"   if exists('s:current_syntax')
-"     let b:current_syntax=s:current_syntax
-"   else
-"     unlet b:current_syntax
-"   endif
-"   execute 'syntax region textSnip'.ft.'
-"   \ matchgroup='.a:textSnipHl.'
-"   \ keepend
-"   \ start="'.a:start.'" end="'.a:end.'"
-"   \ contains=@'.group
-" endfunction
-"
-" autocmd FileType sh call TextEnableCodeSnip('json' ,'#ft:json' ,'#ft:json-end', 'SpecialComment')
-
-" :syntax on
-" :syntax include @CPP syntax/cpp.vim
-" :syntax region cppSnip matchgroup=Snip start="@begin=cpp@" end="@end=cpp@" contains=@CPP
-" :hi link Snip SpecialComment
-
-" TODO: disable grammar.js
-
 lua << EOF
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "all",
+require'nvim-treesitter.config'.setup {
+  ensure_installed = "md, js, jsx, ts, tsx, bash, lua, json, yaml, html, xml, go",
+  auto_install = true,
+  -- ensure_installed = "all",
   ignore_install = {"wing","cc1plus","ipkg"},
   highlight = {
     enable = true,
@@ -61,40 +24,45 @@ require'nvim-treesitter.configs'.setup {
     enable = true
   },
 }
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'md', 'js', 'jsx', 'ts', 'tsx', 'bash', 'lua', 'json', 'yaml', 'html', 'xml', 'go'},
+  callback = function() vim.treesitter.start() end,
+})
+
+-- vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+-- vim.wo[0][0].foldmethod = 'expr'
+
+-- vim.api.nvim_create_autocmd('FileType', {
+--   pattern = '*',
+--   callback = function(args)
+--     local buf = args.buf
+--     local ft = vim.bo[buf].filetype
+--     if ft and ft ~= '' then
+--       local lang = vim.treesitter.language.get_lang(ft)
+--       if lang then
+--         -- Check if parser is actually installed by trying to get queries
+--         local has_parser = pcall(vim.treesitter.query.get, lang, 'highlights')
+--         if has_parser then
+--           local success = pcall(vim.treesitter.start, buf, lang)
+--           if not success then
+--             -- If treesitter fails to start, enable fallback syntax
+--             vim.bo[buf].syntax = 'on'
+--           end
+--         else
+--           -- No parser available, use default syntax highlighting
+--           vim.bo[buf].syntax = 'on'
+--         end
+--       else
+--         -- No language mapping, use default syntax highlighting
+--         vim.bo[buf].syntax = 'on'
+--       end
+--     end
+--   end,
+-- })
+
+
 EOF
-
-
-" auto_install = false,
-" ensure_installed = "all",
-" ignore_install = {},
-" modules = {
-"   highlight = {
-"     additional_vim_regex_highlighting = false,
-"     custom_captures = {},
-"     disable = {},
-"     enable = true,
-"     loaded = true,
-"     module_path = "nvim-treesitter.highlight"
-"   },
-"   incremental_selection = {
-"     disable = {},
-"     enable = false,
-"     keymaps = {
-"       init_selection = "gnn",
-"       node_decremental = "grm",
-"       node_incremental = "grn",
-"       scope_incremental = "grc"
-"     },
-"     module_path = "nvim-treesitter.incremental_selection"
-"   },
-"   indent = {
-"     disable = {},
-"     enable = true,
-"     loaded = true,
-"     module_path = "nvim-treesitter.indent"
-"   }
-" },
-" sync_install = false
 
 
 " set terminal color

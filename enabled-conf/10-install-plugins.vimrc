@@ -231,7 +231,7 @@ Plug 'MeanderingProgrammer/render-markdown.nvim'
 " Optional deps
 Plug 'hrsh7th/nvim-cmp'
 Plug 'nvim-tree/nvim-web-devicons' "or Plug 'echasnovski/mini.icons'
-Plug 'HakonHarnes/img-clip.nvim'
+" Plug 'HakonHarnes/img-clip.nvim'
 Plug 'zbirenbaum/copilot.lua'
 Plug 'stevearc/dressing.nvim' " for enhanced input UI
 Plug 'folke/snacks.nvim' " for modern input UI
