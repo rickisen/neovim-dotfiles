@@ -222,7 +222,7 @@ Plug 'folke/zen-mode.nvim'
 " run and configure linters
 Plug 'mfussenegger/nvim-lint'
 
-"============= avante ===================
+" ============= avante ===================
 " Deps
 Plug 'nvim-lua/plenary.nvim'
 Plug 'MunifTanjim/nui.nvim'
@@ -240,11 +240,13 @@ Plug 'folke/snacks.nvim' " for modern input UI
 " I had to install 2 things in dnf:
 "   sudo dnf install perl-IPC-Cmd
 "   sudo dnf install perl-core
-Plug 'yetone/avante.nvim', { 'branch': 'main', 'do': 'make' }
+" Plug 'yetone/avante.nvim', { 'branch': 'main', 'do': 'make' }
 
-" for nvim-coverage
-" This plugin depends on plenary and optionally on the lua-xmlreader luarock to parse the cobertura format.
-" Plug 'nvim-lua/plenary.nvim'
+" ========================================
+
+" " for nvim-coverage
+" " This plugin depends on plenary and optionally on the lua-xmlreader luarock to parse the cobertura format.
+" " Plug 'nvim-lua/plenary.nvim'
 Plug 'andythigpen/nvim-coverage'
 
 "========================================
