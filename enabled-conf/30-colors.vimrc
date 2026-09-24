@@ -2,65 +2,37 @@
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 lua << EOF
-require'nvim-treesitter.config'.setup {
-  ensure_installed = "md, js, jsx, ts, tsx, bash, lua, json, yaml, html, xml, go",
-  auto_install = true,
-  -- ensure_installed = "all",
-  ignore_install = {"wing","cc1plus","ipkg"},
-  highlight = {
-    enable = true,
-    additional_vim_regex_highlighting = false,
-
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    -- additional_vim_regex_highlighting = false,
-  },
-  incremental_selection = {
-    enable = true
-  },
-  indent = {
-    enable = true
-  },
-}
-
+-- Auto-install parsers and enable treesitter highlight/indent per filetype.
+-- See: https://github.com/nvim-treesitter/nvim-treesitter/discussions/7927
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'md', 'js', 'jsx', 'ts', 'tsx', 'bash', 'lua', 'json', 'yaml', 'html', 'xml', 'go'},
-  callback = function() vim.treesitter.start() end,
+    pattern = { '*' },
+    callback = function(args)
+        local ft = vim.bo[args.buf].filetype
+        local lang = vim.treesitter.language.get_lang(ft)
+        if not vim.treesitter.language.add(lang) then
+            local available = vim.g.ts_available or require('nvim-treesitter').get_available()
+            if not vim.g.ts_available then
+                vim.g.ts_available = available
+            end
+            if vim.tbl_contains(available, lang) then
+                require('nvim-treesitter').install(lang)
+            end
+        end
+        if vim.treesitter.language.add(lang) then
+            vim.treesitter.start(args.buf, lang)
+            vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end
+    end,
 })
 
--- vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
--- vim.wo[0][0].foldmethod = 'expr'
-
--- vim.api.nvim_create_autocmd('FileType', {
---   pattern = '*',
---   callback = function(args)
---     local buf = args.buf
---     local ft = vim.bo[buf].filetype
---     if ft and ft ~= '' then
---       local lang = vim.treesitter.language.get_lang(ft)
---       if lang then
---         -- Check if parser is actually installed by trying to get queries
---         local has_parser = pcall(vim.treesitter.query.get, lang, 'highlights')
---         if has_parser then
---           local success = pcall(vim.treesitter.start, buf, lang)
---           if not success then
---             -- If treesitter fails to start, enable fallback syntax
---             vim.bo[buf].syntax = 'on'
---           end
---         else
---           -- No parser available, use default syntax highlighting
---           vim.bo[buf].syntax = 'on'
---         end
---       else
---         -- No language mapping, use default syntax highlighting
---         vim.bo[buf].syntax = 'on'
---       end
---     end
---   end,
--- })
-
+-- Folding via treesitter.
+vim.api.nvim_create_autocmd({ 'BufEnter', 'BufAdd', 'BufNew', 'BufNewFile', 'BufWinEnter' }, {
+    group = vim.api.nvim_create_augroup('TS_FOLD_WORKAROUND', {}),
+    callback = function()
+        vim.opt.foldmethod = 'expr'
+        vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+    end,
+})
 
 EOF
 
