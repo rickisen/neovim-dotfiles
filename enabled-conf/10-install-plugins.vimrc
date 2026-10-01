@@ -240,7 +240,7 @@ Plug 'folke/snacks.nvim' " for modern input UI
 " I had to install 2 things in dnf:
 "   sudo dnf install perl-IPC-Cmd
 "   sudo dnf install perl-core
-" Plug 'yetone/avante.nvim', { 'branch': 'main', 'do': 'make' }
+Plug 'yetone/avante.nvim', { 'branch': 'main', 'do': 'make' }
 
 " ========================================
 
