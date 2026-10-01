@@ -45,6 +45,16 @@ let g:echodoc_enable_at_startup = 1"
 lua << EOF
 require("snacks").setup({
   picker = { enabled = true },
-  notifier = { enabled = true },
+  notifier = {
+    enabled = true,
+    timeout = 6000, -- notification timeout in ms (6 seconds)
+    width = { min = 33, max = 0.6 }, -- allow wider notifications before wrapping
+    height = { min = 1, max = 0.75 }, -- allow more lines before the message gets collapsed
+  },
+  styles = {
+    notification = {
+      wo = { wrap = true }, -- wrap long lines instead of cropping them off
+    },
+  },
 })
 EOF
