@@ -3,6 +3,15 @@ lua << EOF
 require('avante').setup({
   --provider = "openai",
   -- mode = "legacy",
+  provider = "claude",
+  providers = {
+    claude = {
+      -- model = "claude-haiku-4-5",
+      model = "claude-sonnet-5",
+      -- model = "claude-opus-5-5",
+      -- model = "claude-fable-5-1",
+    },
+  },
 })
 -- require('avante').setup(
 -- {
