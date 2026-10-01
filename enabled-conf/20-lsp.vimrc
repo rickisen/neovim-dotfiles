@@ -245,4 +245,32 @@ vim.lsp.config('ruff', {
   },
 })
 
+vim.lsp.config('rust_analyzer', {
+  on_attach = on_attach,
+  settings = {
+    ['rust-analyzer'] = {
+      cargo = {
+        allFeatures = true,
+        loadOutDirsFromCheck = true,
+        buildScripts = {
+          enable = true,
+        },
+      },
+      checkOnSave = true,
+      check = {
+        command = "clippy",
+      },
+      procMacro = {
+        enable = true,
+      },
+      diagnostics = {
+        enable = true,
+        experimental = {
+          enable = true,
+        },
+      },
+    },
+  },
+})
+
 EOF
