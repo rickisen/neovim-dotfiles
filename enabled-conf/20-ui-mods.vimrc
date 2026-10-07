@@ -50,6 +50,7 @@ require("snacks").setup({
     timeout = 6000, -- notification timeout in ms (6 seconds)
     width = { min = 33, max = 0.6 }, -- allow wider notifications before wrapping
     height = { min = 1, max = 0.75 }, -- allow more lines before the message gets collapsed
+    top_down = false, -- anchor notifications to the bottom-right instead of top-right
   },
   styles = {
     notification = {

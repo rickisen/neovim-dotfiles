@@ -1,7 +1,14 @@
 function! OnBeforeWrite()
-  execute 'RemoveUnusedVariables'
-  execute 'AddMissingImports'
-  execute 'OrganizeImports'
+  " RemoveUnusedVariables/AddMissingImports/OrganizeImports blindly apply the
+  " first matching code action, which is tailored to TS/JS-style import
+  " cleanup. For Rust this can apply unrelated quickfixes (e.g. clippy
+  " suggestions), so skip them there and just run the formatter (rustfmt
+  " via rust-analyzer).
+  if &filetype !=# 'rust'
+    execute 'RemoveUnusedVariables'
+    execute 'AddMissingImports'
+    execute 'OrganizeImports'
+  endif
   lua vim.lsp.buf.format({ async = false })
   sleep 100m
 endfunction
